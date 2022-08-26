@@ -32,8 +32,8 @@ class sidebar extends StatelessWidget {
             ),
           ),
           ListTile(
-              leading: Icon(Icons.track_changes),
-              title: Text('Track Complaint'),
+              leading: Icon(Icons.history),
+              title: Text('Complaint History'),
               onTap: () => {}),
           ListTile(
             leading: Icon(Icons.group),

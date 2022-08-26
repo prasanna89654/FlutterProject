@@ -33,13 +33,14 @@ class _AppbarState extends State<Appbar> {
         drawer: sidebar(),
         appBar: AppBar(
           // automaticallyImplyLeading: false,
-          title: Text("Complaint Management System"),
+          title: Text("Welcome Prasanna Poudel"),
+          centerTitle: true,
           titleTextStyle: TextStyle(
             fontSize: 17,
           ),
 
           // centerTitle: true,
-          backgroundColor: Color.fromARGB(255, 121, 102, 72),
+          backgroundColor: Colors.black,
           actions: [
             IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
           ],
