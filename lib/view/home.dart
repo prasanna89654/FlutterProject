@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/widgets/crousal.dart';
+import 'package:project/widgets/publicmaker.dart';
 
 import '../widgets/sidebar.dart';
 
@@ -272,6 +273,7 @@ class _HomepageState extends State<Homepage> {
                   )),
             ),
           ),
+          Publicmaker()
         ],
       ),
     ));

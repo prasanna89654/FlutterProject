@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lorem/flutter_lorem.dart';
 
 class Profilepage extends StatefulWidget {
   const Profilepage({super.key});
@@ -13,6 +14,9 @@ class _ProfilepageState extends State<Profilepage> {
     return Scaffold(
         body: SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+      child: Center(
+        child: Text(lorem(paragraphs: 1, words: 16)),
+      ),
     ));
   }
 }
