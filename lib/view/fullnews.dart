@@ -17,9 +17,6 @@ class _FullnewsState extends State<Fullnews> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("News"),
-        ),
         body: FutureBuilder(
             future: getNews(),
             builder: (context, AsyncSnapshot snapshot) {

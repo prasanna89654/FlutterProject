@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:project/view/fullnews.dart';
 import 'package:project/view/guideliness.dart';
 import 'package:project/view/home.dart';
-import 'package:project/view/news.dart';
+// import 'package:project/view/news.dart';
 import 'package:project/view/profile.dart';
 import 'package:project/widgets/sidebar.dart';
 
@@ -17,7 +18,7 @@ class _AppbarState extends State<Appbar> {
   final screens = [
     Homepage(),
     Guidepage(),
-    Newspage(),
+    Fullnews(),
     Profilepage(),
   ];
 
