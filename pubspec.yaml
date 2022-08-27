@@ -38,6 +38,8 @@ dependencies:
   carousel_slider: ^4.1.1
   easy_splash_screen: ^1.0.3
   flutter_lorem: ^2.0.0
+  http: ^0.13.5
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:

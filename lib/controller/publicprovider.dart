@@ -8,12 +8,20 @@ class Publicprovider extends ChangeNotifier {
   List<Threemodel> publiccomplaint = [
     Threemodel(
         image: 'assets/images/care.png',
-        title: lorem(paragraphs: 1, words: 16)),
+        subject: lorem(paragraphs: 1, words: 16),
+        date: DateTime.now(),
+        name: "Prasanna Poudel"),
     Threemodel(
-        image: 'assets/images/care.png',
-        title: lorem(paragraphs: 1, words: 16)),
+      image: 'assets/images/contact.png',
+      subject: lorem(paragraphs: 1, words: 16),
+      name: "Suman Shrestha",
+      date: DateTime.now(),
+    ),
     Threemodel(
-        image: 'assets/images/care.png',
-        title: lorem(paragraphs: 1, words: 16)),
+      image: 'assets/images/logo.png',
+      subject: lorem(paragraphs: 1, words: 16),
+      name: "Mahesh neupane",
+      date: DateTime.now(),
+    ),
   ];
 }

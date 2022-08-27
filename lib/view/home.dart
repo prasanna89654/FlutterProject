@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project/widgets/crousal.dart';
+import 'package:project/widgets/nearbymaker.dart';
+import 'package:project/widgets/newsmaker.dart';
 import 'package:project/widgets/publicmaker.dart';
 
 import '../widgets/sidebar.dart';
@@ -122,8 +124,8 @@ class _HomepageState extends State<Homepage> {
               child: Card(
                   margin: EdgeInsets.all(3),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
+                      borderRadius: BorderRadius.circular(20.0),
+                      side: BorderSide(width: 2, color: Colors.blue)),
                   elevation: 20,
                   color: Colors.grey,
                   child: Padding(
@@ -273,7 +275,9 @@ class _HomepageState extends State<Homepage> {
                   )),
             ),
           ),
-          Publicmaker()
+          Publicmaker(),
+          Nearbymaker(),
+          Newsmaker()
         ],
       ),
     ));

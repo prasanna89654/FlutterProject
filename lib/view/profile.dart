@@ -9,14 +9,14 @@ class Profilepage extends StatefulWidget {
 }
 
 class _ProfilepageState extends State<Profilepage> {
+  DateTime date = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-      child: Center(
-        child: Text(lorem(paragraphs: 1, words: 16)),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+        child: Center(child: Text("$date")),
       ),
-    ));
+    );
   }
 }

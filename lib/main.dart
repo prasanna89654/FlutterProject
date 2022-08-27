@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:easy_splash_screen/easy_splash_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'view/login.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(ProviderScope(child: MyApp()));
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);

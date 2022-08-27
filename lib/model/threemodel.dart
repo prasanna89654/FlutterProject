@@ -1,11 +1,20 @@
 class Threemodel {
   String image;
-  String title;
-  String? date;
+  String? title;
+
+  String? name;
+  DateTime? date;
+  String? subject;
+  String? venue;
+  String? link;
 
   Threemodel({
     required this.image,
-    required this.title,
+    this.title,
+    this.name,
     this.date,
+    this.subject,
+    this.venue,
+    this.link,
   });
 }
