@@ -36,7 +36,7 @@ class NewsContainer extends StatelessWidget {
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.2,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(20),
               // color: Colors.green,
             ),
             child: Row(

@@ -7,7 +7,8 @@ import 'package:project/widgets/publicmaker.dart';
 import '../widgets/sidebar.dart';
 
 class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+  const Homepage({super.key, this.changePage});
+  final void Function(int)? changePage;
 
   @override
   State<Homepage> createState() => _HomepageState();
@@ -277,7 +278,9 @@ class _HomepageState extends State<Homepage> {
           ),
           Publicmaker(),
           Nearbymaker(),
-          Newsmaker()
+          Newsmaker(
+            changePage: widget.changePage,
+          )
         ],
       ),
     ));

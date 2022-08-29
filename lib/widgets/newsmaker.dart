@@ -12,7 +12,8 @@ import 'listnearbymaker.dart';
 import 'listnewsmaker.dart';
 
 class Newsmaker extends ConsumerWidget {
-  const Newsmaker({Key? key}) : super(key: key);
+  const Newsmaker({Key? key, this.changePage}) : super(key: key);
+  final void Function(int)? changePage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -64,13 +65,7 @@ class Newsmaker extends ConsumerWidget {
             padding: const EdgeInsets.only(top: 10),
             child: Center(
               child: InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Fullnews(),
-                      ));
-                },
+                onTap: () => changePage!(2),
                 child: Text("View More --->",
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w400)),

@@ -14,22 +14,53 @@ class Appbar extends StatefulWidget {
 }
 
 class _AppbarState extends State<Appbar> {
-  int _currentIndex = 0;
-  final screens = [
-    Homepage(),
-    Guidepage(),
-    Fullnews(),
-    Profilepage(),
-  ];
+  late List<Widget> _pages;
+  late Widget _page1;
+  late Widget _page2;
+  late Widget _page3;
+  late Widget _page4;
+  late int _currentIndex;
+  late Widget _currentPage;
 
-  void _onItemTapped(int index) {
+  // int _currentIndex = 0;
+  // final screens = [
+  //   Homepage(),
+  //   Guidepage(),
+  //   Fullnews(),
+  //   Profilepage(),
+  // ];
+
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     _currentIndex = index;
+  //   });
+  // }
+
+  @override
+  void initState() {
+    super.initState();
+    _page1 = Homepage(changePage: _changeTab);
+    _page2 = const Guidepage();
+    _page3 = const Fullnews();
+    _page4 = const Profilepage();
+    _pages = [_page1, _page2, _page3, _page4];
+    _currentIndex = 0;
+    _currentPage = _page1;
+  }
+
+  void _changeTab(int index) {
     setState(() {
       _currentIndex = index;
+      _currentPage = _pages[index];
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    const String page1 = "Dashboard";
+    const String page2 = "Guidelines";
+    const String page3 = "News";
+    const String title = "Profile";
     return Scaffold(
         drawer: sidebar(),
         appBar: AppBar(
@@ -46,7 +77,7 @@ class _AppbarState extends State<Appbar> {
             IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
           ],
         ),
-        body: screens[_currentIndex],
+        body: _currentPage,
         bottomNavigationBar: BottomNavigationBar(
           // ignore: prefer_const_literals_to_create_immutables
           items: [
@@ -83,7 +114,9 @@ class _AppbarState extends State<Appbar> {
           selectedFontSize: 18,
           unselectedFontSize: 13,
 
-          onTap: _onItemTapped,
+          onTap: (index) {
+            _changeTab(index);
+          },
 
           showUnselectedLabels: true,
 
