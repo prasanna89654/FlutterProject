@@ -17,15 +17,15 @@ class Publicmaker extends ConsumerWidget {
     var width = size.width;
 
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+      padding: const EdgeInsets.only(left: 8, right: 8, top: 30),
       child: Container(
-        height: height * 0.48,
+        height: height * 0.55,
         // color: Colors.red,
         child: Column(children: [
           Text("Public Complaints",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
           Container(
-              height: height * 0.37,
+              height: height * 0.42,
               // color: Colors.green,
               child: Column(
                 children: [

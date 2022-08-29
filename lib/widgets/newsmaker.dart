@@ -9,7 +9,7 @@ import 'package:project/widgets/newscontainer.dart';
 import '../controller/newsprovider.dart';
 import '../view/fullnews.dart';
 import 'listnearbymaker.dart';
-import 'listnewsmaker.dart';
+// import 'listnewsmaker.dart';
 
 class Newsmaker extends ConsumerWidget {
   const Newsmaker({Key? key, this.changePage}) : super(key: key);
@@ -23,15 +23,15 @@ class Newsmaker extends ConsumerWidget {
     var width = size.width;
 
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+      padding: const EdgeInsets.only(left: 8, right: 8, top: 30),
       child: Container(
-        height: height * 0.62,
+        height: height * 0.55,
         // color: Colors.red,
         child: Column(children: [
           Text("Latest News",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
           Container(
-              height: height * 0.51,
+              height: height * 0.44,
               // color: Colors.green,
               child: Column(children: [
                 FutureBuilder(

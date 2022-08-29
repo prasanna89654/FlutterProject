@@ -22,7 +22,7 @@ class NewsContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(top: 10),
       child: InkWell(
         onTap: () {
           Navigator.push(
@@ -30,25 +30,30 @@ class NewsContainer extends StatelessWidget {
               MaterialPageRoute(
                   builder: (context) => WebviewScreen(url: link)));
         },
-        child: Card(
-          elevation: 20,
-          child: Container(
-            width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.2,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              // color: Colors.green,
+        child: Container(
+          width: double.infinity,
+          height: MediaQuery.of(context).size.height * 0.2,
+          child: Card(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(
+                  width: 3, color: Color.fromARGB(255, 245, 242, 251)),
+              borderRadius: BorderRadius.circular(20.0),
             ),
+            elevation: 20,
             child: Row(
               children: [
-                Flexible(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.3,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                            fit: BoxFit.fitHeight,
-                            image: NetworkImage(imageurl!))),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 3, top: 3, bottom: 3, right: 5),
+                  child: Flexible(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                              fit: BoxFit.fitHeight,
+                              image: NetworkImage(imageurl!))),
+                    ),
                   ),
                 ),
                 Flexible(

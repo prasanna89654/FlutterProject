@@ -61,7 +61,8 @@ class _HomepageState extends State<Homepage> {
                                     width: width * 0.22,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: Colors.purple,
+                                      border: Border.all(color: Colors.blue),
+                                      color: Colors.white,
                                     ),
                                     child: IconButton(
                                       onPressed: (() {}),
@@ -82,7 +83,8 @@ class _HomepageState extends State<Homepage> {
                                     width: width * 0.22,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: Colors.purple,
+                                      color: Colors.white,
+                                      border: Border.all(color: Colors.blue),
                                     ),
                                     child: IconButton(
                                       onPressed: (() {}),
@@ -103,7 +105,8 @@ class _HomepageState extends State<Homepage> {
                                     width: width * 0.22,
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
-                                      color: Colors.purple,
+                                      color: Colors.white,
+                                      border: Border.all(color: Colors.blue),
                                     ),
                                     child: IconButton(
                                       onPressed: (() {}),
@@ -118,7 +121,7 @@ class _HomepageState extends State<Homepage> {
                 ),
               ])),
           Padding(
-            padding: const EdgeInsets.only(top: 15, left: 18, right: 18),
+            padding: const EdgeInsets.only(top: 15, left: 14, right: 14),
             child: Container(
               height: height * 0.204,
               // color: Colors.blue,
@@ -126,9 +129,9 @@ class _HomepageState extends State<Homepage> {
                   margin: EdgeInsets.all(3),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
-                      side: BorderSide(width: 2, color: Colors.blue)),
+                      side: BorderSide(
+                          width: 5, color: Color.fromARGB(255, 245, 242, 251))),
                   elevation: 20,
-                  color: Colors.grey,
                   child: Padding(
                     padding:
                         const EdgeInsets.only(top: 15, left: 30, right: 30),
@@ -136,7 +139,7 @@ class _HomepageState extends State<Homepage> {
                       children: [
                         Center(
                           child: Text(
-                            "Complaint",
+                            "Your Complaints",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w500),
                           ),
@@ -163,11 +166,12 @@ class _HomepageState extends State<Homepage> {
                                   Center(
                                     child: Container(
                                       height: height * 0.045,
-                                      width: width * 0.20,
+                                      width: width * 0.10,
                                       decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.blue,
-                                      ),
+                                          shape: BoxShape.rectangle,
+                                          // color: Colors.blue,
+                                          border:
+                                              Border.all(color: Colors.black)),
                                       child: Center(
                                         child: Text(
                                           "9",
@@ -207,11 +211,12 @@ class _HomepageState extends State<Homepage> {
                                     Center(
                                       child: Container(
                                         height: height * 0.045,
-                                        width: width * 0.20,
+                                        width: width * 0.10,
                                         decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.blue,
-                                        ),
+                                            shape: BoxShape.rectangle,
+                                            // color: Colors.blue,
+                                            border: Border.all(
+                                                color: Colors.black)),
                                         child: Center(
                                           child: Text(
                                             "9",
@@ -252,11 +257,12 @@ class _HomepageState extends State<Homepage> {
                                     Center(
                                       child: Container(
                                         height: height * 0.048,
-                                        width: width * 0.20,
+                                        width: width * 0.10,
                                         decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: Colors.blue,
-                                        ),
+                                            shape: BoxShape.rectangle,
+                                            // color: Colors.blue,
+                                            border: Border.all(
+                                                color: Colors.black)),
                                         child: Center(
                                           child: Text(
                                             "9",
@@ -276,6 +282,7 @@ class _HomepageState extends State<Homepage> {
                   )),
             ),
           ),
+          SizedBox(height: 30),
           Publicmaker(),
           Nearbymaker(),
           Newsmaker(
