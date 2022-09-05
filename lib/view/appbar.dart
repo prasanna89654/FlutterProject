@@ -3,7 +3,8 @@ import 'package:project/view/fullnews.dart';
 import 'package:project/view/guideliness.dart';
 import 'package:project/view/home.dart';
 // import 'package:project/view/news.dart';
-import 'package:project/view/profile.dart';
+// import 'package:project/view/profile.dart';
+import 'package:project/view/profile_screen.dart';
 import 'package:project/widgets/sidebar.dart';
 
 class Appbar extends StatefulWidget {
@@ -42,7 +43,7 @@ class _AppbarState extends State<Appbar> {
     _page1 = Homepage(changePage: _changeTab);
     _page2 = const Guidepage();
     _page3 = const Fullnews();
-    _page4 = const Profilepage();
+    _page4 = profile();
     _pages = [_page1, _page2, _page3, _page4];
     _currentIndex = 0;
     _currentPage = _page1;
