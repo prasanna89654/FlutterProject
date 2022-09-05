@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project/view/addcom.dart';
+import 'package:project/view/testpage.dart';
 import 'package:project/widgets/crousal.dart';
 import 'package:project/widgets/nearbymaker.dart';
 import 'package:project/widgets/newsmaker.dart';
@@ -66,7 +67,13 @@ class _HomepageState extends State<Homepage> {
                                       color: Colors.white,
                                     ),
                                     child: IconButton(
-                                      onPressed: (() {}),
+                                      onPressed: (() {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => test(),
+                                            ));
+                                      }),
                                       icon: Icon(Icons.track_changes),
                                     )),
                                 Text("Track Complain")
@@ -91,9 +98,7 @@ class _HomepageState extends State<Homepage> {
                                       onPressed: (() {
                                         showDialog(
                                             context: context,
-                                            builder: (BuildContext context) {
-                                              return addCom();
-                                            });
+                                            builder: (_) => addCom());
                                       }),
                                       icon: Icon(Icons.add),
                                     )),
