@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/view/addcom.dart';
 import 'package:project/widgets/crousal.dart';
 import 'package:project/widgets/nearbymaker.dart';
 import 'package:project/widgets/newsmaker.dart';
@@ -87,7 +88,13 @@ class _HomepageState extends State<Homepage> {
                                       border: Border.all(color: Colors.blue),
                                     ),
                                     child: IconButton(
-                                      onPressed: (() {}),
+                                      onPressed: (() {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return addCom();
+                                            });
+                                      }),
                                       icon: Icon(Icons.add),
                                     )),
                                 Text("Add Complain")
