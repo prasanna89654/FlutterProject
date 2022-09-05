@@ -10,6 +10,7 @@ class WebviewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         // centerTitle: true,
         title: Text("Go Back"),
       ),

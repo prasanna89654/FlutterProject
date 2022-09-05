@@ -15,80 +15,86 @@ class profile extends StatefulWidget {
 class _profileState extends State<profile> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    var height = size.height;
+    var width = size.width;
     return Scaffold(
       body: SingleChildScrollView(
-          child: Column(
-        children: [
-          Container(
-              height: 100,
-              // color: Colors.red,
-              width: double.infinity,
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    width: 98.0,
-                    height: 98.0,
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage("assets/images/care.png"),
-                      backgroundColor: Colors.white,
+          child: Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Column(
+          children: [
+            Container(
+                height: height * 0.12,
+                // color: Colors.red,
+                width: double.infinity,
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 10,
                     ),
-                  ),
-                  SizedBox(width: 10),
-                  Container(
-                      height: 40,
-                      width: 280,
-                      // color: Colors.blue,
-                      child: style(text: 'Sample Name', fontsize: 25)),
+                    Container(
+                      width: height * 0.11,
+                      height: height * 0.11,
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage("assets/images/Bill.png"),
+                        backgroundColor: Colors.white,
+                      ),
+                    ),
+                    SizedBox(width: 20),
+                    Container(
+                        height: height * 0.05,
+                        width: width * 0.65,
+                        // color: Colors.blue,
+                        child: style(text: 'Sample Name', fontsize: 25)),
 
-                  // ClipRRect(
-                  //     child: SizedBox.fromSize(
-                  //   size: Size.fromRadius(48), // Image radius
-                  //   child: Image.asset(
-                  //     'assets/images/profile1.png',
-                  //     height: 10,
-                  //     width: 10,
-                  //   ),
-                  // ))
-                ],
-              )),
-          SizedBox(height: 10),
-          Container(
-              height: 500,
-              // color: Colors.green,
-              child: ListView(
-                // padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
-                children: [
-                  pmaker(
-                    image: "assets/images/care.png",
-                    text: 'Gender',
-                    text1: 'Male',
-                  ),
-                  pmaker(
-                    image: "assets/images/contact.png",
-                    text: 'Birthday',
-                    text1: '12-12-2000',
-                  ),
-                  pmaker(
-                    image: "assets/images/logo.png",
-                    text: 'Email',
-                    text1: 'poudell789@gmail.com',
-                  ),
-                  pmaker(
-                    image: "assets/images/contact.png",
-                    text: 'Phone Number',
-                    text1: '98822843462',
-                  ),
-                  pmaker(
-                    image: "assets/images/logo.png",
-                    text: 'Password',
-                    text1: '.............',
-                  ),
-                ],
-              ))
-        ],
+                    // ClipRRect(
+                    //     child: SizedBox.fromSize(
+                    //   size: Size.fromRadius(48), // Image radius
+                    //   child: Image.asset(
+                    //     'assets/images/profile1.png',
+                    //     height: 10,
+                    //     width: 10,
+                    //   ),
+                    // ))
+                  ],
+                )),
+            SizedBox(height: 15),
+            Container(
+                height: height * 0.55,
+                // color: Colors.green,
+                child: ListView(
+                  // padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
+                  children: [
+                    pmaker(
+                      image: "assets/images/gender.png",
+                      text: 'Gender',
+                      text1: 'Male',
+                    ),
+                    pmaker(
+                      image: "assets/images/calendar.png",
+                      text: 'Birthday',
+                      text1: '12-12-2000',
+                    ),
+                    pmaker(
+                      image: "assets/images/email.png",
+                      text: 'Email',
+                      text1: 'poudellfvgdu7@gmail.com',
+                    ),
+                    pmaker(
+                      image: "assets/images/call.png",
+                      text: 'Phone Number',
+                      text1: '98822843462',
+                    ),
+                    pmaker(
+                      image: "assets/images/lock.png",
+                      text: 'Password',
+                      text1: '.............',
+                    ),
+                  ],
+                ))
+          ],
+        ),
       )),
     );
   }
