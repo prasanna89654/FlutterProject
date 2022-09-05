@@ -17,89 +17,26 @@ class _FullnewsState extends State<Fullnews> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      children: [
-        FutureBuilder(
-            future: getNews(),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      var data = snapshot.data;
-                      return NewsContainer(
-                        imageurl: data[index].imageurl,
-                        title: data[index].title,
-                        description: data[index].description,
-                        author: data[index].author,
-                        link: data[index].link,
-                      );
-                    });
-              }
+      body: FutureBuilder(
+          future: getNews(),
+          builder: (context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context, index) {
+                    var data = snapshot.data;
+                    return NewsContainer(
+                      imageurl: data[index].imageurl,
+                      title: data[index].title,
+                      description: data[index].description,
+                      author: data[index].author,
+                      link: data[index].link,
+                    );
+                  });
+            }
 
-              return const Center(child: CircularProgressIndicator());
-            }),
-        FutureBuilder(
-            future: getNews(),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      var data = snapshot.data;
-                      return NewsContainer(
-                        imageurl: data[index].imageurl,
-                        title: data[index].title,
-                        description: data[index].description,
-                        author: data[index].author,
-                        link: data[index].link,
-                      );
-                    });
-              }
-
-              return const Center(child: CircularProgressIndicator());
-            }),
-        FutureBuilder(
-            future: getNews(),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      var data = snapshot.data;
-                      return NewsContainer(
-                        imageurl: data[index].imageurl,
-                        title: data[index].title,
-                        description: data[index].description,
-                        author: data[index].author,
-                        link: data[index].link,
-                      );
-                    });
-              }
-
-              return const Center(child: CircularProgressIndicator());
-            }),
-        FutureBuilder(
-            future: getNews(),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, index) {
-                      var data = snapshot.data;
-                      return NewsContainer(
-                        imageurl: data[index].imageurl,
-                        title: data[index].title,
-                        description: data[index].description,
-                        author: data[index].author,
-                        link: data[index].link,
-                      );
-                    });
-              }
-
-              return const Center(child: CircularProgressIndicator());
-            }),
-      ],
-    ));
+            return const Center(child: CircularProgressIndicator());
+          }),
+    );
   }
 }
