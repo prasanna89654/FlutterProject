@@ -8,7 +8,7 @@ import '../Model/news_model.dart';
 String baseurl = "https://ktmwebscraper.herokuapp.com/national";
 
 getNews() async {
-  var response = await http.get(Uri.parse(baseurl));
+  var response = await http.get(Uri.parse(baseurl+));
 
   if (response.statusCode == 200) {
     var jsondata = jsonDecode(response.body);
