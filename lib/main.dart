@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/view/complaint_history.dart';
+import 'package:project/view/home.dart';
 
 import 'view/login.dart';
 
@@ -26,7 +27,7 @@ class _MyAppState extends State<MyApp> {
             'assets/images/care.png',
           ),
           backgroundColor: Colors.orange,
-          navigator: (const History()),
+          navigator: (LoginScreen()),
         ));
   }
 }
