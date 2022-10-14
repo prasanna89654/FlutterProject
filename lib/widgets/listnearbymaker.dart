@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 
 import '../model/threemodel.dart';
@@ -27,7 +29,7 @@ class Listnearbymaker extends StatelessWidget {
         child: Expanded(
           child: Card(
             shape: RoundedRectangleBorder(
-              side: BorderSide(
+              side: const BorderSide(
                   width: 3, color: Color.fromARGB(255, 245, 242, 251)),
               borderRadius: BorderRadius.circular(20.0),
             ),

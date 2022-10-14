@@ -43,7 +43,7 @@ class _AppbarState extends State<Appbar> {
     _page1 = Homepage(changePage: _changeTab);
     _page2 = const Guidepage();
     _page3 = const Fullnews();
-    _page4 = profile();
+    _page4 = const profile();
     _pages = [_page1, _page2, _page3, _page4];
     _currentIndex = 0;
     _currentPage = _page1;
@@ -58,48 +58,44 @@ class _AppbarState extends State<Appbar> {
 
   @override
   Widget build(BuildContext context) {
-    const String page1 = "Dashboard";
-    const String page2 = "Guidelines";
-    const String page3 = "News";
-    const String title = "Profile";
     return Scaffold(
-        drawer: sidebar(),
+        drawer: const sidebar(),
         appBar: AppBar(
           // automaticallyImplyLeading: false,
-          title: Text("Welcome Prasanna Poudel"),
+          title: const Text("Welcome Prasanna Poudel"),
           centerTitle: true,
-          titleTextStyle: TextStyle(
+          titleTextStyle: const TextStyle(
             fontSize: 17,
           ),
 
           // centerTitle: true,
           backgroundColor: Colors.black,
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.notifications))
+            IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
           ],
         ),
         body: _currentPage,
         bottomNavigationBar: BottomNavigationBar(
           // ignore: prefer_const_literals_to_create_immutables
           items: [
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Icons.dashboard),
               label: 'Dashboard',
               // backgroundColor: Colors.red,
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(
                 Icons.rule,
               ),
               label: 'Guidelines',
               // backgroundColor: Colors.red,
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Icons.newspaper_sharp),
               label: 'News',
               // backgroundColor: Colors.red,
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Icons.account_box_rounded),
               label: 'Profile',
               // backgroundColor: Colors.red,

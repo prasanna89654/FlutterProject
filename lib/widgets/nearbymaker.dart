@@ -1,9 +1,9 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/controller/riverpodmanager.dart';
-import 'package:project/model/threemodel.dart';
 import 'package:project/view/login.dart';
-import 'package:project/widgets/listpmaker.dart';
 
 import 'listnearbymaker.dart';
 
@@ -15,7 +15,6 @@ class Nearbymaker extends ConsumerWidget {
     var watch = ref.watch(nearbyriverpod);
     var size = MediaQuery.of(context).size;
     var height = size.height;
-    var width = size.width;
 
     return Padding(
       padding: const EdgeInsets.only(left: 8, right: 8, top: 30),
@@ -23,7 +22,7 @@ class Nearbymaker extends ConsumerWidget {
         height: height * 0.55,
         // color: Colors.red,
         child: Column(children: [
-          Text("Nearby Events",
+          const Text("Nearby Events",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
           Container(
               height: height * 0.42,
@@ -46,10 +45,10 @@ class Nearbymaker extends ConsumerWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
+                        builder: (context) => const LoginScreen(),
                       ));
                 },
-                child: Text("View More --->",
+                child: const Text("View More --->",
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w400)),
               ),

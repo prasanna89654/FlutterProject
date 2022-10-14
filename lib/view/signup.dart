@@ -1,4 +1,6 @@
 // import 'package:flutter/cupertino.dart';
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +9,7 @@ import '../widgets/boxdecoration.dart';
 import 'login.dart';
 
 class Signup extends StatefulWidget {
-  Signup({Key? key}) : super(key: key);
+  const Signup({Key? key}) : super(key: key);
 
   @override
   State<Signup> createState() => _SignupState();
@@ -40,7 +42,6 @@ class _SignupState extends State<Signup> {
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _pass = TextEditingController();
-  final TextEditingController _confirmpass = TextEditingController();
 
   String dropdownvalue = 'Ward Number   ';
 
@@ -110,13 +111,13 @@ class _SignupState extends State<Signup> {
               }
               // } else if (value.length != 10)
               //   return 'Enter 10 digit Phone number';
-              else if (validatePhone(value) == false)
+              else if (validatePhone(value) == false) {
                 return 'Enter 10 digit number only';
+              }
 
               return null;
             },
           ),
-
           const SizedBox(
             height: 15,
           ),
@@ -147,15 +148,15 @@ class _SignupState extends State<Signup> {
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Enter your email';
-              } else if (validateEmail(value) == false)
+              } else if (validateEmail(value) == false) {
                 return 'Please enter Valid email';
+              }
               return null;
             },
           ),
           const SizedBox(
             height: 15,
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -166,12 +167,15 @@ class _SignupState extends State<Signup> {
                 child: TextFormField(
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   decoration: textDecoration.copyWith(
-                      labelText: "Age", prefixIcon: Icon(Icons.date_range)),
+                      labelText: "Age",
+                      prefixIcon: const Icon(Icons.date_range)),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Enter your age';
-                    } else if (int.parse(value) < 10 || int.parse(value) > 100)
+                    } else if (int.parse(value) < 10 ||
+                        int.parse(value) > 100) {
                       return 'Enter valid age ';
+                    }
 
                     //  else if (value )
                     //   return 'Enter Valid Age';
@@ -212,17 +216,15 @@ class _SignupState extends State<Signup> {
           const SizedBox(
             height: 15,
           ),
-
           Container(
             height: height * 0.03,
             width: width,
             // color: Colors.green,
-            child: Text(
+            child: const Text(
               "Gender :",
               style: TextStyle(fontSize: 17),
             ),
           ),
-
           Container(
               // color: Colors.red,
               height: height * 0.055,
@@ -235,7 +237,7 @@ class _SignupState extends State<Signup> {
                       width: width * 0.33,
                       // color: Colors.blue,
                       child: RadioListTile(
-                        title: Text(
+                        title: const Text(
                           "Male",
                           style: TextStyle(
                             fontSize: 16,
@@ -255,7 +257,7 @@ class _SignupState extends State<Signup> {
                       width: width * 0.37,
                       // color: Colors.green,
                       child: RadioListTile(
-                        title: Text(
+                        title: const Text(
                           "Female",
                           style: TextStyle(
                             fontSize: 16,
@@ -271,11 +273,9 @@ class _SignupState extends State<Signup> {
                       ),
                     ),
                   ])),
-
           const SizedBox(
             height: 15,
           ),
-
           Container(
             height: height * 0.04,
             width: double.infinity,
@@ -283,7 +283,7 @@ class _SignupState extends State<Signup> {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "BirthDate :  ",
                     style: TextStyle(fontSize: 17),
                   ),
@@ -292,7 +292,7 @@ class _SignupState extends State<Signup> {
                       width: width * 0.4,
                       // color: Colors.blue,
                       child: Text("${date.year}/${date.month}/${date.day}",
-                          style: TextStyle(fontSize: 17))),
+                          style: const TextStyle(fontSize: 17))),
                   ElevatedButton(
                       onPressed: () async {
                         DateTime? newDate = await showDatePicker(
@@ -304,14 +304,12 @@ class _SignupState extends State<Signup> {
                         if (newDate == null) return;
                         setState(() => date = newDate);
                       },
-                      child: Text("Choose"))
+                      child: const Text("Choose"))
                 ]),
           ),
-
           const SizedBox(
             height: 20,
           ),
-          // ignore: sized_box_for_whitespace
           Container(
               width: double.infinity,
               height: height * 0.07,
@@ -325,7 +323,8 @@ class _SignupState extends State<Signup> {
                           barrierDismissible: false,
                           builder: (BuildContext context) => AlertDialog(
                                   // title: Text("LogOut"),
-                                  content: Text("Please choose your gender"),
+                                  content:
+                                      const Text("Please choose your gender"),
                                   actions: [
                                     TextButton(
                                       // FlatButton widget is used to make a text to work like a button
@@ -336,7 +335,7 @@ class _SignupState extends State<Signup> {
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       }, // function used to perform after pressing the button
-                                      child: Text(
+                                      child: const Text(
                                         'OK',
                                         style: TextStyle(fontSize: 16),
                                       ),
@@ -348,8 +347,8 @@ class _SignupState extends State<Signup> {
                           barrierDismissible: false,
                           builder: (BuildContext context) => AlertDialog(
                                   // title: Text("LogOut"),
-                                  content:
-                                      Text("Please choose your Ward number"),
+                                  content: const Text(
+                                      "Please choose your Ward number"),
                                   actions: [
                                     TextButton(
                                       // FlatButton widget is used to make a text to work like a button
@@ -360,7 +359,7 @@ class _SignupState extends State<Signup> {
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       }, // function used to perform after pressing the button
-                                      child: Text(
+                                      child: const Text(
                                         'OK',
                                         style: TextStyle(fontSize: 16),
                                       ),
@@ -368,7 +367,7 @@ class _SignupState extends State<Signup> {
                                   ]),
                           context: context);
                     } else if (_formKey.currentState!.validate()) {
-                      Signup();
+                      const Signup();
                     }
                   },
                   child: const Text(
@@ -401,7 +400,7 @@ class _SignupState extends State<Signup> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => LoginScreen(),
+                              builder: (context) => const LoginScreen(),
                             ))
                       }),
           ])),

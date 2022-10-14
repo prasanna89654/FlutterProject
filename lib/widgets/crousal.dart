@@ -24,22 +24,19 @@ class _CrousalState extends State<Crousal> {
 
     final List<Widget> imageSliders = imgList
         .map((item) => Container(
-              child: Container(
-                margin: EdgeInsets.all(4.0),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                    child: Stack(
-                      children: <Widget>[
-                        Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                      ],
-                    )),
-              ),
+              margin: const EdgeInsets.all(4.0),
+              child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+                  child: Stack(
+                    children: <Widget>[
+                      Image.network(item, fit: BoxFit.cover, width: 1000.0),
+                    ],
+                  )),
             ))
         .toList();
 
     var size = MediaQuery.of(context).size;
     var height = size.height;
-    var width = size.width;
     return Column(children: [
       CarouselSlider(
         options: CarouselOptions(
@@ -66,7 +63,8 @@ class _CrousalState extends State<Crousal> {
             child: Container(
               width: 12.0,
               height: 10.0,
-              margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+              margin:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: (Theme.of(context).brightness == Brightness.dark

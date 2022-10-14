@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 
 import '../view/webview.dart';
@@ -35,7 +37,7 @@ class NewsContainer extends StatelessWidget {
           height: MediaQuery.of(context).size.height * 0.2,
           child: Card(
             shape: RoundedRectangleBorder(
-              side: BorderSide(
+              side: const BorderSide(
                   width: 3, color: Color.fromARGB(255, 245, 242, 251)),
               borderRadius: BorderRadius.circular(20.0),
             ),
@@ -80,7 +82,7 @@ class NewsContainer extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text("By ${author}"),
+                            Text("By $author"),
                           ],
                         )
                       ],

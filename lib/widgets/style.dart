@@ -1,16 +1,18 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 
 class style extends StatefulWidget {
-  style({
+  const style({
     Key? key,
     required this.text,
     required this.fontsize,
     this.fontweight,
   }) : super(key: key);
 
-  String text;
-  double fontsize;
-  String? fontweight;
+  final String text;
+  final double fontsize;
+  final String? fontweight;
 
   @override
   State<style> createState() => _styleState();

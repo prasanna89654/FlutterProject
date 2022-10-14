@@ -19,12 +19,12 @@ class _HistoryState extends State<History> {
               Row(
                 children: [
                   Expanded(
-                    child: Container(height: 300, color: Colors.blue),
                     flex: 2,
+                    child: Container(height: 300, color: Colors.blue),
                   ),
                   Expanded(
-                    child: Container(height: 300, color: Colors.green),
                     flex: 1,
+                    child: Container(height: 300, color: Colors.green),
                   ),
                   Container(
                     height: 300,
@@ -33,18 +33,19 @@ class _HistoryState extends State<History> {
                   )
                 ],
               ),
+              // ignore: prefer_const_constructors
               SizedBox(
                 height: 20,
               ),
               Row(
                 children: [
                   Flexible(
-                    child: Container(height: 300, color: Colors.blue),
                     flex: 2,
+                    child: Container(height: 300, color: Colors.blue),
                   ),
                   Expanded(
-                    child: Container(height: 300, color: Colors.green),
                     flex: 1,
+                    child: Container(height: 300, color: Colors.green),
                   ),
                   Container(
                     height: 300,

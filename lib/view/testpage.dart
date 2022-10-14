@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 
 class test extends StatefulWidget {
@@ -27,7 +29,7 @@ class _testState extends State<test> {
                     child: Container(
                       width: MediaQuery.of(context).size.width - 10,
                       height: MediaQuery.of(context).size.height - 80,
-                      padding: EdgeInsets.all(20),
+                      padding: const EdgeInsets.all(20),
                       color: Colors.white,
                       child: Column(
                         children: [
@@ -35,7 +37,7 @@ class _testState extends State<test> {
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
-                            child: Text(
+                            child: const Text(
                               "Save",
                               style: TextStyle(color: Colors.white),
                             ),
@@ -46,7 +48,7 @@ class _testState extends State<test> {
                   );
                 });
           },
-          child: Text("Press here")),
+          child: const Text("Press here")),
     ));
   }
 }

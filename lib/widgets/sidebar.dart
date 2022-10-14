@@ -1,8 +1,11 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
-import 'package:project/view/home.dart';
 import 'package:project/view/login.dart';
 
 class sidebar extends StatelessWidget {
+  const sidebar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -11,8 +14,8 @@ class sidebar extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            accountName: Text('Example'),
-            accountEmail: Text('example@gmail.com'),
+            accountName: const Text('Example'),
+            accountEmail: const Text('example@gmail.com'),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
                 child: Image.network(
@@ -23,7 +26,7 @@ class sidebar extends StatelessWidget {
                 ),
               ),
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               // color: Colors.blue,
               image: DecorationImage(
                   fit: BoxFit.fill,
@@ -32,60 +35,60 @@ class sidebar extends StatelessWidget {
             ),
           ),
           ListTile(
-              leading: Icon(Icons.history),
-              title: Text('Complaint History'),
+              leading: const Icon(Icons.history),
+              title: const Text('Complaint History'),
               onTap: () => {}),
           ListTile(
-            leading: Icon(Icons.group),
-            title: Text('Public Complaints'),
-            onTap: () => null,
+            leading: const Icon(Icons.group),
+            title: const Text('Public Complaints'),
+            onTap: () {},
           ),
           ListTile(
-            leading: Icon(Icons.event),
-            title: Text('Nearby Programs'),
-            onTap: () => null,
+            leading: const Icon(Icons.event),
+            title: const Text('Nearby Programs'),
+            onTap: () {},
           ),
-          Divider(
+          const Divider(
             thickness: 1,
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Settings'),
-            onTap: () => null,
+            leading: const Icon(Icons.settings),
+            title: const Text('Settings'),
+            onTap: () {},
           ),
           ListTile(
-            leading: Icon(Icons.contact_page),
-            title: Text('About Us'),
-            onTap: () => null,
+            leading: const Icon(Icons.contact_page),
+            title: const Text('About Us'),
+            onTap: () {},
           ),
-          Divider(
+          const Divider(
             thickness: 1,
           ),
           ListTile(
-              title: Text('Logout'),
-              leading: Icon(Icons.exit_to_app),
+              title: const Text('Logout'),
+              leading: const Icon(Icons.exit_to_app),
               onTap: () {
                 showDialog(
                   barrierDismissible: false,
                   builder: (BuildContext context) => AlertDialog(
-                    title: Text('Logout'),
-                    content: Text('Are you sure to logout?'),
+                    title: const Text('Logout'),
+                    content: const Text('Are you sure to logout?'),
                     actions: [
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text('CANCEL'),
+                        child: const Text('CANCEL'),
                       ),
                       TextButton(
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => LoginScreen(),
+                                builder: (context) => const LoginScreen(),
                               ));
                         },
-                        child: Text('OK'),
+                        child: const Text('OK'),
                       ),
                     ],
                   ),

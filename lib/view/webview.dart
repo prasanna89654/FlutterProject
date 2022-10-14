@@ -12,7 +12,7 @@ class WebviewScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
         // centerTitle: true,
-        title: Text("Go Back"),
+        title: const Text("Go Back"),
       ),
       body: WebView(
         initialUrl: url,

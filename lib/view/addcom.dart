@@ -4,27 +4,29 @@ import 'package:flutter/material.dart';
 
 List<DropdownMenuItem<String>> get dropdownItems {
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(
-        child: Text("Choose Category  "), value: "Choose Category  "),
-    DropdownMenuItem(child: Text("Road"), value: "Road"),
-    DropdownMenuItem(child: Text("Electricity"), value: "Electricity"),
-    DropdownMenuItem(child: Text("Hospital"), value: "Hospital"),
-    DropdownMenuItem(child: Text("Public places"), value: "Public places"),
-    DropdownMenuItem(child: Text("Ward"), value: "Ward"),
+    const DropdownMenuItem(
+        value: "Choose Category  ", child: Text("Choose Category  ")),
+    const DropdownMenuItem(value: "Road", child: Text("Road")),
+    const DropdownMenuItem(value: "Electricity", child: Text("Electricity")),
+    const DropdownMenuItem(value: "Hospital", child: Text("Hospital")),
+    const DropdownMenuItem(
+        value: "Public places", child: Text("Public places")),
+    const DropdownMenuItem(value: "Ward", child: Text("Ward")),
   ];
   return menuItems;
 }
 
 List<DropdownMenuItem<String>> get prioritydropdownItems {
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Text("Priority  "), value: "Priority  "),
-    DropdownMenuItem(child: Text("Low"), value: "Low"),
-    DropdownMenuItem(child: Text("Medium"), value: "Medium"),
-    DropdownMenuItem(child: Text("High"), value: "High"),
+    const DropdownMenuItem(value: "Priority  ", child: Text("Priority  ")),
+    const DropdownMenuItem(value: "Low", child: Text("Low")),
+    const DropdownMenuItem(value: "Medium", child: Text("Medium")),
+    const DropdownMenuItem(value: "High", child: Text("High")),
   ];
   return menuItems;
 }
 
+// ignore: camel_case_types
 class addCom extends StatefulWidget {
   const addCom({Key? key}) : super(key: key);
 
@@ -32,6 +34,7 @@ class addCom extends StatefulWidget {
   State<addCom> createState() => _addComState();
 }
 
+// ignore: camel_case_types
 class _addComState extends State<addCom> {
   @override
   Widget build(BuildContext context) {
@@ -44,9 +47,10 @@ class _addComState extends State<addCom> {
         filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
         child: AlertDialog(
             insetPadding: EdgeInsets.zero,
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.0))),
             content: Builder(builder: (context) {
+              // ignore: sized_box_for_whitespace
               return Container(
                   height: height - 200,
                   width: width - 80,
@@ -57,9 +61,9 @@ class _addComState extends State<addCom> {
                         top: -40.0,
                         child: InkResponse(
                           onTap: () {},
-                          child: CircleAvatar(
-                            child: Icon(Icons.close),
+                          child: const CircleAvatar(
                             backgroundColor: Colors.red,
+                            child: Icon(Icons.close),
                           ),
                         ),
                       ),
@@ -68,33 +72,33 @@ class _addComState extends State<addCom> {
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
                             Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     alignLabelWithHint: true,
                                     labelText: "Subject"),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     alignLabelWithHint: true,
                                     labelText: "Location"),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     alignLabelWithHint: true,
                                     labelText: "Image"),
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(8.0),
                               child: TextFormField(
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     alignLabelWithHint: true,
                                     labelText: "Description"),
                               ),
@@ -139,7 +143,8 @@ class _addComState extends State<addCom> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: ElevatedButton(
-                                  child: Text("Submit"), onPressed: () {}),
+                                  child: const Text("Submit"),
+                                  onPressed: () {}),
                             ),
                           ],
                         ),

@@ -10,9 +10,9 @@ class Guidepage extends StatefulWidget {
 class _GuidepageState extends State<Guidepage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         body: SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
     ));
   }
 }

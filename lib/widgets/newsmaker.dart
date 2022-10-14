@@ -1,14 +1,10 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project/controller/riverpodmanager.dart';
-import 'package:project/model/threemodel.dart';
-import 'package:project/view/login.dart';
-import 'package:project/widgets/listpmaker.dart';
 import 'package:project/widgets/newscontainer.dart';
 
 import '../controller/newsprovider.dart';
-import '../view/fullnews.dart';
-import 'listnearbymaker.dart';
 // import 'listnewsmaker.dart';
 
 class Newsmaker extends ConsumerWidget {
@@ -20,7 +16,6 @@ class Newsmaker extends ConsumerWidget {
     // var watch = ref.watch(newsriverpod);
     var size = MediaQuery.of(context).size;
     var height = size.height;
-    var width = size.width;
 
     return Padding(
       padding: const EdgeInsets.only(left: 8, right: 8, top: 30),
@@ -28,7 +23,7 @@ class Newsmaker extends ConsumerWidget {
         height: height * 0.55,
         // color: Colors.red,
         child: Column(children: [
-          Text("Latest News",
+          const Text("Latest News",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
           Container(
               height: height * 0.44,
@@ -66,7 +61,7 @@ class Newsmaker extends ConsumerWidget {
             child: Center(
               child: InkWell(
                 onTap: () => changePage!(2),
-                child: Text("View More --->",
+                child: const Text("View More --->",
                     style:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.w400)),
               ),

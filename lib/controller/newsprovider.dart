@@ -8,11 +8,11 @@ import '../Model/news_model.dart';
 String baseurl = "https://ktmwebscraper.herokuapp.com/";
 
 getNews() async {
-  var national = await http.get(Uri.parse(baseurl + "national"));
-  var sports = await http.get(Uri.parse(baseurl + "sports"));
-  var money = await http.get(Uri.parse(baseurl + "money"));
-  var valley = await http.get(Uri.parse(baseurl + "valley"));
-  var art = await http.get(Uri.parse(baseurl + "art-culture"));
+  var national = await http.get(Uri.parse("${baseurl}national"));
+  var sports = await http.get(Uri.parse("${baseurl}sports"));
+  var money = await http.get(Uri.parse("${baseurl}money"));
+  var valley = await http.get(Uri.parse("${baseurl}valley"));
+  var art = await http.get(Uri.parse("${baseurl}art-culture"));
 
   var nationaldata = jsonDecode(national.body);
 

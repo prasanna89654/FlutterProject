@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:project/view/addcom.dart';
 import 'package:project/view/testpage.dart';
@@ -5,8 +7,6 @@ import 'package:project/widgets/crousal.dart';
 import 'package:project/widgets/nearbymaker.dart';
 import 'package:project/widgets/newsmaker.dart';
 import 'package:project/widgets/publicmaker.dart';
-
-import '../widgets/sidebar.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key, this.changePage});
@@ -27,8 +27,8 @@ class _HomepageState extends State<Homepage> {
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         children: [
-          Crousal(),
-          SizedBox(
+          const Crousal(),
+          const SizedBox(
             height: 10,
           ),
           Container(
@@ -38,7 +38,7 @@ class _HomepageState extends State<Homepage> {
                 Container(
                   height: height * 0.29,
                   width: width,
-                  decoration: new BoxDecoration(
+                  decoration: BoxDecoration(
                     // color: Colors.green,
                     borderRadius: BorderRadius.vertical(
                         top: Radius.elliptical(width, 10.0),
@@ -71,12 +71,13 @@ class _HomepageState extends State<Homepage> {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => test(),
+                                              builder: (context) =>
+                                                  const test(),
                                             ));
                                       }),
-                                      icon: Icon(Icons.track_changes),
+                                      icon: const Icon(Icons.track_changes),
                                     )),
-                                Text("Track Complain")
+                                const Text("Track Complain")
                               ],
                             )),
                         Container(
@@ -98,11 +99,11 @@ class _HomepageState extends State<Homepage> {
                                       onPressed: (() {
                                         showDialog(
                                             context: context,
-                                            builder: (_) => addCom());
+                                            builder: (_) => const addCom());
                                       }),
-                                      icon: Icon(Icons.add),
+                                      icon: const Icon(Icons.add),
                                     )),
-                                Text("Add Complain")
+                                const Text("Add Complain")
                               ],
                             )),
                         Container(
@@ -122,9 +123,9 @@ class _HomepageState extends State<Homepage> {
                                     ),
                                     child: IconButton(
                                       onPressed: (() {}),
-                                      icon: Icon(Icons.phone),
+                                      icon: const Icon(Icons.phone),
                                     )),
-                                Text("Helplines")
+                                const Text("Helplines")
                               ],
                             )),
                       ],
@@ -138,10 +139,10 @@ class _HomepageState extends State<Homepage> {
               height: height * 0.204,
               // color: Colors.blue,
               child: Card(
-                  margin: EdgeInsets.all(3),
+                  margin: const EdgeInsets.all(3),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
-                      side: BorderSide(
+                      side: const BorderSide(
                           width: 5, color: Color.fromARGB(255, 245, 242, 251))),
                   elevation: 20,
                   child: Padding(
@@ -149,14 +150,14 @@ class _HomepageState extends State<Homepage> {
                         const EdgeInsets.only(top: 15, left: 30, right: 30),
                     child: Column(
                       children: [
-                        Center(
+                        const Center(
                           child: Text(
                             "Your Complaints",
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.w500),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
@@ -168,11 +169,11 @@ class _HomepageState extends State<Homepage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Pending",
                                     style: TextStyle(fontSize: 18),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 15,
                                   ),
                                   Center(
@@ -184,7 +185,7 @@ class _HomepageState extends State<Homepage> {
                                           // color: Colors.blue,
                                           border:
                                               Border.all(color: Colors.black)),
-                                      child: Center(
+                                      child: const Center(
                                         child: Text(
                                           "9",
                                           style: TextStyle(fontSize: 18),
@@ -195,13 +196,13 @@ class _HomepageState extends State<Homepage> {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             Container(
                                 height: height * 0.10,
                                 // color: Colors.red,
-                                child: VerticalDivider(
+                                child: const VerticalDivider(
                                   thickness: 2,
                                   color: Colors.black26,
                                 )),
@@ -213,11 +214,11 @@ class _HomepageState extends State<Homepage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Text(
+                                    const Text(
                                       "Solved",
                                       style: TextStyle(fontSize: 18),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 15,
                                     ),
                                     Center(
@@ -229,7 +230,7 @@ class _HomepageState extends State<Homepage> {
                                             // color: Colors.blue,
                                             border: Border.all(
                                                 color: Colors.black)),
-                                        child: Center(
+                                        child: const Center(
                                           child: Text(
                                             "9",
                                             style: TextStyle(fontSize: 18),
@@ -241,13 +242,13 @@ class _HomepageState extends State<Homepage> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Container(
                                 height: height * 0.10,
                                 // color: Colors.red,
-                                child: VerticalDivider(
+                                child: const VerticalDivider(
                                   thickness: 2,
                                   color: Colors.black26,
                                 )),
@@ -259,11 +260,11 @@ class _HomepageState extends State<Homepage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    Text(
+                                    const Text(
                                       "Total",
                                       style: TextStyle(fontSize: 18),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 15,
                                     ),
                                     Center(
@@ -275,7 +276,7 @@ class _HomepageState extends State<Homepage> {
                                             // color: Colors.blue,
                                             border: Border.all(
                                                 color: Colors.black)),
-                                        child: Center(
+                                        child: const Center(
                                           child: Text(
                                             "9",
                                             style: TextStyle(fontSize: 18),
@@ -294,9 +295,9 @@ class _HomepageState extends State<Homepage> {
                   )),
             ),
           ),
-          SizedBox(height: 30),
-          Publicmaker(),
-          Nearbymaker(),
+          const SizedBox(height: 30),
+          const Publicmaker(),
+          const Nearbymaker(),
           Newsmaker(
             changePage: widget.changePage,
           )

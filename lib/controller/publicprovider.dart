@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project/widgets/publicmaker.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 
 import '../model/threemodel.dart';

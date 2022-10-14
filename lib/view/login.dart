@@ -1,13 +1,14 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:project/view/appbar.dart';
-import 'package:project/view/home.dart';
 
 import '../widgets/boxdecoration.dart';
 import 'signup.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -25,7 +26,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var height = size.height;
-    var width = size.width;
     return Form(
       key: _formKey,
       child: Scaffold(
@@ -35,14 +35,14 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 120,
                   ),
                   Container(
                       height: height * 0.09,
                       // color: Colors.red,
                       child: Image.asset('assets/images/logo.png')),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   const Text('Welcome to Complaint Management System',
@@ -51,20 +51,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       )),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   const Text('Sign in to continue',
                       style: TextStyle(
                         fontSize: 17,
                       )),
-                  SizedBox(
+                  const SizedBox(
                     height: 38,
                   ),
                   TextFormField(
                     decoration: textDecoration.copyWith(
                       labelText: "Phone number",
-                      prefixIcon: Icon(Icons.phone),
+                      prefixIcon: const Icon(Icons.phone),
                     ),
                     // validator: (value) {
                     //   if (value == null || value.isEmpty) {
@@ -76,13 +76,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     //   return null;
                     // },
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   TextFormField(
                     decoration: textDecoration.copyWith(
                       labelText: "Password",
-                      prefixIcon: Icon(Icons.lock),
+                      prefixIcon: const Icon(Icons.lock),
                     ),
                     obscureText: true,
                     // validator: (value) {
@@ -94,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     //   return null;
                     // }
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
@@ -102,33 +102,33 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: height * 0.07,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold)),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => Appbar(),
+                                    builder: (context) => const Appbar(),
                                   ));
                             }
                           },
-                          child: Text(
+                          child: const Text(
                             "Sign in",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ))),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   InkWell(
                     onTap: () {},
-                    child: Text(
+                    child: const Text(
                       'Forgot Password?',
                       style: TextStyle(
                         color: Colors.blue,
@@ -137,10 +137,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   RichText(
                     text: TextSpan(children: [
-                      TextSpan(
+                      const TextSpan(
                         text: "Don't have a account? ",
                         style: TextStyle(
                           color: Colors.black,
@@ -149,7 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       TextSpan(
                           text: 'Register',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.blue,
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
@@ -159,7 +159,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => Signup(),
+                                        builder: (context) => const Signup(),
                                       ))
                                 }),
                     ]),

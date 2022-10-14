@@ -1,12 +1,11 @@
-import 'dart:ui';
+// ignore_for_file: camel_case_types, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import '../view/appbar.dart';
 import '../widgets/profile_maker.dart';
 import '../widgets/style.dart';
 
 class profile extends StatefulWidget {
-  profile({Key? key}) : super(key: key);
+  const profile({Key? key}) : super(key: key);
 
   @override
   State<profile> createState() => _profileState();
@@ -30,23 +29,23 @@ class _profileState extends State<profile> {
                 width: double.infinity,
                 child: Row(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Container(
                       width: height * 0.11,
                       height: height * 0.11,
-                      child: CircleAvatar(
+                      child: const CircleAvatar(
                         backgroundImage: AssetImage("assets/images/Bill.png"),
                         backgroundColor: Colors.white,
                       ),
                     ),
-                    SizedBox(width: 20),
+                    const SizedBox(width: 20),
                     Container(
                         height: height * 0.05,
                         width: width * 0.65,
                         // color: Colors.blue,
-                        child: style(text: 'Sample Name', fontsize: 25)),
+                        child: const style(text: 'Sample Name', fontsize: 25)),
 
                     // ClipRRect(
                     //     child: SizedBox.fromSize(
@@ -59,13 +58,13 @@ class _profileState extends State<profile> {
                     // ))
                   ],
                 )),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Container(
                 height: height * 0.55,
                 // color: Colors.green,
                 child: ListView(
                   // padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
-                  children: [
+                  children: const [
                     pmaker(
                       image: "assets/images/gender.png",
                       text: 'Gender',
