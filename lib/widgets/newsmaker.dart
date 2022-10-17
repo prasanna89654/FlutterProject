@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:project/view/fullnews.dart';
 import 'package:project/widgets/newscontainer.dart';
 
 import '../controller/newsprovider.dart';
@@ -40,7 +41,7 @@ class Newsmaker extends ConsumerWidget {
                           link: snapshot.data[0].link,
                         );
                       }
-                      return const Center(child: CircularProgressIndicator());
+                      return getShimmer();
                     }),
                 FutureBuilder(
                     future: getNews(),
@@ -53,7 +54,7 @@ class Newsmaker extends ConsumerWidget {
                           link: snapshot.data[1].link,
                         );
                       }
-                      return const Center(child: CircularProgressIndicator());
+                      return getShimmer();
                     })
               ])),
           Padding(

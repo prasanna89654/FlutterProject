@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:project/view/addcom.dart';
-import 'package:project/view/testpage.dart';
+import 'package:project/view/trackpage.dart';
 import 'package:project/widgets/crousal.dart';
 import 'package:project/widgets/nearbymaker.dart';
 import 'package:project/widgets/newsmaker.dart';
