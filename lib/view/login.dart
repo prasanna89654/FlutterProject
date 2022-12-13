@@ -1,9 +1,13 @@
-// ignore_for_file: sized_box_for_whitespace
+// ignore_for_file: sized_box_for_whitespace, unrelated_type_equality_checks
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:project/view/appbar.dart';
+import 'package:project/view/home.dart';
+import 'package:project/view/trackpage.dart';
+import 'package:project/widgets/test1.dart';
 
+// import '../controller/post.dart';
 import '../widgets/boxdecoration.dart';
 import 'signup.dart';
 
@@ -22,8 +26,25 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   final _formKey = GlobalKey<FormState>();
+  final phoneCtrl = TextEditingController();
+  final passwordCtrl = TextEditingController();
+  callLoginApi() {
+    // final service = ApiServices();
+
+    // service.apiCallLogin("name", "password", "tenancy");
+  }
+
+  // LoginApi neww = LoginApi(
+  //     name: phoneCtrl.value.text.toString(),
+  //     password: passwordCtrl.value.text.toString(),
+  //     tenancy: tenant.toString());
+
+  var tenant = "damak";
+
   @override
   Widget build(BuildContext context) {
+    // var number = "9862329593";
+    // var pass = "Prasanna";
     var size = MediaQuery.of(context).size;
     var height = size.height;
     return Form(
@@ -62,36 +83,48 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 38,
                   ),
                   TextFormField(
+                    controller: phoneCtrl,
+
                     decoration: textDecoration.copyWith(
                       labelText: "Phone number",
                       prefixIcon: const Icon(Icons.phone),
                     ),
+                    // onSaved: ((newValue) {
+                    //   number == newValue;
+                    // }),
                     // validator: (value) {
                     //   if (value == null || value.isEmpty) {
                     //     return 'Enter phone number';
                     //   } else if (validatePhone(value) == false) {
                     //     return 'Enter 10 digit number only';
+                    //   } else {
+                    //     // return ' correct num';
+                    //     return null;
                     //   }
-
-                    //   return null;
                     // },
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   TextFormField(
+                    controller: passwordCtrl,
                     decoration: textDecoration.copyWith(
                       labelText: "Password",
                       prefixIcon: const Icon(Icons.lock),
                     ),
+                    // onSaved: ((newValue) {
+                    //   pass == newValue;
+                    // }),
                     obscureText: true,
                     // validator: (value) {
                     //   if (value == null || value.isEmpty) {
                     //     return 'Please enter some text';
                     //   } else if (value.length < 5) {
                     //     return 'Password too Small';
+                    //   } else {
+                    //     // return 'correct pass';
+                    //     return null;
                     //   }
-                    //   return null;
                     // }
                   ),
                   const SizedBox(
@@ -105,13 +138,28 @@ class _LoginScreenState extends State<LoginScreen> {
                               textStyle: const TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold)),
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const Appbar(),
-                                  ));
-                            }
+                            // callLoginApi();
+                            // if (_formKey.currentState!.validate()
+
+                            //     //  &&
+                            //     //     phoneCtrl.value.text == number &&
+                            //     //     passwordCtrl.value.text == pass
+
+                            //     ) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const Appbar()
+
+                                    //  Testpage(
+                                    //   number: phoneCtrl.value.text,
+                                    //   pass: passwordCtrl.value.text,
+                                    // ),
+                                    //           ));
+                                    // } else {
+                                    //   // print("not validated");
+                                    // }
+                                    ));
                           },
                           child: const Text(
                             "Sign in",

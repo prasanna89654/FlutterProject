@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
@@ -54,26 +56,6 @@ class _CrousalState extends State<Crousal> {
             autoPlay: true,
             viewportFraction: 0.85),
         items: imageSliders,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: imgList.asMap().entries.map((entry) {
-          return GestureDetector(
-            onTap: () => _controller.animateToPage(entry.key),
-            child: Container(
-              width: 12.0,
-              height: 10.0,
-              margin:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: (Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white
-                          : Colors.blue)
-                      .withOpacity(_current == entry.key ? 0.99 : 0.30)),
-            ),
-          );
-        }).toList(),
       ),
     ]);
   }

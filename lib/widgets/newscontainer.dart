@@ -79,11 +79,17 @@ class NewsContainer extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle()),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text("By $author"),
-                          ],
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    right: 8.0, bottom: 8),
+                                child: Text("By $author"),
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ))

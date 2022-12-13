@@ -140,6 +140,23 @@ class _SignupState extends State<Signup> {
             height: 15,
           ),
           TextFormField(
+              decoration: textDecoration.copyWith(
+                labelText: "Confirm Password",
+                prefixIcon: const Icon(Icons.lock),
+              ),
+              obscureText: true,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Enter your Password';
+                } else if (value != _pass.text) {
+                  return 'Password not matched';
+                }
+                return null;
+              }),
+          const SizedBox(
+            height: 15,
+          ),
+          TextFormField(
             decoration: textDecoration.copyWith(
                 labelText: "Your Email",
                 prefixIcon: const Icon(

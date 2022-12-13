@@ -33,7 +33,6 @@ class _HomepageState extends State<Homepage> {
           ),
           Container(
               height: height * 0.15,
-              // color: Colors.red,
               child: Stack(children: [
                 Container(
                   height: height * 0.29,
@@ -54,7 +53,6 @@ class _HomepageState extends State<Homepage> {
                         Container(
                             height: height * 0.120,
                             width: width * 0.30,
-                            // color: Colors.red,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -83,7 +81,6 @@ class _HomepageState extends State<Homepage> {
                         Container(
                             height: height * 0.120,
                             width: width * 0.30,
-                            // color: Colors.red,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -109,7 +106,6 @@ class _HomepageState extends State<Homepage> {
                         Container(
                             height: height * 0.120,
                             width: width * 0.30,
-                            // color: Colors.red,
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -136,7 +132,7 @@ class _HomepageState extends State<Homepage> {
           Padding(
             padding: const EdgeInsets.only(top: 15, left: 14, right: 14),
             child: Container(
-              height: height * 0.204,
+              height: height * 0.224,
               // color: Colors.blue,
               child: Card(
                   margin: const EdgeInsets.all(3),
@@ -164,7 +160,7 @@ class _HomepageState extends State<Homepage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              height: height * 0.098,
+                              height: height * 0.1,
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
@@ -176,19 +172,21 @@ class _HomepageState extends State<Homepage> {
                                   const SizedBox(
                                     height: 15,
                                   ),
-                                  Center(
-                                    child: Container(
-                                      height: height * 0.045,
-                                      width: width * 0.10,
-                                      decoration: BoxDecoration(
-                                          shape: BoxShape.rectangle,
-                                          // color: Colors.blue,
-                                          border:
-                                              Border.all(color: Colors.black)),
-                                      child: const Center(
-                                        child: Text(
-                                          "9",
-                                          style: TextStyle(fontSize: 18),
+                                  Expanded(
+                                    child: Center(
+                                      child: Container(
+                                        height: height * 0.045,
+                                        width: width * 0.10,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.rectangle,
+                                            // color: Colors.blue,
+                                            border: Border.all(
+                                                color: Colors.black)),
+                                        child: const Center(
+                                          child: Text(
+                                            "9",
+                                            style: TextStyle(fontSize: 18),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -201,7 +199,6 @@ class _HomepageState extends State<Homepage> {
                             ),
                             Container(
                                 height: height * 0.10,
-                                // color: Colors.red,
                                 child: const VerticalDivider(
                                   thickness: 2,
                                   color: Colors.black26,
@@ -221,19 +218,21 @@ class _HomepageState extends State<Homepage> {
                                     const SizedBox(
                                       height: 15,
                                     ),
-                                    Center(
-                                      child: Container(
-                                        height: height * 0.045,
-                                        width: width * 0.10,
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.rectangle,
-                                            // color: Colors.blue,
-                                            border: Border.all(
-                                                color: Colors.black)),
-                                        child: const Center(
-                                          child: Text(
-                                            "9",
-                                            style: TextStyle(fontSize: 18),
+                                    Expanded(
+                                      child: Center(
+                                        child: Container(
+                                          height: height * 0.045,
+                                          width: width * 0.10,
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.rectangle,
+                                              // color: Colors.blue,
+                                              border: Border.all(
+                                                  color: Colors.black)),
+                                          child: const Center(
+                                            child: Text(
+                                              "9",
+                                              style: TextStyle(fontSize: 18),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -267,19 +266,21 @@ class _HomepageState extends State<Homepage> {
                                     const SizedBox(
                                       height: 15,
                                     ),
-                                    Center(
-                                      child: Container(
-                                        height: height * 0.048,
-                                        width: width * 0.10,
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.rectangle,
-                                            // color: Colors.blue,
-                                            border: Border.all(
-                                                color: Colors.black)),
-                                        child: const Center(
-                                          child: Text(
-                                            "9",
-                                            style: TextStyle(fontSize: 18),
+                                    Expanded(
+                                      child: Center(
+                                        child: Container(
+                                          height: height * 0.048,
+                                          width: width * 0.10,
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.rectangle,
+                                              // color: Colors.blue,
+                                              border: Border.all(
+                                                  color: Colors.black)),
+                                          child: const Center(
+                                            child: Text(
+                                              "9",
+                                              style: TextStyle(fontSize: 18),
+                                            ),
                                           ),
                                         ),
                                       ),
