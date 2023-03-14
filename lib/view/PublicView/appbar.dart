@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:project/view/fullnews.dart';
-import 'package:project/view/guideliness.dart';
-import 'package:project/view/home.dart';
-// import 'package:project/view/news.dart';
-// import 'package:project/view/profile.dart';
-import 'package:project/view/profile_screen.dart';
+import 'package:project/view/PublicView/complaint_history.dart';
+import 'package:project/view/PublicView/historypage.dart';
+import 'package:project/view/PublicView/mycomplaintspage.dart/complaintspage.dart';
+import 'package:project/view/PublicView/profile_screen.dart';
+
 import 'package:project/widgets/sidebar.dart';
 
+import 'fullnews.dart';
+import 'guideliness.dart';
+import 'home.dart';
+
 class Appbar extends StatefulWidget {
-  const Appbar({super.key});
+  Appbar({required this.cindex, super.key});
+  int cindex;
 
   @override
   State<Appbar> createState() => _AppbarState();
@@ -41,11 +45,11 @@ class _AppbarState extends State<Appbar> {
   void initState() {
     super.initState();
     _page1 = Homepage(changePage: _changeTab);
-    _page2 = const Guidepage();
+    _page2 = const ComplaintsPage();
     _page3 = const Fullnews();
     _page4 = const profile();
     _pages = [_page1, _page2, _page3, _page4];
-    _currentIndex = 0;
+    _currentIndex = widget.cindex;
     _currentPage = _page1;
   }
 
@@ -61,6 +65,7 @@ class _AppbarState extends State<Appbar> {
     return Scaffold(
         drawer: const sidebar(),
         appBar: AppBar(
+          elevation: 0,
           // automaticallyImplyLeading: false,
           title: const Text("Welcome Prasanna Poudel"),
           centerTitle: true,
@@ -69,12 +74,12 @@ class _AppbarState extends State<Appbar> {
           ),
 
           // centerTitle: true,
-          backgroundColor: Colors.black,
+          backgroundColor: Colors.blue,
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.notifications))
           ],
         ),
-        body: _currentPage,
+        body: _pages[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
           // ignore: prefer_const_literals_to_create_immutables
           items: [
@@ -85,9 +90,9 @@ class _AppbarState extends State<Appbar> {
             ),
             const BottomNavigationBarItem(
               icon: Icon(
-                Icons.rule,
+                Icons.subject,
               ),
-              label: 'Guidelines',
+              label: 'My Complaints',
               // backgroundColor: Colors.red,
             ),
             const BottomNavigationBarItem(
@@ -107,8 +112,8 @@ class _AppbarState extends State<Appbar> {
 
           selectedItemColor: Colors.blue,
 
-          iconSize: 30,
-          selectedFontSize: 18,
+          iconSize: 29,
+          selectedFontSize: 15,
           unselectedFontSize: 13,
 
           onTap: (index) {

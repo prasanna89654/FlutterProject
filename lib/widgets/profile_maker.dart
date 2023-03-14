@@ -29,16 +29,16 @@ class _pmakerState extends State<pmaker> {
         AssetImage(
           widget.image,
         ),
-        size: 35.55,
+        size: 30,
         color: Colors.blue,
       ),
       contentPadding: const EdgeInsets.fromLTRB(15, 12, 15, 0),
-      title: style(text: widget.text, fontsize: 17),
+      title: style(text: widget.text, fontsize: 16),
       onTap: (() {}),
       // trailing:
 
       trailing: Container(
-          width: width * 0.55,
+          width: width * 0.6,
           // color: Colors.red,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -50,7 +50,7 @@ class _pmakerState extends State<pmaker> {
                 style: const TextStyle(
                   fontSize: 17,
                 ),
-                overflow: TextOverflow.ellipsis,
+                // overflow: TextOverflow.ellipsis,
               ),
             ],
           )),

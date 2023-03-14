@@ -4,17 +4,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import '../widgets/boxdecoration.dart';
+import '../../widgets/boxdecoration.dart';
 
-var categoryItems = [
-  "Road",
-  "Electricity",
-  "Hospital",
-  "Public places",
-  "Ward"
-];
+var categoryItems = ["Water", "Road", "Health", "Electricity", "Education"];
 
-var priorityItems = ["Low", "Medium", "High"];
+var priorityItems = ["Low", "Moderate", "Critical"];
 
 // ignore: camel_case_types
 class addCom extends StatefulWidget {

@@ -3,19 +3,17 @@
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 
-import 'historypage.dart';
-
-class test extends StatefulWidget {
-  const test({Key? key}) : super(key: key);
+class MaintainerStatus extends StatefulWidget {
+  const MaintainerStatus({Key? key}) : super(key: key);
 
   @override
-  State<test> createState() => _testState();
+  State<MaintainerStatus> createState() => _testState();
 }
 
-class _testState extends State<test> {
-  Map<String, double> dataMap = {"Pending": 5, "Solved": 8};
+class _testState extends State<MaintainerStatus> {
+  Map<String, double> dataMap = {"Pending": 5, "Solved": 7, "Hold": 4};
 
-  List<Color> colorList = [Colors.red, Colors.green];
+  List<Color> colorList = [Colors.red, Colors.green, Colors.blue];
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +39,11 @@ class _testState extends State<test> {
                   ),
                   CircleAvatar(
                     radius: 18,
-                    backgroundColor: Color.fromARGB(255, 97, 77, 77),
-                    child: Text("15"),
+                    backgroundColor: Colors.black,
+                    child: Text(
+                      "16",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   )
                 ],
               ),
@@ -59,8 +60,26 @@ class _testState extends State<test> {
                   ),
                   CircleAvatar(
                     radius: 18,
-                    backgroundColor: Color.fromARGB(255, 97, 77, 77),
-                    child: Text("15"),
+                    backgroundColor: Colors.black,
+                    child: Text("5", style: TextStyle(color: Colors.white)),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 10, right: 10, top: 10, bottom: 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    "Hold",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  CircleAvatar(
+                    radius: 18,
+                    backgroundColor: Colors.black,
+                    child: Text("4", style: TextStyle(color: Colors.white)),
                   )
                 ],
               ),
@@ -77,11 +96,24 @@ class _testState extends State<test> {
                   ),
                   CircleAvatar(
                     radius: 18,
-                    backgroundColor: Color.fromARGB(255, 97, 77, 77),
-                    child: Text("15"),
+                    backgroundColor: Colors.black,
+                    child: Text(
+                      "7",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   )
                 ],
               ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Divider(
+              thickness: 1,
+              // color: Colors.black,
+            ),
+            const SizedBox(
+              height: 30,
             ),
             Container(
                 height: height * 0.2,
@@ -93,29 +125,10 @@ class _testState extends State<test> {
             const SizedBox(
               height: 30,
             ),
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HistoryPage(),
-                    ));
-              },
-              child: Container(
-                margin: const EdgeInsets.all(8),
-                height: height * 0.04,
-                padding: const EdgeInsets.only(left: 8, right: 8, top: 3),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 180, 171, 171),
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(width: 2, color: Colors.grey),
-                ),
-                child: const Text(
-                  "View your Complaint History",
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                ),
-              ),
-            )
+            Divider(
+              thickness: 1,
+              // color: Colors.black,
+            ),
           ],
         ),
       ),

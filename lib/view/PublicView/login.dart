@@ -2,23 +2,22 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:project/view/appbar.dart';
-import 'package:project/view/home.dart';
-import 'package:project/view/trackpage.dart';
-import 'package:project/widgets/test1.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:project/Riverpod/Repository/UserRepository.dart';
 
-// import '../controller/post.dart';
-import '../widgets/boxdecoration.dart';
+import '../../widgets/boxdecoration.dart';
+import 'appbar.dart';
 import 'signup.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   bool validatePhone(String value) {
     String pattern = r'(^(?:[+0]9)?[0-9]{10}$)';
     RegExp regex = RegExp(pattern);
@@ -28,21 +27,17 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final phoneCtrl = TextEditingController();
   final passwordCtrl = TextEditingController();
-  callLoginApi() {
-    // final service = ApiServices();
-
-    // service.apiCallLogin("name", "password", "tenancy");
-  }
-
-  // LoginApi neww = LoginApi(
-  //     name: phoneCtrl.value.text.toString(),
-  //     password: passwordCtrl.value.text.toString(),
-  //     tenancy: tenant.toString());
 
   var tenant = "damak";
 
   @override
   Widget build(BuildContext context) {
+    Future<void> login() async {
+      ref
+          .read(userapiProvider)
+          .logIn(phoneCtrl.value.text, passwordCtrl.value.text);
+    }
+
     // var number = "9862329593";
     // var pass = "Prasanna";
     var size = MediaQuery.of(context).size;
@@ -50,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Form(
       key: _formKey,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
           child: Center(
@@ -62,7 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                       height: height * 0.09,
                       // color: Colors.red,
-                      child: Image.asset('assets/images/logo.png')),
+                      child: Image.asset('assets/images/care.png')),
                   const SizedBox(
                     height: 20,
                   ),
@@ -84,23 +80,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   TextFormField(
                     controller: phoneCtrl,
-
                     decoration: textDecoration.copyWith(
-                      labelText: "Phone number",
-                      prefixIcon: const Icon(Icons.phone),
+                      border: OutlineInputBorder(),
+                      labelText: "Email",
+                      prefixIcon: const Icon(Icons.mail),
                     ),
-                    // onSaved: ((newValue) {
-                    //   number == newValue;
-                    // }),
-                    // validator: (value) {
-                    //   if (value == null || value.isEmpty) {
-                    //     return 'Enter phone number';
-                    //   } else if (validatePhone(value) == false) {
-                    //     return 'Enter 10 digit number only';
-                    //   } else {
-                    //     // return ' correct num';
-                    //     return null;
-                    //   }
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(),
+                      // FormBuilderValidators.email(),
+                    ]),
+
                     // },
                   ),
                   const SizedBox(
@@ -110,22 +99,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: passwordCtrl,
                     decoration: textDecoration.copyWith(
                       labelText: "Password",
+                      border: OutlineInputBorder(),
                       prefixIcon: const Icon(Icons.lock),
                     ),
-                    // onSaved: ((newValue) {
-                    //   pass == newValue;
-                    // }),
+                    validator: FormBuilderValidators.compose([
+                      FormBuilderValidators.required(),
+                      FormBuilderValidators.minLength(6),
+                    ]),
                     obscureText: true,
-                    // validator: (value) {
-                    //   if (value == null || value.isEmpty) {
-                    //     return 'Please enter some text';
-                    //   } else if (value.length < 5) {
-                    //     return 'Password too Small';
-                    //   } else {
-                    //     // return 'correct pass';
-                    //     return null;
-                    //   }
-                    // }
                   ),
                   const SizedBox(
                     height: 20,
@@ -138,28 +119,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               textStyle: const TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold)),
                           onPressed: () {
-                            // callLoginApi();
-                            // if (_formKey.currentState!.validate()
-
-                            //     //  &&
-                            //     //     phoneCtrl.value.text == number &&
-                            //     //     passwordCtrl.value.text == pass
-
-                            //     ) {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const Appbar()
-
-                                    //  Testpage(
-                                    //   number: phoneCtrl.value.text,
-                                    //   pass: passwordCtrl.value.text,
-                                    // ),
-                                    //           ));
-                                    // } else {
-                                    //   // print("not validated");
-                                    // }
-                                    ));
+                            if (_formKey.currentState!.validate()) {
+                              login();
+                            }
                           },
                           child: const Text(
                             "Sign in",

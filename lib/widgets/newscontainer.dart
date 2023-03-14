@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../view/webview.dart';
+import '../view/PublicView/webview.dart';
 
 // import '../screens/webview_screen.dart';
 
@@ -10,19 +10,24 @@ class NewsContainer extends StatelessWidget {
   final String? imageurl;
   final String? title;
   final String? description;
-  final String? author;
+  final String? date;
   final String? link;
   const NewsContainer(
       {Key? key,
       this.imageurl,
       this.title,
       this.description,
-      this.author,
-      this.link})
+      this.link,
+      this.date})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    removelast(String value) {
+      final String result = value.substring(0, value.length - 5);
+      return result;
+    }
+
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: InkWell(
@@ -86,7 +91,12 @@ class NewsContainer extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(
                                     right: 8.0, bottom: 8),
-                                child: Text("By $author"),
+                                child: Text(removelast(date!),
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      // color: Colors.grey
+                                    )),
                               )
                             ],
                           ),

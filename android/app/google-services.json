@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "342071659772",
+    "project_id": "seventh-sem-project-72375",
+    "storage_bucket": "seventh-sem-project-72375.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342071659772:android:1bf251fd56b67acc08db79",
+        "android_client_info": {
+          "package_name": "com.example.project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "342071659772-6ecg2qdmhqg5hmr35vfep0qm3qs9deb6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuIJoogIRGSQVlTq3BmhqzCN4DjG8vpoA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "342071659772-6ecg2qdmhqg5hmr35vfep0qm3qs9deb6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
