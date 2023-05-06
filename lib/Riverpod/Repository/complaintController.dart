@@ -21,6 +21,20 @@ class ComplaintController {
     }
   }
 
+  Future<List<ComplaintGetAllModel>> getownComplaints() async {
+    final response = await Api().get(MyConfig.getowncomplaintsURL);
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> map = json.decode(response.data);
+      List<dynamic> data = map["result"]["items"];
+
+      return data.map((data) => ComplaintGetAllModel.fromJson(data)).toList();
+    } else {
+      List<ComplaintGetAllModel> a = [];
+      return a;
+    }
+  }
+
   Future<UserModel?> getuserdetails() async {
     try {
       String gethomeworkdetails =
@@ -50,6 +64,25 @@ class ComplaintController {
     }
     return null;
   }
+
+  Future<OwnReportModel?> ownReportDetails() async {
+    try {
+      String gethomeworkdetails =
+          "/api/services/app/ComplaintReporting/GetComplaintReport?MaxResultCount=50";
+      final response = await Api().get(MyConfig.appUrl + gethomeworkdetails);
+      if (response.statusCode == 200) {
+        var value = json.decode(response.toString())["result"];
+
+        var data = OwnReportModel.fromJson(value);
+
+        return data;
+      }
+    } catch (e) {
+      // ignore: avoid_print
+      print(e.toString());
+    }
+    return null;
+  }
 }
 
 final complaintProvider =
@@ -58,6 +91,14 @@ final getallComplaintProvider =
     FutureProvider.autoDispose<List<ComplaintGetAllModel>>((ref) async {
   return ref.read(complaintProvider).getComplaints();
 });
+
+final getownComplaintProvider =
+    FutureProvider.autoDispose<List<ComplaintGetAllModel>>((ref) async {
+  return ref.read(complaintProvider).getownComplaints();
+});
 final getuserProvider = FutureProvider<UserModel?>((ref) async {
   return ref.read(complaintProvider).getuserdetails();
+});
+final getownReportProvider = FutureProvider<OwnReportModel?>((ref) async {
+  return ref.read(complaintProvider).ownReportDetails();
 });

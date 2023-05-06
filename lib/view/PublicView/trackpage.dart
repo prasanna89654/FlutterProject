@@ -26,7 +26,7 @@ class _testState extends ConsumerState<test> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    final details = ref.watch(getallComplaintProvider);
+    final details = ref.watch(getownReportProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -52,7 +52,10 @@ class _testState extends ConsumerState<test> {
                       radius: 18,
                       backgroundColor: Colors.black,
                       child: Text(
-                        (data.length + 0 + 1).toString(),
+                        (data!.pendingComplaint +
+                                data.holdComplaint +
+                                data.solvedComplaint)
+                            .toString(),
                         style: TextStyle(color: Colors.white),
                       ),
                     )
@@ -73,7 +76,7 @@ class _testState extends ConsumerState<test> {
                     CircleAvatar(
                       radius: 18,
                       backgroundColor: Colors.black,
-                      child: Text(data.length.toString(),
+                      child: Text(data.pendingComplaint.toString(),
                           style: TextStyle(color: Colors.white)),
                     )
                   ],
@@ -84,7 +87,7 @@ class _testState extends ConsumerState<test> {
                     left: 10, right: 10, top: 10, bottom: 0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text(
                       "Hold",
                       style:
@@ -93,7 +96,8 @@ class _testState extends ConsumerState<test> {
                     CircleAvatar(
                       radius: 18,
                       backgroundColor: Colors.black,
-                      child: Text("0", style: TextStyle(color: Colors.white)),
+                      child: Text(data.holdComplaint.toString(),
+                          style: TextStyle(color: Colors.white)),
                     )
                   ],
                 ),
@@ -103,7 +107,7 @@ class _testState extends ConsumerState<test> {
                     left: 10, right: 10, top: 10, bottom: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text(
                       "Solved",
                       style:
@@ -113,7 +117,7 @@ class _testState extends ConsumerState<test> {
                       radius: 18,
                       backgroundColor: Colors.black,
                       child: Text(
-                        "1",
+                        data.solvedComplaint.toString(),
                         style: TextStyle(color: Colors.white),
                       ),
                     )
@@ -134,7 +138,9 @@ class _testState extends ConsumerState<test> {
                   height: height * 0.2,
                   child: PieChart(
                     dataMap: createMap(
-                        data.length.toDouble(), 1.toDouble(), 2.toDouble()),
+                        data.pendingComplaint.toDouble(),
+                        data.holdComplaint.toDouble(),
+                        data.solvedComplaint.toDouble()),
                     colorList: colorList,
                     chartRadius: width / 2,
                   )),

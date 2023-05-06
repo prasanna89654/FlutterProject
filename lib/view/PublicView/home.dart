@@ -1,5 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -13,6 +15,9 @@ import 'package:project/widgets/nearbymaker.dart';
 import 'package:project/widgets/newsmaker.dart';
 import 'package:project/widgets/publicmaker.dart';
 
+import '../../Riverpod/Models/userModel.dart';
+import '../../Riverpod/baseDIo.dart';
+import '../../Riverpod/config.dart';
 import 'addcom.dart';
 
 class Homepage extends ConsumerStatefulWidget {
@@ -27,7 +32,8 @@ class _HomepageState extends ConsumerState<Homepage> {
   @override
   void initState() {
     ref.refresh(getallComplaintProvider);
-
+    ref.refresh(getownReportProvider);
+    // getinitdata();
     super.initState();
   }
 
@@ -39,11 +45,12 @@ class _HomepageState extends ConsumerState<Homepage> {
     final token = getStringAsync(accessToken);
     print("tokenId: $token");
     final details = ref.watch(getallComplaintProvider);
+    final report = ref.watch(getownReportProvider);
+
     return Scaffold(
-        body: SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: details.when(
-        data: (data) => Column(
+        body: details.when(
+      data: (data) => SingleChildScrollView(
+        child: Column(
           children: [
             const Crousal(),
             const SizedBox(
@@ -158,86 +165,41 @@ class _HomepageState extends ConsumerState<Homepage> {
               child: Container(
                 height: height * 0.224,
                 // color: Colors.blue,
-                child: Card(
-                    margin: const EdgeInsets.all(3),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                        side: const BorderSide(
-                            width: 5,
-                            color: Color.fromARGB(255, 245, 242, 251))),
-                    elevation: 20,
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.only(top: 15, left: 30, right: 30),
-                      child: Column(
-                        children: [
-                          const Center(
-                            child: Text(
-                              "Complaint Status",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w500),
+                child: report.when(
+                  data: (data) => Card(
+                      margin: const EdgeInsets.all(3),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                          side: const BorderSide(
+                              width: 5,
+                              color: Color.fromARGB(255, 245, 242, 251))),
+                      elevation: 20,
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.only(top: 15, left: 30, right: 30),
+                        child: Column(
+                          children: [
+                            const Center(
+                              child: Text(
+                                "Complaint Status",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w500),
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                height: height * 0.1,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    const Text(
-                                      "Pending",
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                    Expanded(
-                                      child: Center(
-                                        child: Container(
-                                          height: height * 0.045,
-                                          width: width * 0.10,
-                                          decoration: BoxDecoration(
-                                              shape: BoxShape.rectangle,
-                                              // color: Colors.blue,
-                                              border: Border.all(
-                                                  color: Colors.black)),
-                                          child: Center(
-                                            child: Text(
-                                              data.length.toString(),
-                                              style: TextStyle(fontSize: 18),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Container(
-                                  height: height * 0.10,
-                                  child: const VerticalDivider(
-                                    thickness: 2,
-                                    color: Colors.black26,
-                                  )),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Container(
-                                  height: height * 0.098,
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  height: height * 0.1,
                                   child: Column(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
                                       const Text(
-                                        "Hold",
+                                        "Pending",
                                         style: TextStyle(fontSize: 18),
                                       ),
                                       const SizedBox(
@@ -253,9 +215,10 @@ class _HomepageState extends ConsumerState<Homepage> {
                                                 // color: Colors.blue,
                                                 border: Border.all(
                                                     color: Colors.black)),
-                                            child: const Center(
+                                            child: Center(
                                               child: Text(
-                                                "0",
+                                                data!.pendingComplaint
+                                                    .toString(),
                                                 style: TextStyle(fontSize: 18),
                                               ),
                                             ),
@@ -265,60 +228,112 @@ class _HomepageState extends ConsumerState<Homepage> {
                                     ],
                                   ),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                  height: height * 0.10,
-                                  // color: Colors.red,
-                                  child: const VerticalDivider(
-                                    thickness: 2,
-                                    color: Colors.black26,
-                                  )),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Container(
-                                  height: height * 0.098,
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      const Text(
-                                        "Solved",
-                                        style: TextStyle(fontSize: 18),
-                                      ),
-                                      const SizedBox(
-                                        height: 15,
-                                      ),
-                                      Expanded(
-                                        child: Center(
-                                          child: Container(
-                                            height: height * 0.048,
-                                            width: width * 0.10,
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.rectangle,
-                                                // color: Colors.blue,
-                                                border: Border.all(
-                                                    color: Colors.black)),
-                                            child: const Center(
-                                              child: Text(
-                                                "1",
-                                                style: TextStyle(fontSize: 18),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Container(
+                                    height: height * 0.10,
+                                    child: const VerticalDivider(
+                                      thickness: 2,
+                                      color: Colors.black26,
+                                    )),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Container(
+                                    height: height * 0.098,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        const Text(
+                                          "Hold",
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                        const SizedBox(
+                                          height: 15,
+                                        ),
+                                        Expanded(
+                                          child: Center(
+                                            child: Container(
+                                              height: height * 0.045,
+                                              width: width * 0.10,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.rectangle,
+                                                  // color: Colors.blue,
+                                                  border: Border.all(
+                                                      color: Colors.black)),
+                                              child: Center(
+                                                child: Text(
+                                                  data.holdComplaint.toString(),
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      )
-                                    ],
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    )),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                    height: height * 0.10,
+                                    // color: Colors.red,
+                                    child: const VerticalDivider(
+                                      thickness: 2,
+                                      color: Colors.black26,
+                                    )),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Container(
+                                    height: height * 0.098,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        const Text(
+                                          "Solved",
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                        const SizedBox(
+                                          height: 15,
+                                        ),
+                                        Expanded(
+                                          child: Center(
+                                            child: Container(
+                                              height: height * 0.048,
+                                              width: width * 0.10,
+                                              decoration: BoxDecoration(
+                                                  shape: BoxShape.rectangle,
+                                                  // color: Colors.blue,
+                                                  border: Border.all(
+                                                      color: Colors.black)),
+                                              child: Center(
+                                                child: Text(
+                                                  data.solvedComplaint
+                                                      .toString(),
+                                                  style:
+                                                      TextStyle(fontSize: 18),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      )),
+                  error: (Object error, StackTrace? stackTrace) {},
+                  loading: () {},
+                ),
               ),
             ),
             const SizedBox(height: 30),
@@ -329,9 +344,32 @@ class _HomepageState extends ConsumerState<Homepage> {
             )
           ],
         ),
-        error: (Object error, StackTrace? stackTrace) {},
-        loading: () {},
       ),
+      error: (Object error, StackTrace? stackTrace) {},
+      loading: () {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     ));
   }
+}
+
+Future<UserModel?> getuserdetails() async {
+  try {
+    String gethomeworkdetails =
+        "/api/services/app/Session/GetCurrentLoginInformations";
+    final response = await Api().get(MyConfig.appUrl + gethomeworkdetails);
+    if (response.statusCode == 200) {
+      var value = json.decode(response.toString())["result"]["user"];
+
+      var data = UserModel.fromJson(value);
+
+      return data;
+    }
+  } catch (e) {
+    // ignore: avoid_print
+    print(e.toString());
+  }
+  return null;
 }

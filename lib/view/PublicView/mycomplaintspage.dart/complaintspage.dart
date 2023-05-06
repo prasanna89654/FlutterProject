@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:project/view/PublicView/mycomplaintspage.dart/holdpage.dart';
 import 'package:project/view/PublicView/mycomplaintspage.dart/pendingpage.dart';
 import 'package:project/view/PublicView/mycomplaintspage.dart/solvedpage.dart';
 
@@ -19,7 +20,7 @@ class _ComplaintsPageState extends ConsumerState<ComplaintsPage>
   @override
   void initState() {
     ref.refresh(getallComplaintProvider);
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
     super.initState();
   }
 
@@ -39,16 +40,19 @@ class _ComplaintsPageState extends ConsumerState<ComplaintsPage>
             labelColor: Colors.white,
             tabs: const [
               Tab(
-                text: "Pending Complaints",
+                text: "Pending",
               ),
-              Tab(text: "Solved Complaints")
+              Tab(text: "Hold"),
+              Tab(text: "Solved")
             ],
           ),
         ),
         Expanded(
-          child: TabBarView(
-              controller: tabController,
-              children: const [PendingComplaints(), SolvedPage()]),
+          child: TabBarView(controller: tabController, children: const [
+            PendingComplaints(),
+            HoldComplaints(),
+            SolvedComplaints()
+          ]),
         ),
       ]),
     );

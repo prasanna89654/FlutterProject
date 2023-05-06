@@ -35,7 +35,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     Future<void> login() async {
       ref
           .read(userapiProvider)
-          .logIn(phoneCtrl.value.text, passwordCtrl.value.text);
+          .logIn(phoneCtrl.value.text, passwordCtrl.value.text, context);
     }
 
     // var number = "9862329593";

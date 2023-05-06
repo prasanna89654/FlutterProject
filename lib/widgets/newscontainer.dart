@@ -52,15 +52,13 @@ class NewsContainer extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(
                       left: 3, top: 3, bottom: 3, right: 5),
-                  child: Flexible(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          image: DecorationImage(
-                              fit: BoxFit.fitHeight,
-                              image: NetworkImage(imageurl!))),
-                    ),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                            fit: BoxFit.fitHeight,
+                            image: NetworkImage(imageurl!))),
                   ),
                 ),
                 Flexible(
@@ -84,22 +82,20 @@ class NewsContainer extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle()),
                         ),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 8.0, bottom: 8),
-                                child: Text(removelast(date!),
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      // color: Colors.grey
-                                    )),
-                              )
-                            ],
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 8.0, bottom: 8),
+                              child: Text(removelast(date!),
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    // color: Colors.grey
+                                  )),
+                            )
+                          ],
                         )
                       ],
                     ))

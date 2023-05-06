@@ -54,11 +54,9 @@ class _AdminComplaintsPageState extends State<AdminComplaintsPage>
           ),
         ),
         Expanded(
-          child: TabBarView(controller: tabController, children: const [
-            PendingPage(),
-            AdminHoldPage(),
-            AdminSolvedPage()
-          ]),
+          child: TabBarView(
+              controller: tabController,
+              children: const [PendingPage(), HoldPage(), AdminSolvedPage()]),
         ),
       ]),
     );

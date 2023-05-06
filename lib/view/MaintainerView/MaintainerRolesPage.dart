@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../Riverpod/Models/userModel.dart';
+import '../../Riverpod/Repository/UserRepository.dart';
+import '../maintainerrequest.dart';
+
 class MaintainerRolesPage extends ConsumerStatefulWidget {
   const MaintainerRolesPage({super.key});
 
@@ -10,10 +14,38 @@ class MaintainerRolesPage extends ConsumerStatefulWidget {
 }
 
 class _MaintainerRolesPageState extends ConsumerState<MaintainerRolesPage> {
+  List<UserDetailsModel> users = [];
+  final TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final details = ref.watch(getallUsers);
+
+    details.when(
+      data: (data) {
+        final daw = data.where((element) => element.usersType == 6).toList();
+        final ffd = daw
+            .where((element) => element.name
+                .toLowerCase()
+                .contains(searchController.text.toLowerCase()))
+            .toList();
+        setState(() {
+          users = ffd;
+        });
+      },
+      loading: () {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+      error: (error, stack) {
+        return Center(
+          child: Text(error.toString()),
+        );
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Roles"),
@@ -31,6 +63,7 @@ class _MaintainerRolesPageState extends ConsumerState<MaintainerRolesPage> {
                 children: [
                   Expanded(
                       child: TextField(
+                    controller: searchController,
                     decoration: InputDecoration(
                       hintText: "Search",
                       border: OutlineInputBorder(
@@ -63,7 +96,7 @@ class _MaintainerRolesPageState extends ConsumerState<MaintainerRolesPage> {
                 ),
                 padding: EdgeInsets.zero,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 10,
+                itemCount: users.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return ListTile(
@@ -73,7 +106,8 @@ class _MaintainerRolesPageState extends ConsumerState<MaintainerRolesPage> {
                         backgroundImage: AssetImage("assets/images/user.png"),
                       ),
                       contentPadding: EdgeInsets.zero,
-                      title: Text("Prasanna ${index}"),
+                      title:
+                          Text("${users[index].name} ${users[index].lastName}"),
                       trailing: IconButton(
                           onPressed: () {
                             showModalBottomSheet(
@@ -97,6 +131,14 @@ class _MaintainerRolesPageState extends ConsumerState<MaintainerRolesPage> {
                                             TextButton(
                                                 onPressed: () async {
                                                   Navigator.pop(context);
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            DemoPage(
+                                                                id: users[
+                                                                    index]),
+                                                      ));
                                                 },
                                                 child: Row(
                                                   children: [

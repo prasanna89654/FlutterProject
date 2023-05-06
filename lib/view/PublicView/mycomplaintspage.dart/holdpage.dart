@@ -12,15 +12,14 @@ import '../../../Riverpod/Models/userModel.dart';
 import '../../../widgets/TEsts/random.dart';
 import '../appbar.dart';
 
-class SolvedComplaints extends ConsumerStatefulWidget {
-  const SolvedComplaints({super.key});
+class HoldComplaints extends ConsumerStatefulWidget {
+  const HoldComplaints({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _SolvedComplaintsState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _HoldComplaintsState();
 }
 
-class _SolvedComplaintsState extends ConsumerState<SolvedComplaints> {
+class _HoldComplaintsState extends ConsumerState<HoldComplaints> {
   List<ComplaintGetAllModel> datas = [];
 
   @override
@@ -31,7 +30,7 @@ class _SolvedComplaintsState extends ConsumerState<SolvedComplaints> {
     ref.watch(getownComplaintProvider).when(
           data: (data) {
             final dad =
-                data.where((element) => element.complaintStatus == 2).toList();
+                data.where((element) => element.complaintStatus == 1).toList();
             setState(() {
               datas = dad;
             });
@@ -82,6 +81,7 @@ class _SolvedComplaintsState extends ConsumerState<SolvedComplaints> {
                                       fontSize: 18,
                                       color: Colors.black),
                                 ),
+                                //add a option menu but the menu should pop from bottom
                               ],
                             ),
                           ),

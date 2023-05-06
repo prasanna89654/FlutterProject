@@ -6,6 +6,7 @@ import 'package:project/view/PublicView/profile_screen.dart';
 
 import 'package:project/widgets/sidebar.dart';
 
+import '../../Riverpod/Models/userModel.dart';
 import 'fullnews.dart';
 import 'guideliness.dart';
 import 'home.dart';
@@ -26,6 +27,14 @@ class _AppbarState extends State<Appbar> {
   late Widget _page4;
   late int _currentIndex;
   late Widget _currentPage;
+  UserModel? name;
+  getinitdata() {
+    getuserdetails().then((value) {
+      setState(() {
+        name = value;
+      });
+    });
+  }
 
   // int _currentIndex = 0;
   // final screens = [
@@ -44,6 +53,7 @@ class _AppbarState extends State<Appbar> {
   @override
   void initState() {
     super.initState();
+    getinitdata();
     _page1 = Homepage(changePage: _changeTab);
     _page2 = const ComplaintsPage();
     _page3 = const Fullnews();
@@ -67,7 +77,9 @@ class _AppbarState extends State<Appbar> {
         appBar: AppBar(
           elevation: 0,
           // automaticallyImplyLeading: false,
-          title: const Text("Welcome Prasanna Poudel"),
+          title: name == null
+              ? SizedBox()
+              : Text("Welcome ${name!.name} ${name!.surname}"),
           centerTitle: true,
           titleTextStyle: const TextStyle(
             fontSize: 17,

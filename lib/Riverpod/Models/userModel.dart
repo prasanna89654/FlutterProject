@@ -56,10 +56,10 @@ class ComplaintGetAllModel {
   int priority;
   int category;
   String? imageBytes;
-  String username;
-  String email;
+  String? username;
+  dynamic email;
   dynamic phoneNo;
-  int userWardNo;
+  dynamic userWardNo;
   dynamic userImage;
   int id;
 
@@ -142,6 +142,9 @@ class UserModel {
     required this.name,
     required this.surname,
     required this.userName,
+    required this.address,
+    required this.dboMiti,
+    required this.wardNo,
     required this.emailAddress,
     required this.id,
   });
@@ -151,6 +154,9 @@ class UserModel {
   String userName;
   String emailAddress;
   int id;
+  String address;
+  String dboMiti;
+  int wardNo;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         name: json["name"],
@@ -158,6 +164,9 @@ class UserModel {
         userName: json["userName"],
         emailAddress: json["emailAddress"],
         id: json["id"],
+        address: json["address"],
+        dboMiti: json["dboMiti"],
+        wardNo: json["wardNo"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -165,6 +174,126 @@ class UserModel {
         "surname": surname,
         "userName": userName,
         "emailAddress": emailAddress,
+        "id": id,
+        "address": address,
+        "dboMiti": dboMiti,
+        "wardNo": wardNo,
+      };
+}
+
+class RequestModel {
+  RequestModel({
+    required this.id,
+    required this.name,
+    required this.position,
+    required this.description,
+    required this.role,
+    required this.userid,
+    required this.file,
+  });
+
+  String id;
+  String name;
+  String position;
+  String description;
+  String role;
+  String userid;
+  String file;
+
+  factory RequestModel.fromJson(Map<String, dynamic> json) => RequestModel(
+        id: json["id"],
+        name: json["name"],
+        position: json["position"],
+        description: json["description"],
+        role: json["role"],
+        userid: json["userid"],
+        file: json["file"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "position": position,
+        "description": description,
+        "role": role,
+        "userid": userid,
+        "file": file,
+      };
+}
+
+class TryModel {
+  TryModel({
+    required this.id,
+    required this.name,
+    this.data,
+  });
+
+  String id;
+  String name;
+  dynamic data;
+
+  factory TryModel.fromJson(Map<String, dynamic> json) => TryModel(
+        id: json["id"],
+        name: json["name"],
+        data: json["data"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "data": data,
+      };
+}
+
+class OwnReportModel {
+  OwnReportModel({
+    required this.pendingComplaint,
+    required this.solvedComplaint,
+    required this.holdComplaint,
+  });
+
+  int pendingComplaint;
+  int solvedComplaint;
+  int holdComplaint;
+
+  factory OwnReportModel.fromJson(Map<String, dynamic> json) => OwnReportModel(
+        pendingComplaint: json["pendingComplaint"],
+        solvedComplaint: json["solvedComplaint"],
+        holdComplaint: json["holdComplaint"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "pendingComplaint": pendingComplaint,
+        "solvedComplaint": solvedComplaint,
+        "holdComplaint": holdComplaint,
+      };
+}
+
+class UserDetailsModel {
+  UserDetailsModel({
+    required this.name,
+    required this.lastName,
+    required this.usersType,
+    required this.id,
+  });
+
+  String name;
+  String lastName;
+  int usersType;
+  int id;
+
+  factory UserDetailsModel.fromJson(Map<String, dynamic> json) =>
+      UserDetailsModel(
+        name: json["name"],
+        lastName: json["lastName"],
+        usersType: json["usersType"],
+        id: json["id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
+        "lastName": lastName,
+        "usersType": usersType,
         "id": id,
       };
 }

@@ -89,7 +89,7 @@ class _profileState extends ConsumerState<profile> {
                           const pmaker(
                             image: "assets/images/land.png",
                             text: 'Ward Number',
-                            text1: '5',
+                            text1: '3',
                           ),
                           const pmaker(
                             image: "assets/images/calendar.png",

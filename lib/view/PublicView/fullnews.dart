@@ -35,48 +35,51 @@ class _FullnewsState extends ConsumerState<Fullnews> {
                     );
                   });
             },
-            loading: () => ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) => Shimmer.fromColors(
-                      baseColor: Colors.grey[300]!,
-                      highlightColor: Colors.grey[100]!,
-                      child: Padding(
-                          padding: const EdgeInsets.only(
-                              left: 8.0, right: 8, top: 10, bottom: 8),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 180,
-                                width: 130,
-                                color: Colors.white,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                  child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    width: double.infinity,
-                                    height: 30,
-                                    color: Colors.white,
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Container(
-                                    width: double.infinity,
-                                    height: 140,
-                                    color: Colors.white,
-                                  ),
-                                  Container()
-                                ],
-                              ))
-                            ],
-                          ))),
-                ),
+            loading: () {
+              CircularProgressIndicator();
+            },
+            //  ListView.builder(
+            //       itemCount: 10,
+            //       itemBuilder: (context, index) => Shimmer.fromColors(
+            //           baseColor: Colors.grey[300]!,
+            //           highlightColor: Colors.grey[100]!,
+            //           child: Padding(
+            //               padding: const EdgeInsets.only(
+            //                   left: 8.0, right: 8, top: 10, bottom: 8),
+            //               child: Row(
+            //                 crossAxisAlignment: CrossAxisAlignment.start,
+            //                 children: [
+            //                   Container(
+            //                     height: 180,
+            //                     width: 130,
+            //                     color: Colors.white,
+            //                   ),
+            //                   const SizedBox(
+            //                     width: 10,
+            //                   ),
+            //                   Column(
+            //                     crossAxisAlignment: CrossAxisAlignment.end,
+            //                     children: [
+            //                       Container(
+            //                         width: double.infinity,
+            //                         height: 30,
+            //                         color: Colors.white,
+            //                       ),
+            //                       const SizedBox(
+            //                         height: 10,
+            //                       ),
+            //                       Container(
+            //                         width: double.infinity,
+            //                         height: 140,
+            //                         color: Colors.white,
+            //                       ),
+            //                       Container()
+            //                     ],
+            //                   )
+            //                 ],
+            //               ))),
+            //     ),
+
             error: (error, stack) => Center(
                   child: Text(error.toString()),
                 )));

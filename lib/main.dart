@@ -1,19 +1,22 @@
+import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_splash_screen/easy_splash_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
+
 import 'package:project/Riverpod/constants.dart';
 import 'package:project/controller/notificationservices.dart';
 import 'package:project/view/AdminView/AdminHomePage.dart';
-import 'package:project/view/AdminView/UpdateEventPage.dart';
 import 'package:project/view/MaintainerView/MaintainerDashboard.dart';
-import 'package:project/view/PublicView/EventsPage.dart';
 import 'package:project/view/PublicView/appbar.dart';
-import 'package:project/view/PublicView/home.dart';
 import 'package:project/view/PublicView/login.dart';
-import 'package:project/view/PublicView/publicComplaints.dart';
+import 'package:project/view/maintainerdisplay.dart';
+import 'package:project/view/maintainerrequest.dart';
+import 'package:project/widgets/TEsts/random.dart';
+import 'package:project/widgets/TEsts/randomget.dart';
+import 'package:project/widgets/TEsts/sendmap.dart';
+import 'package:project/widgets/test1.dart';
 
 import 'Routes/navigator.dart';
 import 'Routes/routes.dart';
@@ -101,7 +104,7 @@ class _MyAppState extends State<MyApp> {
             color: Colors.white,
           ),
           backgroundColor: Colors.blue.shade300,
-          navigator: (selectScreen()),
+          navigator: LoginScreen(),
         ));
   }
 }

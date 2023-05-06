@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:project/Riverpod/Repository/UserRepository.dart';
 
-import '../../widgets/practice.dart';
+import '../widgets/practice.dart';
 
 class DemoDisplayPage extends ConsumerStatefulWidget {
   const DemoDisplayPage({super.key});
@@ -15,7 +15,6 @@ class DemoDisplayPage extends ConsumerStatefulWidget {
 class DemoDisplayPageState extends ConsumerState<DemoDisplayPage> {
   bool isApproved = false;
   bool isDeclined = false;
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;

@@ -33,6 +33,7 @@ class _SignupState extends State<Signup> {
   final TextEditingController username = TextEditingController();
   final TextEditingController password = TextEditingController();
   final TextEditingController location = TextEditingController();
+  final TextEditingController phoneNumber = TextEditingController();
 
   String dropdownvalue = 'Ward Number   ';
 
@@ -54,16 +55,17 @@ class _SignupState extends State<Signup> {
 
   signup() async {
     var data = {
-      "userName": username.value.text,
       "name": fname.value.text,
+      "gender": int.parse(gender!),
+      "phoneNo": phoneNumber.value.text,
       "surname": lname.value.text,
-      "emailAddress": email.value.text,
+      "email": email.value.text,
       "password": password.value.text,
-      "userType": 6,
-      "dboMiti": splitString(date.toString()),
+      "userType": 0,
+      "dobMiti": splitString(date.toString()),
       "wardNo": wardselectedvalue,
-      "address": location.value.text,
-      "dateOfBirth": "2023-03-10T13:41:41.585Z"
+      "location": location.value.text,
+      "dob": "2023-03-10T13:41:41.585Z"
     };
 
     try {
@@ -221,6 +223,23 @@ class _SignupState extends State<Signup> {
               const SizedBox(
                 height: 15,
               ),
+              TextFormField(
+                controller: phoneNumber,
+                keyboardType: TextInputType.number,
+                decoration: textDecoration.copyWith(
+                    border: const OutlineInputBorder(),
+                    labelText: "Phone Number",
+                    prefixIcon: const Icon(
+                      Icons.phone,
+                    )),
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                  FormBuilderValidators.equalLength(10),
+                ]),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -271,6 +290,72 @@ class _SignupState extends State<Signup> {
                         ),
                       )
                     ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Gender:",
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: RadioListTile(
+                      title: Text(
+                        "Male",
+                        style: TextStyle(
+                          fontSize: 13,
+                        ),
+                      ),
+                      value: "0",
+                      groupValue: gender,
+                      onChanged: (value) {
+                        setState(() {
+                          gender = value.toString();
+                        });
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    width: 140,
+                    child: RadioListTile(
+                      title: Text(
+                        "Female",
+                        style: TextStyle(
+                          fontSize: 13,
+                        ),
+                      ),
+                      value: "1",
+                      groupValue: gender,
+                      onChanged: (value) {
+                        setState(() {
+                          gender = value.toString();
+                        });
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: RadioListTile(
+                      title: Text(
+                        "Other",
+                        style: TextStyle(
+                          fontSize: 13,
+                        ),
+                      ),
+                      value: "2",
+                      groupValue: gender,
+                      onChanged: (value) {
+                        setState(() {
+                          gender = value.toString();
+                        });
+                      },
+                    ),
                   ),
                 ],
               ),

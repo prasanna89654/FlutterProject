@@ -6,7 +6,10 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:location/location.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:project/widgets/TEsts/getmap.dart';
+import 'package:project/widgets/TEsts/newtry.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../Riverpod/baseDIo.dart';
@@ -25,7 +28,7 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
   final TextEditingController descriptionCtrl = TextEditingController();
   final TextEditingController addressCtrl = TextEditingController();
   final TextEditingController wardCtrl = TextEditingController();
-
+  bool isSelected = false;
   String? wardselectedvalue;
   String? categoryselectedvalue;
   String? priorityselectedvalue;
@@ -105,16 +108,12 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
       "complaintTitle": titleCtrl.value.text,
       "complaintDescription": descriptionCtrl.value.text,
       "complaintStatus": 0,
-      "location": addressCtrl.value.text,
+      "location": ref.watch(locationStateProvider).conl(),
 //   "image": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       "wardNo": wardselectedvalue,
       "complaintDate": "2023-03-11T08:23:31.034Z",
       "complaintMiti": "2079/11/28",
-      "priority": priorityselectedvalue == "Critical"
-          ? 0
-          : priorityselectedvalue == "Moderate"
-              ? 1
-              : 2,
+      "priority": 0,
       "category": categoryselectedvalue == "Water"
           ? 0
           : categoryselectedvalue == "Road"
@@ -227,23 +226,144 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              SizedBox(
-                                width: 200,
-                                child: TextFormField(
-                                  validator: FormBuilderValidators.compose(
-                                    [
-                                      FormBuilderValidators.required(),
-                                    ],
-                                  ),
-                                  controller: addressCtrl,
-                                  decoration: InputDecoration(
-                                    hintText: "Enter Location",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(0),
-                                    ),
-                                  ),
-                                ),
-                              )
+
+                              isSelected
+                                  ? Row(
+                                      children: [
+                                        const Text(
+                                          "Selected",
+                                          style: TextStyle(
+                                            color: Colors.green,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            ref
+                                                .read(locationStateProvider
+                                                    .notifier)
+                                                .deletelatlong();
+                                            setState(() {
+                                              isSelected = false;
+                                            });
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.all(6),
+                                            child: Text(
+                                              "Remove",
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.white),
+                                            ),
+                                            color: Colors.red,
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  : InkWell(
+                                      onTap: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.all(18.0),
+                                                child: SimpleDialog(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12.0)),
+                                                  children: <Widget>[
+                                                    Center(
+                                                      child: SimpleDialogOption(
+                                                          onPressed: () {
+                                                            Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            MapSample()));
+                                                            setState(() {
+                                                              isSelected = true;
+                                                            });
+                                                          },
+                                                          child: const Text(
+                                                              'Choose on Map',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20))),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    Center(
+                                                      child: SimpleDialogOption(
+                                                          onPressed: () async {
+                                                            var location =
+                                                                Location();
+                                                            var currentLocation =
+                                                                await location
+                                                                    .getLocation();
+                                                            ref
+                                                                .read(locationStateProvider
+                                                                    .notifier)
+                                                                .setLat(currentLocation
+                                                                    .latitude!);
+                                                            ref
+                                                                .read(locationStateProvider
+                                                                    .notifier)
+                                                                .setLong(
+                                                                    currentLocation
+                                                                        .longitude!);
+                                                            setState(() {
+                                                              isSelected = true;
+                                                            });
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          // onPressed: () => pickImageC(),
+                                                          child: const Text(
+                                                              'Use my current locations',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 20))
+                                                          // .tr(),
+                                                          ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            });
+                                      },
+                                      child: Chip(
+                                        label: Text("Select Location"),
+                                      ),
+                                    )
+
+                              // SizedBox(
+                              //   width: 200,
+                              //   child: TextFormField(
+                              //     validator: FormBuilderValidators.compose(
+                              //       [
+                              //         FormBuilderValidators.required(),
+                              //       ],
+                              //     ),
+                              //     controller: addressCtrl,
+                              //     decoration: InputDecoration(
+                              //       hintText: "Enter Location",
+                              //       border: OutlineInputBorder(
+                              //         borderRadius: BorderRadius.circular(0),
+                              //       ),
+                              //     ),
+                              //   ),
+                              // )
                             ],
                           ),
                           const SizedBox(
@@ -412,46 +532,46 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
                               ),
                             ],
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "Priority",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              SizedBox(
-                                width: 180,
-                                child: DropdownButtonFormField(
-                                  isDense: true,
-                                  decoration: InputDecoration(
-                                    hintText: "Choose Priority",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(0),
-                                    ),
-                                  ),
-                                  value: priorityselectedvalue,
-                                  items: priorityItems.map((item) {
-                                    return DropdownMenuItem(
-                                      value: item,
-                                      child: Text(item.toString(),
-                                          overflow: TextOverflow.ellipsis),
-                                    );
-                                  }).toList(),
-                                  onChanged: (String? newValue) {
-                                    setState(() {
-                                      priorityselectedvalue = newValue;
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
+                          // Column(
+                          //   crossAxisAlignment: CrossAxisAlignment.start,
+                          //   children: [
+                          //     const Text(
+                          //       "Priority",
+                          //       style: TextStyle(
+                          //         fontSize: 18,
+                          //         fontWeight: FontWeight.w500,
+                          //       ),
+                          //     ),
+                          //     const SizedBox(
+                          //       height: 10,
+                          //     ),
+                          //     SizedBox(
+                          //       width: 180,
+                          //       child: DropdownButtonFormField(
+                          //         isDense: true,
+                          //         decoration: InputDecoration(
+                          //           hintText: "Choose Priority",
+                          //           border: OutlineInputBorder(
+                          //             borderRadius: BorderRadius.circular(0),
+                          //           ),
+                          //         ),
+                          //         value: priorityselectedvalue,
+                          //         items: priorityItems.map((item) {
+                          //           return DropdownMenuItem(
+                          //             value: item,
+                          //             child: Text(item.toString(),
+                          //                 overflow: TextOverflow.ellipsis),
+                          //           );
+                          //         }).toList(),
+                          //         onChanged: (String? newValue) {
+                          //           setState(() {
+                          //             priorityselectedvalue = newValue;
+                          //           });
+                          //         },
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
                         ],
                       ),
 
@@ -465,6 +585,17 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
                           child: ElevatedButton(
                             onPressed: () {
                               if (formKey.currentState!.validate()) {
+                                if (ref.watch(locationStateProvider).lat ==
+                                        null ||
+                                    ref.watch(locationStateProvider).long ==
+                                        null) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Please select location'),
+                                    ),
+                                  );
+                                  return;
+                                }
                                 uploadFile();
                               }
                             },

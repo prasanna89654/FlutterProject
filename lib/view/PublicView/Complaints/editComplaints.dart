@@ -6,6 +6,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:location/location.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:project/Riverpod/Models/userModel.dart';
 import 'package:uuid/uuid.dart';
@@ -13,6 +14,8 @@ import 'package:uuid/uuid.dart';
 import '../../../Riverpod/Repository/complaintController.dart';
 import '../../../Riverpod/baseDIo.dart';
 import '../../../Riverpod/config.dart';
+import '../../../widgets/TEsts/getmap.dart';
+import '../../../widgets/TEsts/newtry.dart';
 import '../appbar.dart';
 
 class ComplaintUpdatePage extends ConsumerStatefulWidget {
@@ -34,6 +37,7 @@ class _ComplaintUpdatePageState extends ConsumerState<ComplaintUpdatePage> {
   String? wardselectedvalue;
   String? categoryselectedvalue;
   String? priorityselectedvalue;
+  bool islocation = true;
 
   var categoryItems = ["Water", "Road", "Health", "Electricity", "Education"];
 
@@ -111,25 +115,12 @@ class _ComplaintUpdatePageState extends ConsumerState<ComplaintUpdatePage> {
       "complaintTitle": titleCtrl.value.text,
       "complaintDescription": descriptionCtrl.value.text,
       "complaintStatus": 0,
-      "location": addressCtrl.value.text,
+      "location": ref.watch(locationStateProvider).conl(),
 //   "image": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
       "wardNo": wardselectedvalue,
       "complaintDate": "2023-03-11T08:23:31.034Z",
       "complaintMiti": "2079/11/28",
-      "priority": priorityselectedvalue == "Critical"
-          ? 0
-          : priorityselectedvalue == "Moderate"
-              ? 1
-              : 2,
-      "category": categoryselectedvalue == "Water"
-          ? 0
-          : categoryselectedvalue == "Road"
-              ? 1
-              : categoryselectedvalue == "Health"
-                  ? 2
-                  : categoryselectedvalue == "Electricity"
-                      ? 3
-                      : 4,
+      "priority": 0,
       "imageToken": tokenS
     };
 
@@ -178,7 +169,7 @@ class _ComplaintUpdatePageState extends ConsumerState<ComplaintUpdatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Add Complaint'),
+          title: const Text('Update Complaint'),
         ),
         body: SingleChildScrollView(
           child: Form(
@@ -260,23 +251,125 @@ class _ComplaintUpdatePageState extends ConsumerState<ComplaintUpdatePage> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              SizedBox(
-                                width: 200,
-                                child: TextFormField(
-                                  validator: FormBuilderValidators.compose(
-                                    [
-                                      FormBuilderValidators.required(),
-                                    ],
-                                  ),
-                                  controller: addressCtrl,
-                                  decoration: InputDecoration(
-                                    hintText: "Enter Location",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(0),
-                                    ),
-                                  ),
-                                ),
-                              )
+                              islocation
+                                  ? Row(
+                                      children: [
+                                        const Text(
+                                          "Selected",
+                                          style: TextStyle(
+                                            color: Colors.green,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        InkWell(
+                                          onTap: () {
+                                            ref
+                                                .read(locationStateProvider
+                                                    .notifier)
+                                                .deletelatlong();
+                                            setState(() {
+                                              islocation = false;
+                                            });
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.all(6),
+                                            child: Text(
+                                              "Remove",
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.white),
+                                            ),
+                                            color: Colors.red,
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  : InkWell(
+                                      onTap: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.all(18.0),
+                                                child: SimpleDialog(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12.0)),
+                                                  children: <Widget>[
+                                                    Center(
+                                                      child: SimpleDialogOption(
+                                                          onPressed: () {
+                                                            Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            MapSample()));
+                                                            setState(() {
+                                                              islocation = true;
+                                                            });
+                                                          },
+                                                          child: const Text(
+                                                              'Choose on Map',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      20))),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 20,
+                                                    ),
+                                                    Center(
+                                                      child: SimpleDialogOption(
+                                                          onPressed: () async {
+                                                            var location =
+                                                                Location();
+                                                            var currentLocation =
+                                                                await location
+                                                                    .getLocation();
+                                                            ref
+                                                                .read(locationStateProvider
+                                                                    .notifier)
+                                                                .setLat(currentLocation
+                                                                    .latitude!);
+                                                            ref
+                                                                .read(locationStateProvider
+                                                                    .notifier)
+                                                                .setLong(
+                                                                    currentLocation
+                                                                        .longitude!);
+                                                            setState(() {
+                                                              islocation = true;
+                                                            });
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          // onPressed: () => pickImageC(),
+                                                          child: const Text(
+                                                              'Use my current locations',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize: 20))
+                                                          // .tr(),
+                                                          ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            });
+                                      },
+                                      child: Chip(
+                                        label: Text("Select Location"),
+                                      ),
+                                    )
                             ],
                           ),
                           const SizedBox(

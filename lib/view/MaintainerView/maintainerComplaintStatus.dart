@@ -11,7 +11,7 @@ class MaintainerStatus extends StatefulWidget {
 }
 
 class _testState extends State<MaintainerStatus> {
-  Map<String, double> dataMap = {"Pending": 5, "Solved": 7, "Hold": 4};
+  Map<String, double> dataMap = {"Pending": 6, "Solved": 2, "Hold": 3};
 
   List<Color> colorList = [Colors.red, Colors.green, Colors.blue];
 
@@ -41,7 +41,7 @@ class _testState extends State<MaintainerStatus> {
                     radius: 18,
                     backgroundColor: Colors.black,
                     child: Text(
-                      "16",
+                      "11",
                       style: TextStyle(color: Colors.white),
                     ),
                   )
@@ -61,7 +61,7 @@ class _testState extends State<MaintainerStatus> {
                   CircleAvatar(
                     radius: 18,
                     backgroundColor: Colors.black,
-                    child: Text("5", style: TextStyle(color: Colors.white)),
+                    child: Text("6", style: TextStyle(color: Colors.white)),
                   )
                 ],
               ),
@@ -79,7 +79,7 @@ class _testState extends State<MaintainerStatus> {
                   CircleAvatar(
                     radius: 18,
                     backgroundColor: Colors.black,
-                    child: Text("4", style: TextStyle(color: Colors.white)),
+                    child: Text("3", style: TextStyle(color: Colors.white)),
                   )
                 ],
               ),
@@ -98,7 +98,7 @@ class _testState extends State<MaintainerStatus> {
                     radius: 18,
                     backgroundColor: Colors.black,
                     child: Text(
-                      "7",
+                      "2",
                       style: TextStyle(color: Colors.white),
                     ),
                   )

@@ -1,18 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:nb_utils/nb_utils.dart';
+import 'package:project/Riverpod/Models/userModel.dart';
 import 'package:project/view/AdminView/approvepage.dart';
 
-class RolesPage extends StatefulWidget {
+import '../../Riverpod/Repository/UserRepository.dart';
+import '../../Riverpod/baseDIo.dart';
+import '../../Riverpod/config.dart';
+
+class RolesPage extends ConsumerStatefulWidget {
   const RolesPage({super.key});
 
   @override
-  State<RolesPage> createState() => _RolesPageState();
+  ConsumerState<RolesPage> createState() => _RolesPageState();
 }
 
-class _RolesPageState extends State<RolesPage> {
+class _RolesPageState extends ConsumerState<RolesPage> {
+  List<UserDetailsModel> maintainers = [];
+  List<UserDetailsModel> users = [];
+  final TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+    final details = ref.watch(getallUsers);
+    details.when(
+      data: (data) {
+        final daw = data.where((element) => element.usersType == 6).toList();
+        final ffd = daw
+            .where((element) => element.name
+                .toLowerCase()
+                .contains(searchController.text.toLowerCase()))
+            .toList();
+        setState(() {
+          maintainers =
+              data.where((element) => element.usersType != 6).toList();
+          users = ffd;
+        });
+      },
+      loading: () {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+      error: (error, stack) {
+        return Center(
+          child: Text(error.toString()),
+        );
+      },
+    );
     return Scaffold(
       appBar: AppBar(
         title: const Text("Manage Roles"),
@@ -22,7 +58,7 @@ class _RolesPageState extends State<RolesPage> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Approvepage(),
+                    builder: (context) => DemoDisplayPage(),
                   ));
             },
             icon: const Icon(
@@ -45,6 +81,7 @@ class _RolesPageState extends State<RolesPage> {
                 children: [
                   Expanded(
                       child: TextField(
+                    controller: searchController,
                     decoration: InputDecoration(
                       hintText: "Search",
                       border: OutlineInputBorder(
@@ -56,7 +93,19 @@ class _RolesPageState extends State<RolesPage> {
                     width: 10,
                   ),
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          maintainers = maintainers
+                              .where((element) =>
+                                  element.name
+                                      .toLowerCase()
+                                      .contains(searchController.text) ||
+                                  element.lastName
+                                      .toLowerCase()
+                                      .contains(searchController.text))
+                              .toList();
+                        });
+                      },
                       icon: const Icon(
                         Icons.search,
                         size: 28,
@@ -77,7 +126,7 @@ class _RolesPageState extends State<RolesPage> {
                 ),
                 padding: EdgeInsets.zero,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 5,
+                itemCount: maintainers.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return ListTile(
@@ -87,16 +136,17 @@ class _RolesPageState extends State<RolesPage> {
                         radius: 20,
                         backgroundImage: AssetImage("assets/images/user.png"),
                       ),
-                      title: Text("Prasanna ${index}"),
-                      subtitle: Text(index == 0
+                      title: Text(
+                          "${maintainers[index].name} ${maintainers[index].lastName}"),
+                      subtitle: Text(maintainers[index].usersType == 1
                           ? "Health Maintainer"
-                          : index == 1
+                          : index == 2
                               ? "Water Maintainer"
-                              : index == 2
+                              : index == 3
                                   ? "Water Maintainer"
-                                  : index == 3
+                                  : index == 4
                                       ? "Road Maintainer"
-                                      : index == 4
+                                      : index == 5
                                           ? "Education Maintainer"
                                           : "Water Maintainer"),
                       trailing: IconButton(
@@ -121,6 +171,32 @@ class _RolesPageState extends State<RolesPage> {
                                           children: [
                                             TextButton(
                                                 onPressed: () async {
+                                                  var data = {
+                                                    "name":
+                                                        maintainers[index].name,
+                                                    "lastName":
+                                                        maintainers[index]
+                                                            .lastName,
+                                                    "usersType": 6,
+                                                    "id": maintainers[index].id
+                                                  };
+                                                  try {
+                                                    var response = await Api().put(
+                                                        MyConfig
+                                                            .getuserdetailsURL,
+                                                        data: data);
+                                                    print(
+                                                        "upload: ${response.statusCode}");
+                                                    if (response.statusCode ==
+                                                        200) {
+                                                      Fluttertoast.showToast(
+                                                          msg:
+                                                              "User Updated Successfully");
+                                                    } else {}
+                                                  } catch (e) {
+                                                    print("Helloi: $e");
+                                                  }
+                                                  ref.refresh(getallUsers);
                                                   Navigator.pop(context);
                                                 },
                                                 child: Row(
@@ -167,7 +243,7 @@ class _RolesPageState extends State<RolesPage> {
                 ),
                 padding: EdgeInsets.zero,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 10,
+                itemCount: users.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return ListTile(
@@ -177,7 +253,8 @@ class _RolesPageState extends State<RolesPage> {
                         backgroundImage: AssetImage("assets/images/user.png"),
                       ),
                       contentPadding: EdgeInsets.zero,
-                      title: Text("Prasanna ${index}"),
+                      title:
+                          Text("${users[index].name} ${users[index].lastName}"),
                       trailing: IconButton(
                           onPressed: () {
                             showModalBottomSheet(
@@ -200,6 +277,30 @@ class _RolesPageState extends State<RolesPage> {
                                           children: [
                                             TextButton(
                                                 onPressed: () async {
+                                                  var data = {
+                                                    "name": users[index].name,
+                                                    "lastName":
+                                                        users[index].lastName,
+                                                    "usersType": 2,
+                                                    "id": users[index].id
+                                                  };
+                                                  try {
+                                                    var response = await Api().put(
+                                                        MyConfig
+                                                            .getuserdetailsURL,
+                                                        data: data);
+                                                    print(
+                                                        "upload: ${response.statusCode}");
+                                                    if (response.statusCode ==
+                                                        200) {
+                                                      Fluttertoast.showToast(
+                                                          msg:
+                                                              "User Updated Successfully");
+                                                    } else {}
+                                                  } catch (e) {
+                                                    print("Helloi: $e");
+                                                  }
+                                                  ref.refresh(getallUsers);
                                                   Navigator.pop(context);
                                                 },
                                                 child: const Text(

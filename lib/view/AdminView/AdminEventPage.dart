@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:project/widgets/test1.dart';
 import 'package:uuid/uuid.dart';
 import 'package:http/http.dart' as http;
 import '../../../Riverpod/baseDIo.dart';
@@ -89,9 +90,7 @@ class _AdminEventPageState extends ConsumerState<AdminEventPage> {
 
   sendnoti() {
     var data = {
-      "registration_ids": [
-        "dHe6leWkTSy6zNpQ3pQmy2:APA91bGbhDUz1_XR1hYYeJvWbUrZIKemFl1f9AmSY3onXNhiIqjYTlujNaSsDJ_KWRPmh6uijYa7mTPNH1kOPgJXlsXWP3JsVAL6KXNdnuORX1iDlNG6j8ChZDXm8AexfDjwUlyVGgpA"
-      ],
+      "registration_ids": [registrationid],
       "notification": {
         "body": descctrl.value.text,
         "title": titlectrl.value.text,

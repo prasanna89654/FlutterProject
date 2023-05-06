@@ -51,6 +51,12 @@ dependencies:
   uuid: ^3.0.7
   webview_flutter: ^2.0.4
   form_builder_validators: ^8.5.0
+  google_maps_flutter: ^2.2.5
+  location: ^4.4.0
+  flare_flutter: ^3.0.2
+  flutter_polyline_points: ^1.0.0
+  path_provider: ^2.0.14
+  open_filex: ^3.4.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
