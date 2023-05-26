@@ -120,7 +120,7 @@ class _GetSampleState extends ConsumerState<GetSample> {
     });
   }
 
-  double calculateDistance() {
+  double calculateDistanceUsingLatandLong() {
     if (ref.watch(locationStateProvider).getLocation() == null) {
       return 0;
     } else {
@@ -202,9 +202,9 @@ class _GetSampleState extends ConsumerState<GetSample> {
                                     height: 5,
                                   ),
                                   Text(
-                                    calculateDistance() >= 1000
-                                        ? '${(calculateDistance() / 1000).toStringAsFixed(2)} km'
-                                        : '$calculateDistance() meter',
+                                    calculateDistanceUsingLatandLong() >= 1000
+                                        ? '${(calculateDistanceUsingLatandLong() / 1000).toStringAsFixed(2)} km'
+                                        : '$calculateDistanceUsingLatandLong() meter',
                                     style: const TextStyle(
                                       fontSize: 20,
                                     ),

@@ -422,7 +422,6 @@ makeTwoline(String first, String second, BuildContext context) {
       ),
       SizedBox(width: width * 0.01),
       SizedBox(
-        width: 100,
         child: Text(
           second,
           style: const TextStyle(fontSize: 15

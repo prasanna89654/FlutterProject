@@ -33,6 +33,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     Future<void> login() async {
+      print("Ok");
       ref
           .read(userapiProvider)
           .logIn(phoneCtrl.value.text, passwordCtrl.value.text, context);

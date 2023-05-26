@@ -89,7 +89,7 @@ class MapSampleState extends ConsumerState<MapSample> {
       print(choosedlat);
       print(choosedlong);
 
-      final dm = calculateDistance(_locationData!.latitude!,
+      final dm = calculateDistanceUsingLatandLong(_locationData!.latitude!,
           _locationData!.longitude!, latLng.latitude, latLng.longitude);
 
       //take only int value
@@ -219,10 +219,16 @@ class MapSampleState extends ConsumerState<MapSample> {
   }
 }
 
-double calculateDistance(lat1, lon1, lat2, lon2) {
-  var p = 0.017453292519943295;
-  var a = 0.5 -
-      cos((lat2 - lat1) * p) / 2 +
-      cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
-  return 12742 * asin(sqrt(a)) * 1000;
+double calculateDistanceUsingLatandLong(
+    latitudefirst, longitudefirst, latitudesecond, longitudesecond) {
+  var perfectDistancetoCalculate = 0.017453292519943295;
+  var accumulatedDistancefromCurrentPosition = 0.5 -
+      cos((latitudesecond - latitudefirst) * perfectDistancetoCalculate) / 2 +
+      cos(latitudefirst * perfectDistancetoCalculate) *
+          cos(latitudesecond * perfectDistancetoCalculate) *
+          (1 -
+              cos((longitudesecond - longitudefirst) *
+                  perfectDistancetoCalculate)) /
+          2;
+  return 12742 * asin(sqrt(accumulatedDistancefromCurrentPosition)) * 1000;
 }

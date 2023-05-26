@@ -143,7 +143,7 @@ class _RandomPageState extends ConsumerState<RandomPage> {
     });
   }
 
-  double calculateDistance() {
+  double calculateDistanceUsingLatandLong() {
     if (ref.watch(locationStateProvider).getLocation() == null) {
       return 0;
     } else {
@@ -224,7 +224,7 @@ class _RandomPageState extends ConsumerState<RandomPage> {
                             height: 5,
                           ),
                           Text(
-                            "${calculateDistance().toStringAsFixed(2)} meter",
+                            "${calculateDistanceUsingLatandLong().toStringAsFixed(2)} meter",
                             style: const TextStyle(
                               fontSize: 20,
                             ),

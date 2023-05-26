@@ -1,9 +1,11 @@
 // ignore_for_file: avoid_print, prefer_interpolation_to_compose_strings, file_names
 
+import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:nb_utils/nb_utils.dart';
+import '../Routes/navigator.dart';
 import 'config.dart';
 import 'constants.dart';
 
@@ -78,6 +80,9 @@ class Api {
     } on FormatException catch (_) {
       throw const FormatException("Unable to process the data");
     } catch (e) {
+      Fluttertoast.showToast(
+        msg: e.toString(),
+      );
       print(e.toString());
       rethrow;
     }
@@ -188,8 +193,35 @@ class AppInterceptors extends Interceptor {
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
-    print(err.type);
-    print(err.response);
+    switch (err.type) {
+      case DioErrorType.connectionTimeout:
+      case DioErrorType.sendTimeout:
+      case DioErrorType.receiveTimeout:
+        throw DeadlineExceededException(err.requestOptions, "");
+      case DioErrorType.badResponse:
+        String errorMsg = json.decode(err.response.toString())["message"];
+        switch (err.response?.statusCode) {
+          case 400:
+            throw BadRequestException(err.requestOptions, errorMsg);
+          case 401:
+            throw UnauthorizedException(err.requestOptions, errorMsg);
+          case 404:
+            throw NotFoundException(err.requestOptions, errorMsg);
+          case 409:
+            throw ConflictException(err.requestOptions, errorMsg);
+          case 500:
+            throw InternalServerErrorException(err.requestOptions, errorMsg);
+        }
+        break;
+      case DioErrorType.unknown:
+        throw NoInternetConnectionException(err.requestOptions, "Failed");
+      case DioErrorType.cancel:
+        break;
+      case DioErrorType.badCertificate:
+        break;
+      case DioErrorType.connectionError:
+        break;
+    }
 
     return handler.next(err);
   }
@@ -231,6 +263,8 @@ class UnauthorizedException extends DioError {
 
   @override
   String toString() {
+    AppNavigatorService.pushNamedAndRemoveUntil("login");
+
     return error.toString();
   }
 }

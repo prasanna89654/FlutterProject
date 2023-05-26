@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math' show cos, sqrt, asin;
 
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -55,27 +56,34 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
     });
   }
 
-  getnearme() async {
+  getNearmeComplaints() async {
     var location = Location();
 
     LocationData ld = await location.getLocation();
 
-    // datas.sort((a, b) => calculateDistance(ld.latitude, ld.longitude,
-    //         firstString(b.location), lastString(b.location))
-    //     .compareTo(calculateDistance(ld.latitude, ld.longitude,
-    //         firstString(a.location), lastString(a.location))));
-    // double dwd = calculateDistance(ld.latitude, ld.longitude,
-    //     firstString(datas[1].location), lastString(datas[1].location));
-
     datas.sort((a, b) {
-      double toA = calculateDistance(ld.latitude, ld.longitude,
+      double toA = calculateDistanceUsingLatandLong(ld.latitude, ld.longitude,
           firstString(a.location), lastString(a.location));
-      double toB = calculateDistance(ld.latitude, ld.longitude,
+      double toB = calculateDistanceUsingLatandLong(ld.latitude, ld.longitude,
           firstString(b.location), lastString(b.location));
       return toA.compareTo(toB);
     });
-    // print(datas[0].complaintTitle);
+
     setState(() {});
+  }
+
+  double calculateDistanceUsingLatandLong(
+      latitudefirst, longitudefirst, latitudesecond, longitudesecond) {
+    var perfectDistancetoCalculate = 0.017453292519943295;
+    var accumulatedDistancefromCurrentPosition = 0.5 -
+        cos((latitudesecond - latitudefirst) * perfectDistancetoCalculate) / 2 +
+        cos(latitudefirst * perfectDistancetoCalculate) *
+            cos(latitudesecond * perfectDistancetoCalculate) *
+            (1 -
+                cos((longitudesecond - longitudefirst) *
+                    perfectDistancetoCalculate)) /
+            2;
+    return 12742 * asin(sqrt(accumulatedDistancefromCurrentPosition)) * 1000;
   }
 
   getinitdata() {
@@ -500,7 +508,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                     ),
                                     PopupMenuItem(
                                       onTap: () {
-                                        getnearme();
+                                        getNearmeComplaints();
                                         setState(() {
                                           isnearme = true;
                                           isdefault = false;

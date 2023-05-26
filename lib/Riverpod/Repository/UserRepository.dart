@@ -14,45 +14,45 @@ import '../config.dart';
 class UserRepository {
   Future<LoginModel?> logIn(
       String username, String password, BuildContext context) async {
-    var data = {"userNameOrEmailAddress": username, "password": password};
+    var data = {"email": username, "password": password};
 
     try {
-      var response = await Api().post(MyConfig.loginURL, data: data);
+      var response = await Api().post("${MyConfig.nodeUrl}/login", data: data);
       print("Heloi: ${response.statusCode}");
-      if (response.statusCode == 200) {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              content: Row(
-                children: [
-                  CircularProgressIndicator(),
-                  SizedBox(
-                    width: 40,
-                  ),
-                  Text("Loading...")
-                ],
-              ),
-            );
-          },
-        );
-        var token = json.decode(response.data)['result']['accessToken'];
-        var type = json.decode(response.data)['result']['userType'];
-        print(type);
+      // if (response.statusCode == 200) {
+      //   showDialog(
+      //     context: context,
+      //     builder: (BuildContext context) {
+      //       return AlertDialog(
+      //         content: Row(
+      //           children: [
+      //             CircularProgressIndicator(),
+      //             SizedBox(
+      //               width: 40,
+      //             ),
+      //             Text("Loading...")
+      //           ],
+      //         ),
+      //       );
+      //     },
+      //   );
+      //   var token = json.decode(response.data)['result']['accessToken'];
+      //   var type = json.decode(response.data)['result']['userType'];
+      //   print(type);
 
-        print(token);
-        await setValue(accessToken, token);
-        await setValue(userType, type);
-        Navigator.pop(context);
-        if (type == "Admin") {
-          await AppNavigatorService.pushNamedAndRemoveUntil("admin");
-        } else if (type == "User") {
-          await AppNavigatorService.pushNamedAndRemoveUntil("appbar");
-        } else {
-          await AppNavigatorService.pushNamedAndRemoveUntil("maintainer");
-        }
-      }
-      await AppNavigatorService.pushNamedAndRemoveUntil("login");
+      //   print(token);
+      //   await setValue(accessToken, token);
+      //   await setValue(userType, type);
+      //   Navigator.pop(context);
+      //   if (type == "Admin") {
+      //     await AppNavigatorService.pushNamedAndRemoveUntil("admin");
+      //   } else if (type == "User") {
+      //     await AppNavigatorService.pushNamedAndRemoveUntil("appbar");
+      //   } else {
+      //     await AppNavigatorService.pushNamedAndRemoveUntil("maintainer");
+      //   }
+      // }
+      // await AppNavigatorService.pushNamedAndRemoveUntil("login");
     } catch (e) {
       print(e.toString());
     }
