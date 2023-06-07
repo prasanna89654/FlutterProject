@@ -221,7 +221,7 @@ class _SignupState extends State<Signup> {
                     return null;
                   }),
               const SizedBox(
-                height: 15,
+                height: 10,
               ),
               TextFormField(
                 controller: phoneNumber,
@@ -238,7 +238,7 @@ class _SignupState extends State<Signup> {
                 ]),
               ),
               const SizedBox(
-                height: 15,
+                height: 10,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -247,7 +247,7 @@ class _SignupState extends State<Signup> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: 200,
+                        width: 150,
                         child: TextField(
                           decoration: textDecoration.copyWith(
                             border: const OutlineInputBorder(),
@@ -259,13 +259,13 @@ class _SignupState extends State<Signup> {
                     ],
                   ),
                   const SizedBox(
-                    width: 20,
+                    width: 10,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: 160,
+                        width: 150,
                         child: DropdownButtonFormField(
                           isDense: true,
                           decoration: InputDecoration(
@@ -294,7 +294,7 @@ class _SignupState extends State<Signup> {
                 ],
               ),
               const SizedBox(
-                height: 25,
+                height: 10,
               ),
               Align(
                 alignment: Alignment.topLeft,
@@ -308,9 +308,9 @@ class _SignupState extends State<Signup> {
                   Expanded(
                     child: RadioListTile(
                       title: Text(
-                        "Male",
+                        "M",
                         style: TextStyle(
-                          fontSize: 13,
+                          fontSize: 14,
                         ),
                       ),
                       value: "0",
@@ -326,9 +326,9 @@ class _SignupState extends State<Signup> {
                     width: 140,
                     child: RadioListTile(
                       title: Text(
-                        "Female",
+                        "F",
                         style: TextStyle(
-                          fontSize: 13,
+                          fontSize: 14,
                         ),
                       ),
                       value: "1",
@@ -343,9 +343,9 @@ class _SignupState extends State<Signup> {
                   Expanded(
                     child: RadioListTile(
                       title: Text(
-                        "Other",
+                        "O",
                         style: TextStyle(
-                          fontSize: 13,
+                          fontSize: 14,
                         ),
                       ),
                       value: "2",
