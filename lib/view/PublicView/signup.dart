@@ -3,7 +3,6 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:nb_utils/nb_utils.dart';
 
@@ -61,7 +60,7 @@ class _SignupState extends State<Signup> {
       "surname": lname.value.text,
       "email": email.value.text,
       "password": password.value.text,
-      "userType": 0,
+      "userType": 2,
       "dobMiti": splitString(date.toString()),
       "wardNo": wardselectedvalue,
       "location": location.value.text,
@@ -69,7 +68,8 @@ class _SignupState extends State<Signup> {
     };
 
     try {
-      var response = await Api().post(MyConfig.signupURL, data: data);
+      const url = "/createUsers";
+      var response = await Api().post(MyConfig.nodeUrl + url, data: data);
       if (response.statusCode == 200) {
         Fluttertoast.showToast(msg: "User Created Successfully");
       } else {
@@ -77,7 +77,7 @@ class _SignupState extends State<Signup> {
         Fluttertoast.showToast(msg: message);
       }
     } catch (e) {
-      Fluttertoast.showToast(msg: "User Already Exists");
+      Fluttertoast.showToast(msg: e.toString());
     }
     // var response = await http.post(
   }
@@ -296,7 +296,7 @@ class _SignupState extends State<Signup> {
               const SizedBox(
                 height: 10,
               ),
-              Align(
+              const Align(
                 alignment: Alignment.topLeft,
                 child: Text(
                   "Gender:",
@@ -307,7 +307,7 @@ class _SignupState extends State<Signup> {
                 children: [
                   Expanded(
                     child: RadioListTile(
-                      title: Text(
+                      title: const Text(
                         "M",
                         style: TextStyle(
                           fontSize: 14,
@@ -325,7 +325,7 @@ class _SignupState extends State<Signup> {
                   SizedBox(
                     width: 140,
                     child: RadioListTile(
-                      title: Text(
+                      title: const Text(
                         "F",
                         style: TextStyle(
                           fontSize: 14,
@@ -342,7 +342,7 @@ class _SignupState extends State<Signup> {
                   ),
                   Expanded(
                     child: RadioListTile(
-                      title: Text(
+                      title: const Text(
                         "O",
                         style: TextStyle(
                           fontSize: 14,
@@ -434,13 +434,11 @@ class _SignupState extends State<Signup> {
                       fontSize: 18,
                     ),
                     recognizer: TapGestureRecognizer()
-                      ..onTap = () => {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginScreen(),
-                                ))
-                          }),
+                      ..onTap = () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginScreen(),
+                          ))),
               ])),
             ]),
           )),
