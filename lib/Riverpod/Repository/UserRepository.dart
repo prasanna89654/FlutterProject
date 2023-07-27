@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:project/Riverpod/Models/userModel.dart';
 import 'package:project/Riverpod/constants.dart';
+
 // import 'package:nb_utils/nb_utils.dart';
 
 import '../../Routes/navigator.dart';
@@ -18,41 +19,40 @@ class UserRepository {
 
     try {
       var response = await Api().post("${MyConfig.nodeUrl}/login", data: data);
-      print("Heloi: ${response.statusCode}");
-      // if (response.statusCode == 200) {
-      //   showDialog(
-      //     context: context,
-      //     builder: (BuildContext context) {
-      //       return AlertDialog(
-      //         content: Row(
-      //           children: [
-      //             CircularProgressIndicator(),
-      //             SizedBox(
-      //               width: 40,
-      //             ),
-      //             Text("Loading...")
-      //           ],
-      //         ),
-      //       );
-      //     },
-      //   );
-      //   var token = json.decode(response.data)['result']['accessToken'];
-      //   var type = json.decode(response.data)['result']['userType'];
-      //   print(type);
 
-      //   print(token);
-      //   await setValue(accessToken, token);
-      //   await setValue(userType, type);
-      //   Navigator.pop(context);
-      //   if (type == "Admin") {
-      //     await AppNavigatorService.pushNamedAndRemoveUntil("admin");
-      //   } else if (type == "User") {
-      //     await AppNavigatorService.pushNamedAndRemoveUntil("appbar");
-      //   } else {
-      //     await AppNavigatorService.pushNamedAndRemoveUntil("maintainer");
-      //   }
-      // }
-      // await AppNavigatorService.pushNamedAndRemoveUntil("login");
+      if (response.statusCode == 200) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const AlertDialog(
+              content: Row(
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  Text("Loading...")
+                ],
+              ),
+            );
+          },
+        );
+        var token = json.decode(response.data)['token'];
+        var role = json.decode(response.data)['role'];
+
+        print(token);
+        await setValue(accessToken, token);
+        await setValue(userType, role.toString());
+        Navigator.pop(context);
+        if (role == "Admin") {
+          await AppNavigatorService.pushNamedAndRemoveUntil("admin");
+        } else if (role == 2) {
+          await AppNavigatorService.pushNamedAndRemoveUntil("appbar");
+        } else {
+          await AppNavigatorService.pushNamedAndRemoveUntil("maintainer");
+        }
+      }
+      await AppNavigatorService.pushNamedAndRemoveUntil("login");
     } catch (e) {
       print(e.toString());
     }
@@ -60,7 +60,7 @@ class UserRepository {
   }
 
   Future<List<RequestModel>> getRequests() async {
-    final url = "/maintainer/getRequest";
+    const url = "/maintainer/getRequest";
     final response = await Api().get(MyConfig.nodeUrl + url);
 
     if (response.statusCode == 200) {
@@ -75,7 +75,7 @@ class UserRepository {
   }
 
   Future<List<TryModel>> getTry() async {
-    final url = "/maintainer/getFile";
+    const url = "/maintainer/getFile";
     final response = await Api().get(MyConfig.nodeUrl + url);
 
     if (response.statusCode == 200) {
@@ -91,7 +91,7 @@ class UserRepository {
   }
 
   Future<List<UserDetailsModel>> getAllUsers() async {
-    final url = "/api/services/app/Complaint/GetAllUsers";
+    const url = "/api/services/app/Complaint/GetAllUsers";
     final response = await Api().get(MyConfig.appUrl + url);
 
     if (response.statusCode == 200) {

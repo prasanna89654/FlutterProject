@@ -54,17 +54,17 @@ class _SignupState extends State<Signup> {
 
   signup() async {
     var data = {
-      "name": fname.value.text,
+      "firstname": fname.value.text,
+      "username": username.value.text,
       "gender": int.parse(gender!),
-      "phoneNo": phoneNumber.value.text,
-      "surname": lname.value.text,
+      "phone": phoneNumber.value.text,
+      "lastname": lname.value.text,
       "email": email.value.text,
       "password": password.value.text,
-      "userType": 2,
-      "dobMiti": splitString(date.toString()),
-      "wardNo": wardselectedvalue,
-      "location": location.value.text,
-      "dob": "2023-03-10T13:41:41.585Z"
+      "role": 2,
+      "dob": splitString(date.toString()),
+      "ward": wardselectedvalue,
+      "address": location.value.text,
     };
 
     try {
@@ -249,6 +249,7 @@ class _SignupState extends State<Signup> {
                       SizedBox(
                         width: 150,
                         child: TextField(
+                          controller: location,
                           decoration: textDecoration.copyWith(
                             border: const OutlineInputBorder(),
                             labelText: "Location",

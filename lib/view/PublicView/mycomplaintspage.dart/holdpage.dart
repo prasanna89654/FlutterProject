@@ -22,22 +22,27 @@ class HoldComplaints extends ConsumerStatefulWidget {
 class _HoldComplaintsState extends ConsumerState<HoldComplaints> {
   List<ComplaintGetAllModel> datas = [];
 
+  initdata() async {
+    final data = await ref.read(complaintProvider).getownComplaints();
+    final dad = data.where((element) => element.status == 'hold').toList();
+    setState(() {
+      datas = dad;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+     WidgetsBinding.instance.addPostFrameCallback((_) {
+    initdata();
+  });
+  }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     // final details = ref.watch(getownComplaintProvider);
-    ref.watch(getownComplaintProvider).when(
-          data: (data) {
-            final dad =
-                data.where((element) => element.complaintStatus == 1).toList();
-            setState(() {
-              datas = dad;
-            });
-          },
-          error: (error, stackTrace) {},
-          loading: () {},
-        );
 
     return datas.isEmpty
         ? const Center(child: CircularProgressIndicator())
@@ -53,10 +58,8 @@ class _HoldComplaintsState extends ConsumerState<HoldComplaints> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => RandomPage(
-                                  choosedlat:
-                                      firstString(datas[index].location),
-                                  choosedlong:
-                                      lastString(datas[index].location),
+                                  choosedlat: firstString(datas[index].address),
+                                  choosedlong: lastString(datas[index].address),
                                 )));
                   },
                   child: Container(
@@ -75,7 +78,7 @@ class _HoldComplaintsState extends ConsumerState<HoldComplaints> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  datas[index].complaintMiti,
+                                  datas[index].created_at,
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,
@@ -89,7 +92,7 @@ class _HoldComplaintsState extends ConsumerState<HoldComplaints> {
                             height: height * 0.01,
                           ),
                           Text(
-                            datas[index].complaintTitle,
+                            datas[index].title,
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 17,
@@ -99,7 +102,7 @@ class _HoldComplaintsState extends ConsumerState<HoldComplaints> {
                             height: height * 0.01,
                           ),
                           ReadMoreText(
-                            datas[index].complaintDescription,
+                            datas[index].description,
                             trimLines: 3,
                             colorClickableText: Colors.blue,
                             trimMode: TrimMode.Line,
@@ -115,7 +118,7 @@ class _HoldComplaintsState extends ConsumerState<HoldComplaints> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              datas[index].imageBytes == null
+                              datas[index].image == null
                                   ? SizedBox()
                                   : InkWell(
                                       onTap: () {
@@ -135,7 +138,7 @@ class _HoldComplaintsState extends ConsumerState<HoldComplaints> {
                                                               image: MemoryImage(
                                                                   base64Decode(datas[
                                                                           index]
-                                                                      .imageBytes
+                                                                      .image
                                                                       .toString())),
                                                               fit: BoxFit
                                                                   .fitWidth)),
@@ -157,7 +160,7 @@ class _HoldComplaintsState extends ConsumerState<HoldComplaints> {
                                                     image: MemoryImage(
                                                         base64Decode(
                                                             datas[index]
-                                                                .imageBytes
+                                                                .image
                                                                 .toString())),
                                                     fit: BoxFit.cover)),
                                           ),
@@ -169,44 +172,22 @@ class _HoldComplaintsState extends ConsumerState<HoldComplaints> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   makeTwoline(
-                                      "Status:",
-                                      datas[index].complaintStatus == 0
-                                          ? "Pending"
-                                          : datas[index].complaintStatus == 1
-                                              ? "Hold"
-                                              : "Solved",
-                                      context),
+                                      "Status:", datas[index].status, context),
                                   SizedBox(
                                     height: height * 0.01,
                                   ),
                                   makeTwoline("Ward No:",
-                                      datas[index].wardNo.toString(), context),
+                                      datas[index].ward.toString(), context),
                                   SizedBox(
                                     height: height * 0.01,
                                   ),
-                                  makeTwoline(
-                                      "Priority:",
-                                      datas[index].priority == 0
-                                          ? "Critical"
-                                          : datas[index].priority == 1
-                                              ? "Moderate"
-                                              : "Low",
-                                      context),
+                                  makeTwoline("Priority:",
+                                      datas[index].priority, context),
                                   SizedBox(
                                     height: height * 0.01,
                                   ),
-                                  makeTwoline(
-                                      "Category:",
-                                      datas[index].category == 0
-                                          ? "Water"
-                                          : datas[index].category == 1
-                                              ? "Road"
-                                              : datas[index].category == 2
-                                                  ? "Health"
-                                                  : datas[index].category == 3
-                                                      ? "Electricity"
-                                                      : "Education",
-                                      context)
+                                  makeTwoline("Category:",
+                                      datas[index].category, context)
                                 ],
                               )
                             ],
@@ -222,27 +203,27 @@ class _HoldComplaintsState extends ConsumerState<HoldComplaints> {
   }
 }
 
-makeTwoline(String first, String second, BuildContext context) {
-  var height = MediaQuery.of(context).size.height;
-  final width = MediaQuery.of(context).size.width;
-  return Row(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        first,
-        style: const TextStyle(
-            fontSize: 16, color: Colors.grey, fontWeight: FontWeight.w500),
-      ),
-      SizedBox(width: width * 0.01),
-      SizedBox(
-        width: 100,
-        child: Text(
-          second,
-          style: const TextStyle(fontSize: 15
-              // fontWeight: FontWeight.bold,
-              ),
-        ),
-      ),
-    ],
-  );
-}
+// makeTwoline(String first, String second, BuildContext context) {
+//   var height = MediaQuery.of(context).size.height;
+//   final width = MediaQuery.of(context).size.width;
+//   return Row(
+//     crossAxisAlignment: CrossAxisAlignment.start,
+//     children: [
+//       Text(
+//         first,
+//         style: const TextStyle(
+//             fontSize: 16, color: Colors.grey, fontWeight: FontWeight.w500),
+//       ),
+//       SizedBox(width: width * 0.01),
+//       SizedBox(
+//         width: 100,
+//         child: Text(
+//           second,
+//           style: const TextStyle(fontSize: 15
+//               // fontWeight: FontWeight.bold,
+//               ),
+//         ),
+//       ),
+//     ],
+//   );
+// }

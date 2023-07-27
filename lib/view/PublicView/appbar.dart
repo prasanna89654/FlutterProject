@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:project/view/PublicView/complaint_history.dart';
-import 'package:project/view/PublicView/historypage.dart';
-import 'package:project/view/PublicView/mycomplaintspage.dart/complaintspage.dart';
+import 'package:project/view/PublicView/mycomplaintspage.dart/pendingpage.dart';
 import 'package:project/view/PublicView/profile_screen.dart';
 
-import 'package:project/widgets/sidebar.dart';
-
 import '../../Riverpod/Models/userModel.dart';
+import '../../widgets/sidebar.dart';
 import 'fullnews.dart';
-import 'guideliness.dart';
 import 'home.dart';
 
 class Appbar extends StatefulWidget {
@@ -55,7 +51,7 @@ class _AppbarState extends State<Appbar> {
     super.initState();
     getinitdata();
     _page1 = Homepage(changePage: _changeTab);
-    _page2 = const ComplaintsPage();
+    _page2 = const PendingComplaints();
     _page3 = const Fullnews();
     _page4 = const profile();
     _pages = [_page1, _page2, _page3, _page4];
@@ -78,8 +74,8 @@ class _AppbarState extends State<Appbar> {
           elevation: 0,
           // automaticallyImplyLeading: false,
           title: name == null
-              ? SizedBox()
-              : Text("Welcome ${name!.name} ${name!.surname}"),
+              ? const SizedBox()
+              : Text("Welcome ${name!.username}"),
           centerTitle: true,
           titleTextStyle: const TextStyle(
             fontSize: 17,

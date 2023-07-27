@@ -30,74 +30,54 @@ class LoginModel {
 
 class ComplaintGetAllModel {
   ComplaintGetAllModel({
-    required this.complaintTitle,
-    required this.complaintDescription,
-    required this.complaintStatus,
-    required this.location,
-    required this.wardNo,
-    required this.complaintMiti,
+    required this.title,
+    required this.description,
+    required this.status,
+    required this.address,
+    required this.ward,
+    required this.created_at,
     required this.priority,
     required this.category,
-    this.imageBytes,
+    this.image,
     required this.username,
-    required this.email,
-    this.phoneNo,
-    required this.userWardNo,
-    this.userImage,
-    required this.id,
   });
 
-  String complaintTitle;
-  String complaintDescription;
-  int complaintStatus;
-  String location;
-  int wardNo;
-  String complaintMiti;
-  int priority;
-  int category;
-  String? imageBytes;
+  dynamic title;
+  dynamic description;
+  dynamic status;
+  dynamic address;
+  dynamic ward;
+  dynamic created_at;
+  dynamic priority;
+  dynamic category;
+  String? image;
   String? username;
-  dynamic email;
-  dynamic phoneNo;
-  dynamic userWardNo;
-  dynamic userImage;
-  int id;
 
   factory ComplaintGetAllModel.fromJson(Map<String, dynamic> json) =>
       ComplaintGetAllModel(
-        complaintTitle: json["complaintTitle"],
-        complaintDescription: json["complaintDescription"],
-        complaintStatus: json["complaintStatus"],
-        location: json["location"],
-        wardNo: json["wardNo"],
-        complaintMiti: json["complaintMiti"],
+        title: json["title"],
+        description: json["description"],
+        status: json["status"],
+        address: json["address"],
+        ward: json["ward"],
+        created_at: json["created_at"],
         priority: json["priority"],
         category: json["category"],
-        imageBytes: json["imageBytes"],
+        image: json["image"],
         username: json["username"],
-        email: json["email"],
-        phoneNo: json["phoneNo"],
-        userWardNo: json["userWardNo"],
-        userImage: json["userImage"],
-        id: json["id"],
       );
 
   Map<String, dynamic> toJson() => {
-        "complaintTitle": complaintTitle,
-        "complaintDescription": complaintDescription,
-        "complaintStatus": complaintStatus,
-        "location": location,
-        "wardNo": wardNo,
-        "complaintMiti": complaintMiti,
+        "title": title,
+        "description": description,
+        "status": status,
+        "address": address,
+        "ward": ward,
+        "created_at": created_at,
         "priority": priority,
         "category": category,
-        "imageBytes": imageBytes,
+        "image": image,
         "username": username,
-        "email": email,
-        "phoneNo": phoneNo,
-        "userWardNo": userWardNo,
-        "userImage": userImage,
-        "id": id,
       };
 }
 
@@ -106,24 +86,24 @@ class EventModel {
     required this.title,
     required this.shortDescription,
     required this.eventMiti,
-    this.imageBytes,
-    required this.location,
+    this.image,
+    required this.address,
     required this.id,
   });
 
   String title;
   String shortDescription;
   String eventMiti;
-  dynamic imageBytes;
-  String location;
+  dynamic image;
+  String address;
   int id;
 
   factory EventModel.fromJson(Map<String, dynamic> json) => EventModel(
         title: json["title"],
         shortDescription: json["shortDescription"],
         eventMiti: json["eventMiti"],
-        imageBytes: json["imageBytes"],
-        location: json["location"],
+        image: json["image"],
+        address: json["address"],
         id: json["id"],
       );
 
@@ -131,54 +111,40 @@ class EventModel {
         "title": title,
         "shortDescription": shortDescription,
         "eventMiti": eventMiti,
-        "imageBytes": imageBytes,
-        "location": location,
+        "image": image,
+        "address": address,
         "id": id,
       };
 }
 
 class UserModel {
   UserModel({
-    required this.name,
-    required this.surname,
-    required this.userName,
+    required this.username,
     required this.address,
-    required this.dboMiti,
-    required this.wardNo,
-    required this.emailAddress,
+    required this.dob,
+    required this.ward,
+    required this.email,
     required this.id,
+    required this.phone,
   });
 
-  String name;
-  String surname;
-  String userName;
-  String emailAddress;
-  int id;
+  String username;
+  String email;
+  String phone;
+  String id;
   String address;
-  String dboMiti;
-  int wardNo;
+  String dob;
+  int ward;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        name: json["name"],
-        surname: json["surname"],
-        userName: json["userName"],
-        emailAddress: json["emailAddress"],
+        username: json["username"],
+        email: json["email"],
         id: json["id"],
         address: json["address"],
-        dboMiti: json["dboMiti"],
-        wardNo: json["wardNo"],
+        dob: json["dob"],
+        ward: json["ward"],
+        phone: json["phone"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "name": name,
-        "surname": surname,
-        "userName": userName,
-        "emailAddress": emailAddress,
-        "id": id,
-        "address": address,
-        "dboMiti": dboMiti,
-        "wardNo": wardNo,
-      };
 }
 
 class RequestModel {

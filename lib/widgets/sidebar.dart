@@ -5,14 +5,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:project/Riverpod/constants.dart';
 import 'package:project/Routes/navigator.dart';
-import 'package:project/view/PublicView/EventsPage.dart';
-import 'package:project/view/PublicView/appbar.dart';
 import 'package:project/view/PublicView/guideliness.dart';
-import 'package:project/view/PublicView/mycomplaintspage.dart/complaintspage.dart';
-import 'package:project/view/PublicView/publicComplaints.dart';
 
 import '../Riverpod/Repository/complaintController.dart';
-import '../view/PublicView/login.dart';
 
 class sidebar extends ConsumerStatefulWidget {
   const sidebar({super.key});
@@ -34,18 +29,19 @@ class _sidebarState extends ConsumerState<sidebar> {
           children: [
             UserAccountsDrawerHeader(
               accountName: Text(
-                data!.name,
-                style: TextStyle(fontSize: 18, color: Colors.black),
+                data!.username,
+                style: const TextStyle(fontSize: 18, color: Colors.black),
               ),
               accountEmail: Text(
-                data.emailAddress,
-                style: TextStyle(fontSize: 15, color: Colors.black54),
+                data.email,
+                style: const TextStyle(fontSize: 15, color: Colors.black54),
               ),
               currentAccountPicture: CircleAvatar(
                 backgroundColor: Colors.blue,
                 child: Text(
-                  data.name[0].toUpperCase() + data.surname[0].toUpperCase(),
-                  style: TextStyle(
+                  data.username[0].toUpperCase() +
+                      data.username[1].toUpperCase(),
+                  style: const TextStyle(
                     fontSize: 20,
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -75,22 +71,22 @@ class _sidebarState extends ConsumerState<sidebar> {
               leading: const Icon(Icons.group),
               title: const Text('Public Complaints'),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PublicComplaints(),
-                    ));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => PublicComplaints(),
+                //     ));
               },
             ),
             ListTile(
               leading: const Icon(Icons.event),
               title: const Text('Nearby Programs'),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EventsPage(),
-                    ));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => EventsPage(),
+                //     ));
               },
             ),
             const Divider(
@@ -108,7 +104,7 @@ class _sidebarState extends ConsumerState<sidebar> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Guidepage(),
+                            builder: (context) => const Guidepage(),
                           ))
                     }),
             ListTile(
@@ -151,8 +147,12 @@ class _sidebarState extends ConsumerState<sidebar> {
                 }),
           ],
         ),
-        error: (Object error, StackTrace? stackTrace) {},
-        loading: () {},
+        error: (Object error, StackTrace? stackTrace) {
+          return null;
+        },
+        loading: () {
+          return null;
+        },
       ),
     );
   }

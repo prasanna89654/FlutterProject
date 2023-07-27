@@ -11,14 +11,12 @@ import 'package:project/view/PublicView/Complaints/addcomplaint.dart';
 import 'package:project/view/PublicView/Helpliness.dart';
 import 'package:project/view/PublicView/trackpage.dart';
 import 'package:project/widgets/crousal.dart';
-import 'package:project/widgets/nearbymaker.dart';
 import 'package:project/widgets/newsmaker.dart';
-import 'package:project/widgets/publicmaker.dart';
 
 import '../../Riverpod/Models/userModel.dart';
 import '../../Riverpod/baseDIo.dart';
 import '../../Riverpod/config.dart';
-import 'addcom.dart';
+import '../../widgets/publicmaker.dart';
 
 class Homepage extends ConsumerStatefulWidget {
   const Homepage({super.key, this.changePage});
@@ -31,7 +29,6 @@ class Homepage extends ConsumerStatefulWidget {
 class _HomepageState extends ConsumerState<Homepage> {
   @override
   void initState() {
-    ref.refresh(getallComplaintProvider);
     ref.refresh(getownReportProvider);
     // getinitdata();
     super.initState();
@@ -44,12 +41,11 @@ class _HomepageState extends ConsumerState<Homepage> {
     var width = size.width;
     final token = getStringAsync(accessToken);
     print("tokenId: $token");
-    final details = ref.watch(getallComplaintProvider);
+
     final report = ref.watch(getownReportProvider);
 
     return Scaffold(
-        body: details.when(
-      data: (data) => SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             const Crousal(),
@@ -219,7 +215,8 @@ class _HomepageState extends ConsumerState<Homepage> {
                                               child: Text(
                                                 data!.pendingComplaint
                                                     .toString(),
-                                                style: TextStyle(fontSize: 18),
+                                                style: const TextStyle(
+                                                    fontSize: 18),
                                               ),
                                             ),
                                           ),
@@ -265,8 +262,8 @@ class _HomepageState extends ConsumerState<Homepage> {
                                               child: Center(
                                                 child: Text(
                                                   data.holdComplaint.toString(),
-                                                  style:
-                                                      TextStyle(fontSize: 18),
+                                                  style: const TextStyle(
+                                                      fontSize: 18),
                                                 ),
                                               ),
                                             ),
@@ -315,8 +312,8 @@ class _HomepageState extends ConsumerState<Homepage> {
                                                 child: Text(
                                                   data.solvedComplaint
                                                       .toString(),
-                                                  style:
-                                                      TextStyle(fontSize: 18),
+                                                  style: const TextStyle(
+                                                      fontSize: 18),
                                                 ),
                                               ),
                                             ),
@@ -331,37 +328,34 @@ class _HomepageState extends ConsumerState<Homepage> {
                           ],
                         ),
                       )),
-                  error: (Object error, StackTrace? stackTrace) {},
-                  loading: () {},
+                  error: (Object error, StackTrace? stackTrace) {
+                    return null;
+                  },
+                  loading: () {
+                    return null;
+                  },
                 ),
               ),
             ),
             const SizedBox(height: 30),
             const Publicmaker(),
-            const Nearbymaker(),
+            // const Nearbymaker(),
             Newsmaker(
               changePage: widget.changePage,
             )
           ],
         ),
       ),
-      error: (Object error, StackTrace? stackTrace) {},
-      loading: () {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    ));
+    );
   }
 }
 
 Future<UserModel?> getuserdetails() async {
   try {
-    String gethomeworkdetails =
-        "/api/services/app/Session/GetCurrentLoginInformations";
-    final response = await Api().get(MyConfig.appUrl + gethomeworkdetails);
+    String gethomeworkdetails = "/getUserProfile";
+    final response = await Api().get(MyConfig.nodeUrl + gethomeworkdetails);
     if (response.statusCode == 200) {
-      var value = json.decode(response.toString())["result"]["user"];
+      var value = json.decode(response.toString());
 
       var data = UserModel.fromJson(value);
 

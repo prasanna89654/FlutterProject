@@ -7,9 +7,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:location/location.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:project/Riverpod/Models/userModel.dart';
-import 'package:project/Riverpod/Repository/complaintController.dart';
 import 'package:project/view/PublicView/viewonmap.dart';
-import 'package:project/widgets/TEsts/newtry.dart';
 
 import '../../Riverpod/baseDIo.dart';
 import '../../Riverpod/config.dart';
@@ -45,7 +43,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
   // int seconds = 500;
 
   void _startTimer() {
-    _timer = Timer.periodic(Duration(milliseconds: 1000), (timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 1000), (timer) {
       setState(() {
         if (_number < datas.length) {
           _number++;
@@ -63,9 +61,9 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
 
     datas.sort((a, b) {
       double toA = calculateDistanceUsingLatandLong(ld.latitude, ld.longitude,
-          firstString(a.location), lastString(a.location));
+          firstString(a.address), lastString(a.address));
       double toB = calculateDistanceUsingLatandLong(ld.latitude, ld.longitude,
-          firstString(b.location), lastString(b.location));
+          firstString(b.address), lastString(b.address));
       return toA.compareTo(toB);
     });
 
@@ -91,13 +89,12 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
       setState(() {
         datas = value;
       });
-      datas.sort((a, b) => b.id.compareTo(a.id));
     });
   }
 
   getmyward() {
     getComplaints().then((value) {
-      final dw = value.where((element) => element.wardNo == 3).toList();
+      final dw = value.where((element) => element.ward == 3).toList();
       setState(() {
         datas = dw;
       });
@@ -106,8 +103,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
 
   getpendingdata() {
     getComplaints().then((value) {
-      final dw =
-          value.where((element) => element.complaintStatus == 0).toList();
+      final dw = value.where((element) => element.status == 'pending').toList();
       setState(() {
         datas = dw;
       });
@@ -116,8 +112,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
 
   getholddata() {
     getComplaints().then((value) {
-      final dw =
-          value.where((element) => element.complaintStatus == 1).toList();
+      final dw = value.where((element) => element.status == 'hold').toList();
       setState(() {
         datas = dw;
       });
@@ -126,25 +121,24 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
 
   getsolveddata() {
     getComplaints().then((value) {
-      final dw =
-          value.where((element) => element.complaintStatus == 2).toList();
+      final dw = value.where((element) => element.status == 'solved').toList();
       setState(() {
         datas = dw;
       });
     });
   }
 
-  sortlowpriority() {
-    datas.sort((a, b) => a.priority.compareTo(b.priority));
+  // sortlowpriority() {
+  //   datas.sort((a, b) => a.priority.compareTo(b.priority));
 
-    // });
-  }
+  //   // });
+  // }
 
-  sorthighpriority() {
-    datas.sort((a, b) => b.priority.compareTo(a.priority));
+  // sorthighpriority() {
+  //   datas.sort((a, b) => b.priority.compareTo(a.priority));
 
-    // });
-  }
+  //   // });
+  // }
 
   @override
   void initState() {
@@ -157,11 +151,11 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
 
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1300),
+      duration: const Duration(milliseconds: 1300),
     )..repeat(reverse: true);
     _animation = Tween<Offset>(
-      begin: Offset(-1.0, 0.0),
-      end: Offset(1.0, 0.0),
+      begin: const Offset(-1.0, 0.0),
+      end: const Offset(1.0, 0.0),
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.easeInOut,
@@ -225,17 +219,17 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                           onTap: () {
                             setState(() {
                               datas = datas
-                                  .where((element) => element.complaintTitle
+                                  .where((element) => element.title
                                       .toLowerCase()
                                       .contains(searchController.value.text
                                           .toLowerCase()))
                                   .toList();
                             });
                           },
-                          child: Chip(
+                          child: const Chip(
                             backgroundColor: Colors.blue,
                             label: Padding(
-                              padding: const EdgeInsets.symmetric(
+                              padding: EdgeInsets.symmetric(
                                   horizontal: 8.0, vertical: 6.0),
                               child: Icon(
                                 Icons.search,
@@ -258,7 +252,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                               child: Row(
                                 children: [
                                   PopupMenuButton(
-                                    icon: Icon(Icons.filter_list),
+                                    icon: const Icon(Icons.filter_list),
                                     itemBuilder: (context) {
                                       return [
                                         PopupMenuItem(
@@ -336,7 +330,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                         Visibility(
                           visible: isward,
                           child: FilterChip(
-                              label: Row(
+                              label: const Row(
                                 children: [
                                   Text(
                                     "My Ward",
@@ -364,7 +358,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                         Visibility(
                           visible: ispending,
                           child: FilterChip(
-                              label: Row(
+                              label: const Row(
                                 children: [
                                   Text(
                                     "Pending",
@@ -395,7 +389,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                         Visibility(
                           visible: ishold,
                           child: FilterChip(
-                              label: Row(
+                              label: const Row(
                                 children: [
                                   Text(
                                     "Hold",
@@ -426,7 +420,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                         Visibility(
                           visible: issolved,
                           child: FilterChip(
-                              label: Row(
+                              label: const Row(
                                 children: [
                                   Text(
                                     "Solved",
@@ -467,12 +461,12 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                         : isLow
                                             ? "Low to High"
                                             : "Near me",
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 16),
                               ),
                               // Icon(Icons.keyboard_double_arrow_down_sharp),
                               PopupMenuButton(
-                                icon: Icon(
+                                icon: const Icon(
                                     Icons.keyboard_double_arrow_down_sharp),
                                 itemBuilder: (context) {
                                   return [
@@ -482,14 +476,14 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                         //   datas = [];
                                         // });
                                         // getinitdata();
-                                        sorthighpriority();
+                                        // sorthighpriority();
                                         setState(() {
                                           isdefault = false;
                                           isHigh = true;
                                           isLow = false;
                                         });
                                       },
-                                      child: Text("High to Low"),
+                                      child: const Text("High to Low"),
                                     ),
                                     PopupMenuItem(
                                       onTap: () {
@@ -497,14 +491,14 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                         //   datas = [];
                                         // });
                                         // getinitdata();
-                                        sortlowpriority();
+                                        // sortlowpriority();
                                         setState(() {
                                           isdefault = false;
                                           isHigh = false;
                                           isLow = true;
                                         });
                                       },
-                                      child: Text("Low to High"),
+                                      child: const Text("Low to High"),
                                     ),
                                     PopupMenuItem(
                                       onTap: () {
@@ -536,7 +530,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                         // getinitdata();
                                         // sortlowpriority();
                                       },
-                                      child: Text("Near me"),
+                                      child: const Text("Near me"),
                                     ),
                                     PopupMenuItem(
                                       onTap: () {
@@ -550,7 +544,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                           isHigh = false;
                                         });
                                       },
-                                      child: Text("Default"),
+                                      child: const Text("Default"),
                                     ),
                                   ];
                                 },
@@ -570,7 +564,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                   : isanimation
                       ? Column(
                           children: [
-                            CircleAvatar(
+                            const CircleAvatar(
                               radius: 145,
                               backgroundColor: Colors.green,
                               child: CircleAvatar(
@@ -579,11 +573,11 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                     AssetImage("assets/images/map.jpg"),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             // child: Image.asset("assets/images/map.jpg")),
-                            Container(
+                            SizedBox(
                               height: 50,
                               width: MediaQuery.of(context).size.width * 0.3,
                               child: SlideTransition(
@@ -594,21 +588,21 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
-                            Text(
+                            const Text(
                               "Searching...",
                               style:
                                   TextStyle(color: Colors.blue, fontSize: 22),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Text(
                               "Found $_number Nearby Complaints",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 18),
+                              style: const TextStyle(
+                                  color: Colors.black, fontSize: 18),
                             )
                             // RotationTransition(
                             //   turns: Tween(begin: 0.0, end: 1.0)
@@ -625,17 +619,17 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                             isnearme
                                 ? Column(
                                     children: [
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 5,
                                       ),
                                       Text(
                                         "Found ${datas.length} Nearby Complaints",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.black,
                                             fontSize: 18,
                                             fontWeight: FontWeight.w500),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 5,
                                       ),
                                       InkWell(
@@ -644,10 +638,10 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ViewonMap(),
+                                                    const ViewonMap(),
                                               ));
                                         },
-                                        child: Chip(
+                                        child: const Chip(
                                             backgroundColor: Colors.blue,
                                             label: Text(
                                               "View On Map",
@@ -657,8 +651,8 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                       )
                                     ],
                                   )
-                                : SizedBox(),
-                            SizedBox(
+                                : const SizedBox(),
+                            const SizedBox(
                               height: 10,
                             ),
                             ListView.builder(
@@ -679,9 +673,9 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                           MaterialPageRoute(
                                               builder: (context) => RandomPage(
                                                     choosedlat: firstString(
-                                                        datas[index].location),
+                                                        datas[index].address),
                                                     choosedlong: lastString(
-                                                        datas[index].location),
+                                                        datas[index].address),
                                                   )));
                                     },
                                     child: Container(
@@ -723,20 +717,21 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                                         Text(
                                                           datas[index]
                                                               .username!,
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              fontSize: 17,
-                                                              color:
-                                                                  Colors.black),
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 17,
+                                                                  color: Colors
+                                                                      .black),
                                                         ),
                                                         SizedBox(
                                                           width: width * 0.02,
                                                         ),
                                                         Text(
                                                           datas[index]
-                                                              .complaintMiti,
+                                                              .created_at,
                                                         ),
                                                         SizedBox(
                                                           width: width * 0.04,
@@ -763,7 +758,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                                                           1
                                                                       ? "Medium"
                                                                       : "High",
-                                                              style: TextStyle(
+                                                              style: const TextStyle(
                                                                   color: Colors
                                                                       .white),
                                                             )),
@@ -777,8 +772,8 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                               height: height * 0.01,
                                             ),
                                             Text(
-                                              datas[index].complaintTitle,
-                                              style: TextStyle(
+                                              datas[index].title,
+                                              style: const TextStyle(
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 17,
                                                   color: Colors.black),
@@ -787,13 +782,13 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                               height: height * 0.01,
                                             ),
                                             ReadMoreText(
-                                              datas[index].complaintDescription,
+                                              datas[index].description,
                                               trimLines: 3,
                                               colorClickableText: Colors.blue,
                                               trimMode: TrimMode.Line,
                                               trimCollapsedText: 'Read more',
                                               trimExpandedText: '...show less',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 14,
                                               ),
                                             ),
@@ -805,8 +800,8 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
                                               children: [
-                                                datas[index].imageBytes == null
-                                                    ? SizedBox()
+                                                datas[index].image == null
+                                                    ? const SizedBox()
                                                     : InkWell(
                                                         onTap: () {
                                                           showDialog(
@@ -824,7 +819,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                                                         height: height *
                                                                             0.8,
                                                                         decoration:
-                                                                            BoxDecoration(image: DecorationImage(image: MemoryImage(base64Decode(datas[index].imageBytes.toString())), fit: BoxFit.fitWidth)),
+                                                                            BoxDecoration(image: DecorationImage(image: MemoryImage(base64Decode(datas[index].image.toString())), fit: BoxFit.fitWidth)),
                                                                       ),
                                                                     ),
                                                                   ],
@@ -844,7 +839,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                                                   image: DecorationImage(
                                                                       image: MemoryImage(base64Decode(datas[
                                                                               index]
-                                                                          .imageBytes
+                                                                          .image
                                                                           .toString())),
                                                                       fit: BoxFit
                                                                           .cover)),
@@ -861,14 +856,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                                   children: [
                                                     makeTwoline(
                                                         "Status:",
-                                                        datas[index].complaintStatus ==
-                                                                0
-                                                            ? "Pending"
-                                                            : datas[index]
-                                                                        .complaintStatus ==
-                                                                    1
-                                                                ? "Hold"
-                                                                : "Solved",
+                                                        datas[index].status,
                                                         context),
                                                     SizedBox(
                                                       height: height * 0.01,
@@ -876,7 +864,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                                     makeTwoline(
                                                         "Ward No:",
                                                         datas[index]
-                                                            .wardNo
+                                                            .ward
                                                             .toString(),
                                                         context),
                                                     SizedBox(
@@ -884,35 +872,14 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                                     ),
                                                     makeTwoline(
                                                         "Priority:",
-                                                        datas[index].priority ==
-                                                                0
-                                                            ? "Low"
-                                                            : datas[index]
-                                                                        .priority ==
-                                                                    1
-                                                                ? "Medium"
-                                                                : "High",
+                                                        datas[index].priority,
                                                         context),
                                                     SizedBox(
                                                       height: height * 0.01,
                                                     ),
                                                     makeTwoline(
                                                         "Category:",
-                                                        datas[index].category ==
-                                                                0
-                                                            ? "Water"
-                                                            : datas[index]
-                                                                        .category ==
-                                                                    1
-                                                                ? "Road"
-                                                                : datas[index]
-                                                                            .category ==
-                                                                        2
-                                                                    ? "Health"
-                                                                    : datas[index].category ==
-                                                                            3
-                                                                        ? "Electricity"
-                                                                        : "Education",
+                                                        datas[index].category,
                                                         context)
                                                   ],
                                                 )
@@ -935,11 +902,11 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
 }
 
 Future<List<ComplaintGetAllModel>> getComplaints() async {
-  final response = await Api().get(MyConfig.getcomplaintsURL);
+  final response =
+      await Api().get("${MyConfig.nodeUrl}/complaint/getAllComplaint");
 
   if (response.statusCode == 200) {
-    Map<String, dynamic> map = json.decode(response.data);
-    List<dynamic> data = map["result"]["items"];
+    List<dynamic> data = json.decode(response.data);
 
     return data.map((data) => ComplaintGetAllModel.fromJson(data)).toList();
   } else {

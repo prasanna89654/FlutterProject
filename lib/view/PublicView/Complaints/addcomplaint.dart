@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -9,8 +8,6 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:location/location.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:project/widgets/TEsts/getmap.dart';
-import 'package:project/widgets/TEsts/newtry.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../../Riverpod/baseDIo.dart';
 import '../../../Riverpod/config.dart';
@@ -67,67 +64,24 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
         filess = file;
         hasfile = true;
       });
-      var filename = file.path.split("/").last;
-
-      String fileType = file.uri.toString().split(".").last;
-      const guid = Uuid();
-      const apiurl = "/CmsImage/UploadImageFile";
-      String a = Uri.parse(MyConfig.appUrl + apiurl).toString();
-      var formData = FormData.fromMap({
-        'FileName': filename,
-        'FileToken': guid.v4(),
-        'FileType': fileType,
-        'file': await MultipartFile.fromFile(file.path)
-      });
-
-      final response = await Api().post(a, data: formData);
-
-      if (response.statusCode == 200) {
-        var token = json.decode(response.data)["result"]["fileToken"];
-        var message = json.decode(response.data)["result"]["message"];
-
-        if (token != null) {
-          setState(() {
-            // isChoosed = true;
-            FileName = filename;
-            Type = fileType;
-            tokenS = token;
-          });
-        } else {
-          Fluttertoast.showToast(msg: message);
-        }
-      } else {}
     } catch (e) {
       print(e);
     }
   }
 
   uploadFile() async {
-    var data = {
-//   "id": 0,
-      "complaintTitle": titleCtrl.value.text,
-      "complaintDescription": descriptionCtrl.value.text,
-      "complaintStatus": 0,
-      "location": ref.watch(locationStateProvider).conl(),
-//   "image": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-      "wardNo": wardselectedvalue,
-      "complaintDate": "2023-03-11T08:23:31.034Z",
-      "complaintMiti": "2079/11/28",
-      "priority": 0,
-      "category": categoryselectedvalue == "Water"
-          ? 0
-          : categoryselectedvalue == "Road"
-              ? 1
-              : categoryselectedvalue == "Health"
-                  ? 2
-                  : categoryselectedvalue == "Electricity"
-                      ? 3
-                      : 4,
-      "imageToken": tokenS
-    };
+    var formdata = FormData.fromMap({
+      "title": titleCtrl.value.text,
+      "description": descriptionCtrl.value.text,
+      "address": ref.watch(locationStateProvider).conl(),
+      "file": await MultipartFile.fromFile(filess!.path),
+      "ward": wardselectedvalue,
+      "category": categoryselectedvalue,
+    });
 
     try {
-      var response = await Api().post(MyConfig.complaintupload, data: data);
+      const url = "/complaint/createComplaint";
+      var response = await Api().post(MyConfig.nodeUrl + url, data: formdata);
       print("upload: ${response.statusCode}");
       if (response.statusCode == 200) {
         Fluttertoast.showToast(msg: "Complaint Added Successfully");
@@ -238,7 +192,7 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
                                             fontWeight: FontWeight.w500,
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 8,
                                         ),
                                         InkWell(
@@ -252,14 +206,14 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
                                             });
                                           },
                                           child: Container(
-                                            padding: EdgeInsets.all(6),
-                                            child: Text(
+                                            padding: const EdgeInsets.all(6),
+                                            color: Colors.red,
+                                            child: const Text(
                                               "Remove",
                                               style: TextStyle(
                                                   fontSize: 12,
                                                   color: Colors.white),
                                             ),
-                                            color: Colors.red,
                                           ),
                                         )
                                       ],
@@ -281,12 +235,12 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
                                                     Center(
                                                       child: SimpleDialogOption(
                                                           onPressed: () {
-                                                            Navigator.push(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                    builder:
-                                                                        (context) =>
-                                                                            MapSample()));
+                                                            // Navigator.push(
+                                                            //     context,
+                                                            //     MaterialPageRoute(
+                                                            //         builder:
+                                                            //             (context) =>
+                                                            //                 MapSample()));
                                                             setState(() {
                                                               isSelected = true;
                                                             });
@@ -299,7 +253,7 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
                                                                   fontSize:
                                                                       20))),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 20,
                                                     ),
                                                     Center(
@@ -342,7 +296,7 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
                                               );
                                             });
                                       },
-                                      child: Chip(
+                                      child: const Chip(
                                         label: Text("Select Location"),
                                       ),
                                     )
@@ -415,7 +369,7 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
                         height: 30,
                       ),
                       hasfile
-                          ? SizedBox()
+                          ? const SizedBox()
                           : InkWell(
                               onTap: () => pickImage(),
                               child: Container(
@@ -423,20 +377,20 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
                                 decoration: BoxDecoration(
                                     border: Border.all(
                                         width: 1, color: Colors.grey)),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(
                                       horizontal: 10, vertical: 15),
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      const Icon(
+                                      Icon(
                                         Icons.camera_alt,
                                         color: Colors.blue,
                                       ),
-                                      const SizedBox(
+                                      SizedBox(
                                         width: 10,
                                       ),
-                                      const Text(
+                                      Text(
                                         "Upload Image",
                                         style: TextStyle(
                                           fontSize: 16,
@@ -459,7 +413,7 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
                                           filess!,
                                           fit: BoxFit.cover,
                                         ))),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 InkWell(
@@ -469,7 +423,7 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
                                       tokenS = "";
                                     });
                                   },
-                                  child: Row(
+                                  child: const Row(
                                     children: [
                                       Icon(
                                         Icons.delete,
@@ -599,10 +553,10 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
                                 uploadFile();
                               }
                             },
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
+                            child: const Padding(
+                              padding: EdgeInsets.symmetric(
                                   horizontal: 60, vertical: 18),
-                              child: const Text(
+                              child: Text(
                                 "Submit",
                                 style: TextStyle(
                                   fontSize: 18,

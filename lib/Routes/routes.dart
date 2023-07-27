@@ -21,18 +21,18 @@ class Routes {
             handlerFunc: (BuildContext? context, Map<String, dynamic> params) =>
                 LoginScreen()));
 
-    router.define('admin',
-        handler: Handler(
-            handlerFunc: (BuildContext? context, Map<String, dynamic> params) =>
-                AdminHomePage()));
-    router.define('maintainer',
-        handler: Handler(
-            handlerFunc: (BuildContext? context, Map<String, dynamic> params) =>
-                MaintainerDashboard()));
-    router.define('eventspage',
-        handler: Handler(
-            handlerFunc: (BuildContext? context, Map<String, dynamic> params) =>
-                EventsPage()));
+    // router.define('admin',
+    //     handler: Handler(
+    //         handlerFunc: (BuildContext? context, Map<String, dynamic> params) =>
+    //             AdminHomePage()));
+    // router.define('maintainer',
+    //     handler: Handler(
+    //         handlerFunc: (BuildContext? context, Map<String, dynamic> params) =>
+    //             MaintainerDashboard()));
+    // router.define('eventspage',
+    //     handler: Handler(
+    //         handlerFunc: (BuildContext? context, Map<String, dynamic> params) =>
+    //             EventsPage()));
 
     return router;
   }

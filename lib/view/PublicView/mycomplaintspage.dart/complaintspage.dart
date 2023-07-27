@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:project/view/PublicView/mycomplaintspage.dart/holdpage.dart';
 import 'package:project/view/PublicView/mycomplaintspage.dart/pendingpage.dart';
-import 'package:project/view/PublicView/mycomplaintspage.dart/solvedpage.dart';
-
-import '../../../Riverpod/Repository/complaintController.dart';
 
 class ComplaintsPage extends ConsumerStatefulWidget {
   const ComplaintsPage({super.key});
@@ -19,8 +15,7 @@ class _ComplaintsPageState extends ConsumerState<ComplaintsPage>
 
   @override
   void initState() {
-    ref.refresh(getallComplaintProvider);
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(length: 1, vsync: this);
     super.initState();
   }
 
@@ -42,16 +37,16 @@ class _ComplaintsPageState extends ConsumerState<ComplaintsPage>
               Tab(
                 text: "Pending",
               ),
-              Tab(text: "Hold"),
-              Tab(text: "Solved")
+              // Tab(text: "Hold"),
+              // Tab(text: "Solved")
             ],
           ),
         ),
         Expanded(
           child: TabBarView(controller: tabController, children: const [
             PendingComplaints(),
-            HoldComplaints(),
-            SolvedComplaints()
+            // HoldComplaints(),
+            // SolvedComplaints()
           ]),
         ),
       ]),

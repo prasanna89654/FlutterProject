@@ -31,11 +31,11 @@ class ViewonMapState extends ConsumerState<ViewonMap> {
           _markers.add(Marker(
             markerId: MarkerId('targetLocation$i'),
             infoWindow: InfoWindow(
-              title: value[i].complaintTitle,
+              title: value[i].title,
               snippet: value[i].username,
             ),
             position: LatLng(
-                firstString(value[i].location), lastString(value[i].location)),
+                firstString(value[i].address), lastString(value[i].address)),
             icon: BitmapDescriptor.defaultMarkerWithHue(
                 BitmapDescriptor.hueGreen),
           ));

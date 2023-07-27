@@ -4,19 +4,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
-
 import 'package:project/Riverpod/constants.dart';
 import 'package:project/controller/notificationservices.dart';
-import 'package:project/view/AdminView/AdminHomePage.dart';
-import 'package:project/view/MaintainerView/MaintainerDashboard.dart';
 import 'package:project/view/PublicView/appbar.dart';
 import 'package:project/view/PublicView/login.dart';
-import 'package:project/view/maintainerdisplay.dart';
-import 'package:project/view/maintainerrequest.dart';
-import 'package:project/widgets/TEsts/random.dart';
-import 'package:project/widgets/TEsts/randomget.dart';
-import 'package:project/widgets/TEsts/sendmap.dart';
-import 'package:project/widgets/test1.dart';
 
 import 'Routes/navigator.dart';
 import 'Routes/routes.dart';
@@ -104,7 +95,7 @@ class _MyAppState extends State<MyApp> {
             color: Colors.white,
           ),
           backgroundColor: Colors.blue.shade300,
-          navigator: LoginScreen(),
+          navigator: selectScreen(),
         ));
   }
 }
@@ -117,12 +108,12 @@ selectScreen() {
   if (token.isEmptyOrNull || usertype.isEmptyOrNull) {
     return const LoginScreen();
   } else if (usertype == "Admin") {
-    return const AdminHomePage();
-  } else if (usertype == "User") {
+    // return const AdminHomePage();
+  } else if (usertype == "2") {
     return Appbar(
       cindex: 0,
     );
   } else {
-    return MaintainerDashboard();
+    // return MaintainerDashboard();
   }
 }

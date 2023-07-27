@@ -7,12 +7,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project/Riverpod/Repository/complaintController.dart';
 import 'package:project/controller/riverpodmanager.dart';
 import 'package:project/view/PublicView/publicComplaints.dart';
-import 'package:project/widgets/listpmaker.dart';
 import 'package:readmore/readmore.dart';
 
 import '../Riverpod/Models/userModel.dart';
 import '../view/PublicView/mycomplaintspage.dart/pendingpage.dart';
-import 'full_public.dart';
 
 class Publicmaker extends ConsumerStatefulWidget {
   const Publicmaker({Key? key}) : super(key: key);
@@ -27,7 +25,6 @@ class _PublicmakerState extends ConsumerState<Publicmaker> {
       setState(() {
         fatas = value;
       });
-      fatas.sort((a, b) => b.id.compareTo(a.id));
     });
   }
 
@@ -53,7 +50,7 @@ class _PublicmakerState extends ConsumerState<Publicmaker> {
             children: [
               const Text("  Public Complaints",
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
-              Spacer(),
+              const Spacer(),
               InkWell(
                 onTap: () {
                   Navigator.push(
@@ -65,10 +62,9 @@ class _PublicmakerState extends ConsumerState<Publicmaker> {
                   decoration: BoxDecoration(
                       color: Colors.blue.shade300,
                       borderRadius: BorderRadius.circular(40)),
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-                    child: const Text("View More",
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                    child: Text("View More",
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w400,
@@ -109,15 +105,15 @@ class _PublicmakerState extends ConsumerState<Publicmaker> {
                                     CircleAvatar(
                                       backgroundColor: Colors.white,
                                       radius: width * 0.04,
-                                      backgroundImage:
-                                          AssetImage("assets/images/user.png"),
+                                      backgroundImage: const AssetImage(
+                                          "assets/images/user.png"),
                                     ),
                                     SizedBox(
                                       width: width * 0.02,
                                     ),
                                     Text(
                                       fatas[index].username!,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 17,
                                           color: Colors.black),
@@ -126,7 +122,7 @@ class _PublicmakerState extends ConsumerState<Publicmaker> {
                                       width: width * 0.02,
                                     ),
                                     Text(
-                                      fatas[index].complaintMiti,
+                                      fatas[index].created_at.substring(0, 10),
                                     )
                                   ],
                                 ),
@@ -138,8 +134,8 @@ class _PublicmakerState extends ConsumerState<Publicmaker> {
                           height: height * 0.01,
                         ),
                         Text(
-                          fatas[index].complaintTitle,
-                          style: TextStyle(
+                          fatas[index].title,
+                          style: const TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 17,
                               color: Colors.black),
@@ -148,13 +144,13 @@ class _PublicmakerState extends ConsumerState<Publicmaker> {
                           height: height * 0.01,
                         ),
                         ReadMoreText(
-                          fatas[index].complaintDescription,
+                          fatas[index].description,
                           trimLines: 3,
                           colorClickableText: Colors.blue,
                           trimMode: TrimMode.Line,
                           trimCollapsedText: 'Read more',
                           trimExpandedText: '...show less',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 14,
                           ),
                         ),
@@ -165,8 +161,8 @@ class _PublicmakerState extends ConsumerState<Publicmaker> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            fatas[index].imageBytes == null
-                                ? SizedBox()
+                            fatas[index].image == null
+                                ? const SizedBox()
                                 : InkWell(
                                     onTap: () {
                                       showDialog(
@@ -184,7 +180,7 @@ class _PublicmakerState extends ConsumerState<Publicmaker> {
                                                             image: MemoryImage(
                                                                 base64Decode(fatas[
                                                                         index]
-                                                                    .imageBytes
+                                                                    .image
                                                                     .toString())),
                                                             fit: BoxFit
                                                                 .fitWidth)),
@@ -205,7 +201,7 @@ class _PublicmakerState extends ConsumerState<Publicmaker> {
                                               image: DecorationImage(
                                                   image: MemoryImage(
                                                       base64Decode(fatas[index]
-                                                          .imageBytes
+                                                          .image
                                                           .toString())),
                                                   fit: BoxFit.cover)),
                                         ),
@@ -217,44 +213,22 @@ class _PublicmakerState extends ConsumerState<Publicmaker> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 makeTwoline(
-                                    "Status:",
-                                    fatas[index].complaintStatus == 0
-                                        ? "Pending"
-                                        : fatas[index].complaintStatus == 1
-                                            ? "Hold"
-                                            : "Solved",
-                                    context),
+                                    "Status:", fatas[index].status, context),
                                 SizedBox(
                                   height: height * 0.01,
                                 ),
                                 makeTwoline("Ward No:",
-                                    fatas[index].wardNo.toString(), context),
+                                    fatas[index].ward.toString(), context),
                                 SizedBox(
                                   height: height * 0.01,
                                 ),
-                                makeTwoline(
-                                    "Priority:",
-                                    fatas[index].priority == 0
-                                        ? "Critical"
-                                        : fatas[index].priority == 1
-                                            ? "Moderate"
-                                            : "Low",
+                                makeTwoline("Priority:", fatas[index].priority,
                                     context),
                                 SizedBox(
                                   height: height * 0.01,
                                 ),
                                 makeTwoline(
-                                    "Category:",
-                                    fatas[index].category == 0
-                                        ? "Water"
-                                        : fatas[index].category == 1
-                                            ? "Road"
-                                            : fatas[index].category == 2
-                                                ? "Health"
-                                                : fatas[index].category == 3
-                                                    ? "Electricity"
-                                                    : "Education",
-                                    context)
+                                    "Category:", fatas[index].category, context)
                               ],
                             )
                           ],

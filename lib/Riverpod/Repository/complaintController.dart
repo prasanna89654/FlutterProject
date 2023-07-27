@@ -8,11 +8,11 @@ import '../config.dart';
 
 class ComplaintController {
   Future<List<ComplaintGetAllModel>> getComplaints() async {
-    final response = await Api().get(MyConfig.getcomplaintsURL);
+    const url = "/complaint/getAllComplaint";
+    final response = await Api().get(MyConfig.nodeUrl + url);
 
     if (response.statusCode == 200) {
-      Map<String, dynamic> map = json.decode(response.data);
-      List<dynamic> data = map["result"]["items"];
+      List<dynamic> data = json.decode(response.data);
 
       return data.map((data) => ComplaintGetAllModel.fromJson(data)).toList();
     } else {
@@ -22,11 +22,11 @@ class ComplaintController {
   }
 
   Future<List<ComplaintGetAllModel>> getownComplaints() async {
-    final response = await Api().get(MyConfig.getowncomplaintsURL);
+    final response =
+        await Api().get("${MyConfig.nodeUrl}/complaint/getOwnComplaint");
 
     if (response.statusCode == 200) {
-      Map<String, dynamic> map = json.decode(response.data);
-      List<dynamic> data = map["result"]["items"];
+      List<dynamic> data = json.decode(response.data);
 
       return data.map((data) => ComplaintGetAllModel.fromJson(data)).toList();
     } else {
@@ -37,11 +37,10 @@ class ComplaintController {
 
   Future<UserModel?> getuserdetails() async {
     try {
-      String gethomeworkdetails =
-          "/api/services/app/Session/GetCurrentLoginInformations";
-      final response = await Api().get(MyConfig.appUrl + gethomeworkdetails);
+      String gethomeworkdetails = "/getUserProfile";
+      final response = await Api().get(MyConfig.nodeUrl + gethomeworkdetails);
       if (response.statusCode == 200) {
-        var value = json.decode(response.toString())["result"]["user"];
+        var value = json.decode(response.toString());
 
         var data = UserModel.fromJson(value);
 
@@ -67,11 +66,10 @@ class ComplaintController {
 
   Future<OwnReportModel?> ownReportDetails() async {
     try {
-      String gethomeworkdetails =
-          "/api/services/app/ComplaintReporting/GetComplaintReport?MaxResultCount=50";
-      final response = await Api().get(MyConfig.appUrl + gethomeworkdetails);
+      String gethomeworkdetails = "/complaint/getComplaintStatus";
+      final response = await Api().get(MyConfig.nodeUrl + gethomeworkdetails);
       if (response.statusCode == 200) {
-        var value = json.decode(response.toString())["result"];
+        var value = json.decode(response.toString());
 
         var data = OwnReportModel.fromJson(value);
 

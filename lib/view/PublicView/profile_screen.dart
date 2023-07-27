@@ -53,7 +53,8 @@ class _profileState extends ConsumerState<profile> {
                                 height: height * 0.05,
                                 width: width * 0.65,
                                 // color: Colors.blue,
-                                child: style(text: data!.name, fontsize: 25)),
+                                child:
+                                    style(text: data!.username, fontsize: 25)),
 
                             // ClipRRect(
                             //     child: SizedBox.fromSize(
@@ -79,22 +80,22 @@ class _profileState extends ConsumerState<profile> {
                           pmaker(
                             image: "assets/images/email.png",
                             text: 'Email',
-                            text1: data.emailAddress.toString(),
+                            text1: data.email.toString(),
                           ),
-                          const pmaker(
+                          pmaker(
                             image: "assets/images/location.png",
                             text: 'Location',
-                            text1: 'biratnagar',
+                            text1: data.address.toString(),
                           ),
-                          const pmaker(
+                          pmaker(
                             image: "assets/images/land.png",
                             text: 'Ward Number',
-                            text1: '3',
+                            text1: data.ward.toString(),
                           ),
-                          const pmaker(
+                          pmaker(
                             image: "assets/images/calendar.png",
                             text: 'D.O.B',
-                            text1: '12-12-2000',
+                            text1: data.dob.toString(),
                           ),
                           const SizedBox(height: 15),
                           const Divider(
@@ -105,8 +106,12 @@ class _profileState extends ConsumerState<profile> {
                     )
                   ],
                 ),
-                error: (Object error, StackTrace? stackTrace) {},
-                loading: () {},
+                error: (Object error, StackTrace? stackTrace) {
+                  return null;
+                },
+                loading: () {
+                  return null;
+                },
               ))),
     );
   }
