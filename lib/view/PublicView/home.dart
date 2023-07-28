@@ -41,7 +41,6 @@ class _HomepageState extends ConsumerState<Homepage> {
     var width = size.width;
     final token = getStringAsync(accessToken);
     print("tokenId: $token");
-
     final report = ref.watch(getownReportProvider);
 
     return Scaffold(

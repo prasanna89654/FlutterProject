@@ -731,7 +731,9 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
                                                         ),
                                                         Text(
                                                           datas[index]
-                                                              .created_at,
+                                                              .created_at
+                                                              .toString()
+                                                              .substring(0, 10),
                                                         ),
                                                         SizedBox(
                                                           width: width * 0.04,
@@ -904,7 +906,7 @@ class _PublicComplaintsState extends ConsumerState<PublicComplaints>
 Future<List<ComplaintGetAllModel>> getComplaints() async {
   final response =
       await Api().get("${MyConfig.nodeUrl}/complaint/getAllComplaint");
-
+  print("fatas: ${response.statusCode}");
   if (response.statusCode == 200) {
     List<dynamic> data = json.decode(response.data);
 

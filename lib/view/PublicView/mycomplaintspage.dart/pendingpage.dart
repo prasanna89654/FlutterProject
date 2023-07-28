@@ -93,7 +93,10 @@ class _PendingComplaintsState extends ConsumerState<PendingComplaints> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      datas![index].created_at.toString(),
+                                      datas![index]
+                                          .created_at
+                                          .toString()
+                                          .substring(0, 10),
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 18,
