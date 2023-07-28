@@ -4,8 +4,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:project/Riverpod/Repository/complaintController.dart';
-import 'package:project/controller/riverpodmanager.dart';
 import 'package:project/view/PublicView/publicComplaints.dart';
 import 'package:readmore/readmore.dart';
 
@@ -36,11 +34,10 @@ class _PublicmakerState extends ConsumerState<Publicmaker> {
 
   @override
   Widget build(BuildContext context) {
-    var watch = ref.watch(publicriverpod);
     var size = MediaQuery.of(context).size;
     var height = size.height;
     var width = size.width;
-    final details = ref.watch(getallComplaintProvider);
+
     return Padding(
       padding: const EdgeInsets.only(left: 8, right: 8, top: 20),
       child: Container(

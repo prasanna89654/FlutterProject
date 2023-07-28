@@ -7,19 +7,19 @@ import '../baseDIo.dart';
 import '../config.dart';
 
 class ComplaintController {
-  Future<List<ComplaintGetAllModel>> getComplaints() async {
-    const url = "/complaint/getAllComplaint";
-    final response = await Api().get(MyConfig.nodeUrl + url);
+  // Future<List<ComplaintGetAllModel>> getComplaints() async {
+  //   const url = "/complaint/getAllComplaint";
+  //   final response = await Api().get(MyConfig.nodeUrl + url);
 
-    if (response.statusCode == 200) {
-      List<dynamic> data = json.decode(response.data);
+  //   if (response.statusCode == 200) {
+  //     List<dynamic> data = json.decode(response.data);
 
-      return data.map((data) => ComplaintGetAllModel.fromJson(data)).toList();
-    } else {
-      List<ComplaintGetAllModel> a = [];
-      return a;
-    }
-  }
+  //     return data.map((data) => ComplaintGetAllModel.fromJson(data)).toList();
+  //   } else {
+  //     List<ComplaintGetAllModel> a = [];
+  //     return a;
+  //   }
+  // }
 
   Future<List<ComplaintGetAllModel>> getownComplaints() async {
     final response =
@@ -85,10 +85,10 @@ class ComplaintController {
 
 final complaintProvider =
     Provider<ComplaintController>((ref) => ComplaintController());
-final getallComplaintProvider =
-    FutureProvider.autoDispose<List<ComplaintGetAllModel>>((ref) async {
-  return ref.read(complaintProvider).getComplaints();
-});
+// final getallComplaintProvider =
+//     FutureProvider.autoDispose<List<ComplaintGetAllModel>>((ref) async {
+//   return ref.read(complaintProvider).getComplaints();
+// });
 
 final getownComplaintProvider =
     FutureProvider.autoDispose<List<ComplaintGetAllModel>>((ref) async {
