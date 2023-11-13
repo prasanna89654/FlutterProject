@@ -8,7 +8,6 @@ import 'package:project/Riverpod/constants.dart';
 import 'package:project/controller/notificationservices.dart';
 import 'package:project/view/PublicView/appbar.dart';
 import 'package:project/view/PublicView/login.dart';
-
 import 'Routes/navigator.dart';
 import 'Routes/routes.dart';
 
@@ -28,6 +27,7 @@ Future<void> main() async {
   print("Token: $fcmToken");
   runApp(const ProviderScope(child: MyApp()));
 }
+//okay
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

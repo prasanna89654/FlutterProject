@@ -44,7 +44,7 @@ dependencies:
   hooks_riverpod: ^1.0.4
   http: ^0.13.5
   intl: ^0.18.0
-  nb_utils: ^5.0.5
+  nb_utils: ^5.0.8
   pie_chart: ^5.3.2
   readmore: ^2.2.0
   shimmer: ^2.0.0

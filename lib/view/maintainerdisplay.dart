@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:project/Riverpod/Repository/UserRepository.dart';
-
 import '../widgets/practice.dart';
 
 class DemoDisplayPage extends ConsumerStatefulWidget {
