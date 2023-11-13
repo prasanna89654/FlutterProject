@@ -27,7 +27,7 @@ Future<void> main() async {
   print("Token: $fcmToken");
   runApp(const ProviderScope(child: MyApp()));
 }
-//okay
+//okays
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
