@@ -55,10 +55,8 @@ class _GetSampleState extends ConsumerState<GetSample> {
     var currentLocation = await location.getLocation();
 
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      googleAPiKey,
-      PointLatLng(currentLocation.latitude!, currentLocation.longitude!),
-      PointLatLng(widget.choosedlat, widget.choosedlong),
-      travelMode: TravelMode.driving,
+      googleApiKey: googleAPiKey,
+      request: PolylineRequest(origin: PointLatLng(currentLocation.latitude!, currentLocation.longitude!), destination: PointLatLng(widget.choosedlat, widget.choosedlong), mode: TravelMode.driving),
     );
 
     if (result.points.isNotEmpty) {

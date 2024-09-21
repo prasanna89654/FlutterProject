@@ -416,8 +416,7 @@ double lastString(String str) {
 }
 
 Future<List<ComplaintGetAllModel>> getownComplaints() async {
-  final response =
-      await Api().get("${MyConfig.nodeUrl}/complaint/getOwnComplaint");
+  final response = await Api().get("${MyConfig.nodeUrl}/getOwnComplaint");
 
   if (response.statusCode == 200) {
     List<dynamic> data = json.decode(response.data);

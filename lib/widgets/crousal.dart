@@ -12,7 +12,7 @@ class Crousal extends StatefulWidget {
 
 class _CrousalState extends State<Crousal> {
   int _current = 0;
-  final CarouselController _controller = CarouselController();
+  // final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
     final List<String> imgList = [

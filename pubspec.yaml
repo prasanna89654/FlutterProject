@@ -27,40 +27,42 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  carousel_slider: ^4.1.1
+  carousel_slider: ^5.0.0
   cupertino_icons: ^1.0.2
   dio: ^5.0.0
   easy_splash_screen: ^1.0.3
-  file_picker: ^4.6.1
-  firebase_core: ^2.7.0
-  firebase_messaging: ^14.2.5
+  file_picker: ^8.1.2
+  firebase_core: ^3.5.0
+  firebase_messaging: ^15.1.2
   fluro: ^2.0.5
   flutter:
     sdk: flutter
-  flutter_html: ^2.2.1
-  flutter_local_notifications: ^12.0.4
+  flutter_html: ^3.0.0-beta.2
+  flutter_local_notifications: ^17.2.3
   flutter_lorem: ^2.0.0
-  flutter_riverpod: ^1.0.4
-  hooks_riverpod: ^1.0.4
-  http: ^0.13.5
-  intl: ^0.18.0
-  nb_utils: ^5.0.8
+  flutter_riverpod: ^2.5.1
+  hooks_riverpod: ^2.5.2
+  http: ^1.2.2
+  nb_utils: ^7.0.4
   pie_chart: ^5.3.2
-  readmore: ^2.2.0
-  shimmer: ^2.0.0
-  uuid: ^3.0.7
-  webview_flutter: ^2.0.4
-  form_builder_validators: ^9.0.0
+  readmore: ^3.0.0
+  shimmer: ^3.0.0
+  uuid: ^4.5.0
+  webview_flutter: ^4.8.0
+  form_builder_validators: ^11.0.0
   google_maps_flutter: ^2.2.5
-  location: ^4.4.0
+  location: ^6.0.2
   flare_flutter: ^3.0.2
-  flutter_polyline_points: ^1.0.0
+  flutter_polyline_points: ^2.1.0
   path_provider: ^2.0.14
-  open_filex: ^3.4.0
-  fvm: ^2.4.1
+  open_filex: ^4.5.0
+  fvm: ^3.2.1
+
+dependency_overrides:
+  intl: any
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
 

@@ -23,7 +23,7 @@ class _RandomPageState extends ConsumerState<RandomPage> {
   // double choosedlong = 87.28232380002737;
   String googleAPiKey = "AIzaSyAuggkY7rh34Rm2tbq1WGRbpVyxFRrJ_Gs";
 
-  Set<Marker> markers = Set(); //markers for google map
+  Set<Marker> markers = {}; //markers for google map
   Map<PolylineId, Polyline> polylines = {}; //polylines to show direction
 
   // LatLng startLocation = LatLng(27.6683619, 85.3101895);
@@ -113,16 +113,17 @@ class _RandomPageState extends ConsumerState<RandomPage> {
     // ref.read(locationStateProvider.notifier).setLocation(ld);
 
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      googleAPiKey,
-      PointLatLng(ld.latitude!, ld.longitude!),
-      PointLatLng(widget.choosedlat, widget.choosedlong),
-      travelMode: TravelMode.driving,
+      googleApiKey: googleAPiKey,
+      request: PolylineRequest(
+          origin: PointLatLng(ld.latitude!, ld.longitude!),
+          destination: PointLatLng(widget.choosedlat, widget.choosedlong),
+          mode: TravelMode.driving),
     );
 
     if (result.points.isNotEmpty) {
-      result.points.forEach((PointLatLng point) {
+      for (var point in result.points) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
+      }
     } else {
       print(result.errorMessage);
     }
@@ -130,7 +131,7 @@ class _RandomPageState extends ConsumerState<RandomPage> {
   }
 
   addPolyLine(List<LatLng> polylineCoordinates) {
-    PolylineId id = PolylineId("poly");
+    PolylineId id = const PolylineId("poly");
     Polyline polyline = Polyline(
       polylineId: id,
       color: Colors.deepPurpleAccent,
@@ -163,7 +164,7 @@ class _RandomPageState extends ConsumerState<RandomPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Complaint Location"),
+        title: const Text("Complaint Location"),
       ),
       body: Stack(children: [
         GoogleMap(
@@ -195,10 +196,10 @@ class _RandomPageState extends ConsumerState<RandomPage> {
                 padding: const EdgeInsets.all(16),
                 child: Row(
                   children: [
-                    Container(
+                    const SizedBox(
                       height: 100,
                       width: 100,
-                      child: const FlareActor(
+                      child: FlareActor(
                         'assets/location.flr',
                         // animation: "location",
                         // animation: ,

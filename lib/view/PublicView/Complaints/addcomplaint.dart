@@ -7,10 +7,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:location/location.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:project/view/PublicView/home.dart';
 import 'package:project/widgets/TEsts/getmap.dart';
 
 import '../../../Riverpod/baseDIo.dart';
 import '../../../Riverpod/config.dart';
+import '../appbar.dart';
 
 class ComplaintAddPage extends ConsumerStatefulWidget {
   const ComplaintAddPage({super.key});
@@ -80,12 +82,17 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
     });
 
     try {
-      const url = "/complaint/createComplaint";
+      const url = "/createComplaint";
       var response = await Api().post(MyConfig.nodeUrl + url, data: formdata);
       print("upload: ${response.statusCode}");
       if (response.statusCode == 200) {
         Fluttertoast.showToast(msg: "Complaint Added Successfully");
-        Navigator.pop(context);
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
+          return Appbar(
+            cindex: 0,
+          );
+        }));
       } else {}
     } catch (e) {
       print("Helloi: $e");
@@ -232,30 +239,6 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
                                                           BorderRadius.circular(
                                                               12.0)),
                                                   children: <Widget>[
-                                                    Center(
-                                                      child: SimpleDialogOption(
-                                                          onPressed: () {
-                                                            // Navigator.push(
-                                                            //     context,
-                                                            //     MaterialPageRoute(
-                                                            //         builder:
-                                                            //             (context) =>
-                                                            //                 MapSample()));
-                                                            setState(() {
-                                                              isSelected = true;
-                                                            });
-                                                          },
-                                                          child: const Text(
-                                                              'Choose on Map',
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .black,
-                                                                  fontSize:
-                                                                      20))),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
                                                     Center(
                                                       child: SimpleDialogOption(
                                                           onPressed: () async {

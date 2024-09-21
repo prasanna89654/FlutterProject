@@ -218,9 +218,9 @@ class OwnReportModel {
     required this.holdComplaint,
   });
 
-  int pendingComplaint;
-  int solvedComplaint;
-  int holdComplaint;
+  String pendingComplaint;
+  String solvedComplaint;
+  String holdComplaint;
 
   factory OwnReportModel.fromJson(Map<String, dynamic> json) => OwnReportModel(
         pendingComplaint: json["pendingComplaint"],

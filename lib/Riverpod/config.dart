@@ -1,8 +1,8 @@
 class MyConfig {
-  static const String appUrl = "http://103.90.86.54:8082";
+  static const String appUrl = "http://192.168.1.70:3000";
   // static const String appUrl = "http://192.168.1.65:44311";
 
-  static const String nodeUrl = "http://192.168.254.80:3000";
+  static const String nodeUrl = "http://192.168.1.70:3000";
 
   // static const String newsUrl =
   //     "https://simplescraper.io/api/nQstlLpbMklhICOgTYCP?apikey=9Ma7nbqTSAvrSTs7k9pC0Y0W1D7Wc83m&limit=100";

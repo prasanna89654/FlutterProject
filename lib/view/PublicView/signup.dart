@@ -12,7 +12,7 @@ import '../../widgets/boxdecoration.dart';
 import 'login.dart';
 
 class Signup extends StatefulWidget {
-  const Signup({Key? key}) : super(key: key);
+  const Signup({super.key});
 
   @override
   State<Signup> createState() => _SignupState();
@@ -72,6 +72,7 @@ class _SignupState extends State<Signup> {
       var response = await Api().post(MyConfig.nodeUrl + url, data: data);
       if (response.statusCode == 200) {
         Fluttertoast.showToast(msg: "User Created Successfully");
+        Navigator.pop(context);
       } else {
         var message = response.data['error']['message'];
         Fluttertoast.showToast(msg: message);

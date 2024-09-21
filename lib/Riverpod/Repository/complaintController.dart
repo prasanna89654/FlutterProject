@@ -22,8 +22,7 @@ class ComplaintController {
   // }
 
   Future<List<ComplaintGetAllModel>> getownComplaints() async {
-    final response =
-        await Api().get("${MyConfig.nodeUrl}/complaint/getOwnComplaint");
+    final response = await Api().get("${MyConfig.nodeUrl}/getOwnComplaint");
 
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.data);
@@ -66,7 +65,7 @@ class ComplaintController {
 
   Future<OwnReportModel?> ownReportDetails() async {
     try {
-      String gethomeworkdetails = "/complaint/getComplaintStatus";
+      String gethomeworkdetails = "/getComplaintStatus";
       final response = await Api().get(MyConfig.nodeUrl + gethomeworkdetails);
       if (response.statusCode == 200) {
         var value = json.decode(response.toString());

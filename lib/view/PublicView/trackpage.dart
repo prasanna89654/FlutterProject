@@ -8,7 +8,7 @@ import '../../Riverpod/Repository/complaintController.dart';
 import 'historypage.dart';
 
 class test extends ConsumerStatefulWidget {
-  const test({Key? key}) : super(key: key);
+  const test({super.key});
 
   @override
   ConsumerState<test> createState() => _testState();
@@ -43,7 +43,7 @@ class _testState extends ConsumerState<test> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Total",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -56,7 +56,7 @@ class _testState extends ConsumerState<test> {
                                 data.holdComplaint +
                                 data.solvedComplaint)
                             .toString(),
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     )
                   ],
@@ -68,7 +68,7 @@ class _testState extends ConsumerState<test> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Pending",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -77,7 +77,7 @@ class _testState extends ConsumerState<test> {
                       radius: 18,
                       backgroundColor: Colors.black,
                       child: Text(data.pendingComplaint.toString(),
-                          style: TextStyle(color: Colors.white)),
+                          style: const TextStyle(color: Colors.white)),
                     )
                   ],
                 ),
@@ -88,7 +88,7 @@ class _testState extends ConsumerState<test> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Hold",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -97,7 +97,7 @@ class _testState extends ConsumerState<test> {
                       radius: 18,
                       backgroundColor: Colors.black,
                       child: Text(data.holdComplaint.toString(),
-                          style: TextStyle(color: Colors.white)),
+                          style: const TextStyle(color: Colors.white)),
                     )
                   ],
                 ),
@@ -108,7 +108,7 @@ class _testState extends ConsumerState<test> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "Solved",
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -118,7 +118,7 @@ class _testState extends ConsumerState<test> {
                       backgroundColor: Colors.black,
                       child: Text(
                         data.solvedComplaint.toString(),
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     )
                   ],
@@ -127,7 +127,7 @@ class _testState extends ConsumerState<test> {
               const SizedBox(
                 height: 30,
               ),
-              Divider(
+              const Divider(
                 thickness: 1,
                 // color: Colors.black,
               ),
@@ -137,24 +137,26 @@ class _testState extends ConsumerState<test> {
               Container(
                   height: height * 0.2,
                   child: PieChart(
-                    dataMap: createMap(
-                        data.pendingComplaint.toDouble(),
-                        data.holdComplaint.toDouble(),
-                        data.solvedComplaint.toDouble()),
+                    dataMap: createMap(data.pendingComplaint,
+                        data.holdComplaint, data.solvedComplaint),
                     colorList: colorList,
                     chartRadius: width / 2,
                   )),
               const SizedBox(
                 height: 30,
               ),
-              Divider(
+              const Divider(
                 thickness: 1,
                 // color: Colors.black,
               ),
             ],
           ),
-          error: (Object error, StackTrace? stackTrace) {},
-          loading: () {},
+          error: (Object error, StackTrace? stackTrace) {
+            return null;
+          },
+          loading: () {
+            return null;
+          },
         ),
       ),
     );

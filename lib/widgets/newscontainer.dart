@@ -13,13 +13,12 @@ class NewsContainer extends StatelessWidget {
   final String? date;
   final String? link;
   const NewsContainer(
-      {Key? key,
+      {super.key,
       this.imageurl,
       this.title,
       this.description,
       this.link,
-      this.date})
-      : super(key: key);
+      this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -76,11 +75,14 @@ class NewsContainer extends StatelessWidget {
                               )),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(description!,
-                              maxLines: 3,
+                              maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle()),
+                        ),
+                        const SizedBox(
+                          height: 3,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
