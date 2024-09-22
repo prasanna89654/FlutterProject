@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 import '../../Riverpod/Repository/complaintController.dart';
@@ -137,8 +138,8 @@ class _testState extends ConsumerState<test> {
               Container(
                   height: height * 0.2,
                   child: PieChart(
-                    dataMap: createMap(data.pendingComplaint,
-                        data.holdComplaint, data.solvedComplaint),
+                    dataMap: createMap(data.pendingComplaint.toDouble(),
+                        data.holdComplaint.toDouble(), data.solvedComplaint.toDouble()),
                     colorList: colorList,
                     chartRadius: width / 2,
                   )),
