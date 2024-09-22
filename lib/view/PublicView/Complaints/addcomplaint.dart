@@ -76,7 +76,7 @@ class _ComplaintAddPageState extends ConsumerState<ComplaintAddPage> {
       "title": titleCtrl.value.text,
       "description": descriptionCtrl.value.text,
       "address": ref.watch(locationStateProvider).conl(),
-      "file": await MultipartFile.fromFile(filess!.path),
+      "file": filess == null ? null : await MultipartFile.fromFile(filess!.path),
       "ward": wardselectedvalue,
       "category": categoryselectedvalue,
     });
